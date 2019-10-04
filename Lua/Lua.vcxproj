@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgui.ini" />
+    <None Include="Luafiles\Text.lua" />
+    <None Include="packages.config" />
+    <None Include="scr\Data\Fonts\comic_sans_ms_16.spritefont" />
+    <None Include="scr\imgui.ini" />
+    <None Include="scr\Includes\SimpleMath.inl" />
+    <None Include="x64\Debug\Lua.tlog\CL.command.1.tlog" />
+    <None Include="x64\Debug\Lua.tlog\CL.read.1.tlog" />
+    <None Include="x64\Debug\Lua.tlog\CL.write.1.tlog" />
+    <None Include="x64\Debug\Lua.tlog\fxc.command.1.tlog" />
+    <None Include="x64\Debug\Lua.tlog\fxc.read.1.tlog" />
+    <None Include="x64\Debug\Lua.tlog\fxc.write.1.tlog" />
+    <None Include="x64\Debug\Lua.tlog\link.command.1.tlog" />
+    <None Include="x64\Debug\Lua.tlog\link.read.1.tlog" />
+    <None Include="x64\Debug\Lua.tlog\link.write.1.tlog" />
+    <None Include="x64\Debug\Lua.tlog\Lua.lastbuildstate" />
+    <None Include="x64\Debug\vc142.idb" />
+    <None Include="x64\Debug\vc142.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Level.txt" />
+    <Text Include="x64\Debug\Lua.Build.CppClean.log" />
+    <Text Include="x64\Debug\Lua.log" />
+    <Text Include="x64\Debug\Lua.vcxproj.FileListAbsolute.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Loader.cpp" />
+    <ClCompile Include="scr\Engine.cpp" />
+    <ClCompile Include="scr\ErrorLogger.cpp" />
+    <ClCompile Include="scr\Graphics\Camera.cpp" />
+    <ClCompile Include="scr\Graphics\D3DBase.cpp" />
+    <ClCompile Include="scr\Graphics\GameObject.cpp" />
+    <ClCompile Include="scr\Graphics\Graphics.cpp" />
+    <ClCompile Include="scr\Graphics\ImGui\imgui.cpp" />
+    <ClCompile Include="scr\Graphics\ImGui\imgui_demo.cpp" />
+    <ClCompile Include="scr\Graphics\ImGui\imgui_draw.cpp" />
+    <ClCompile Include="scr\Graphics\ImGui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="scr\Graphics\ImGui\imgui_impl_win32.cpp" />
+    <ClCompile Include="scr\Graphics\ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="scr\Graphics\Mesh.cpp" />
+    <ClCompile Include="scr\Graphics\Shaders.cpp" />
+    <ClCompile Include="scr\InputHandler.cpp" />
+    <ClCompile Include="scr\Keyboard\KeyboardClass.cpp" />
+    <ClCompile Include="scr\Keyboard\KeyboardEvent.cpp" />
+    <ClCompile Include="scr\Mouse\MouseClass.cpp" />
+    <ClCompile Include="scr\Mouse\MouseEvent.cpp" />
+    <ClCompile Include="scr\RenderWindow.cpp" />
+    <ClCompile Include="scr\Source.cpp" />
+    <ClCompile Include="scr\Timer.cpp" />
+    <ClCompile Include="scr\WindowContainer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Loader.h" />
+    <ClInclude Include="scr\Engine.h" />
+    <ClInclude Include="scr\ErrorLogger.h" />
+    <ClInclude Include="scr\Graphics\Camera.h" />
+    <ClInclude Include="scr\Graphics\ConstantBuffer.h" />
+    <ClInclude Include="scr\Graphics\ConstantBufferTypes.h" />
+    <ClInclude Include="scr\Graphics\D3DBase.h" />
+    <ClInclude Include="scr\Graphics\GameObject.h" />
+    <ClInclude Include="scr\Graphics\Graphics.h" />
+    <ClInclude Include="scr\Graphics\ImGui\imconfig.h" />
+    <ClInclude Include="scr\Graphics\ImGui\imgui.h" />
+    <ClInclude Include="scr\Graphics\ImGui\imgui_impl_dx11.h" />
+    <ClInclude Include="scr\Graphics\ImGui\imgui_impl_win32.h" />
+    <ClInclude Include="scr\Graphics\ImGui\imgui_internal.h" />
+    <ClInclude Include="scr\Graphics\ImGui\imstb_rectpack.h" />
+    <ClInclude Include="scr\Graphics\ImGui\imstb_textedit.h" />
+    <ClInclude Include="scr\Graphics\ImGui\imstb_truetype.h" />
+    <ClInclude Include="scr\Graphics\IndexBuffer.h" />
+    <ClInclude Include="scr\Graphics\Mesh.h" />
+    <ClInclude Include="scr\Graphics\Shaders.h" />
+    <ClInclude Include="scr\Graphics\Vertex.h" />
+    <ClInclude Include="scr\Graphics\VertexBuffer.h" />
+    <ClInclude Include="scr\Includes\Audio.h" />
+    <ClInclude Include="scr\Includes\CommonStates.h" />
+    <ClInclude Include="scr\Includes\DDSTextureLoader.h" />
+    <ClInclude Include="scr\Includes\DirectXHelpers.h" />
+    <ClInclude Include="scr\Includes\Effects.h" />
+    <ClInclude Include="scr\Includes\GamePad.h" />
+    <ClInclude Include="scr\Includes\GeometricPrimitive.h" />
+    <ClInclude Include="scr\Includes\GraphicsMemory.h" />
+    <ClInclude Include="scr\Includes\Keyboard.h" />
+    <ClInclude Include="scr\Includes\Model.h" />
+    <ClInclude Include="scr\Includes\Mouse.h" />
+    <ClInclude Include="scr\Includes\PostProcess.h" />
+    <ClInclude Include="scr\Includes\PrimitiveBatch.h" />
+    <ClInclude Include="scr\Includes\ScreenGrab.h" />
+    <ClInclude Include="scr\Includes\SimpleMath.h" />
+    <ClInclude Include="scr\Includes\SpriteBatch.h" />
+    <ClInclude Include="scr\Includes\SpriteFont.h" />
+    <ClInclude Include="scr\Includes\VertexTypes.h" />
+    <ClInclude Include="scr\Includes\WICTextureLoader.h" />
+    <ClInclude Include="scr\Includes\XboxDDSTextureLoader.h" />
+    <ClInclude Include="scr\InputHandler.h" />
+    <ClInclude Include="scr\Keyboard\KeyboardClass.h" />
+    <ClInclude Include="scr\Keyboard\KeyboardEvent.h" />
+    <ClInclude Include="scr\Mouse\MouseClass.h" />
+    <ClInclude Include="scr\Mouse\MouseEvent.h" />
+    <ClInclude Include="scr\RenderWindow.h" />
+    <ClInclude Include="scr\resource.h" />
+    <ClInclude Include="scr\Timer.h" />
+    <ClInclude Include="scr\WindowContainer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="pixelshader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="PS_Color.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="vertexshader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="VS_Color.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="scr\Data\Textures\piano.PNG" />
+    <Image Include="scr\Data\Textures\pinksquare.jpg" />
+    <Image Include="scr\Data\Textures\seamless_grass.jpg" />
+    <Image Include="scr\Data\Textures\seamless_pavement.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="x64\Debug\Camera.obj" />
+    <Object Include="x64\Debug\D3DBase.obj" />
+    <Object Include="x64\Debug\Engine.obj" />
+    <Object Include="x64\Debug\ErrorLogger.obj" />
+    <Object Include="x64\Debug\GameObject.obj" />
+    <Object Include="x64\Debug\Graphics.obj" />
+    <Object Include="x64\Debug\imgui.obj" />
+    <Object Include="x64\Debug\imgui_demo.obj" />
+    <Object Include="x64\Debug\imgui_draw.obj" />
+    <Object Include="x64\Debug\imgui_impl_dx11.obj" />
+    <Object Include="x64\Debug\imgui_impl_win32.obj" />
+    <Object Include="x64\Debug\imgui_widgets.obj" />
+    <Object Include="x64\Debug\InputHandler.obj" />
+    <Object Include="x64\Debug\KeyboardClass.obj" />
+    <Object Include="x64\Debug\KeyboardEvent.obj" />
+    <Object Include="x64\Debug\Loader.obj" />
+    <Object Include="x64\Debug\Mesh.obj" />
+    <Object Include="x64\Debug\MouseClass.obj" />
+    <Object Include="x64\Debug\MouseEvent.obj" />
+    <Object Include="x64\Debug\RenderWindow.obj" />
+    <Object Include="x64\Debug\Shaders.obj" />
+    <Object Include="x64\Debug\Source.obj" />
+    <Object Include="x64\Debug\Timer.obj" />
+    <Object Include="x64\Debug\WindowContainer.obj" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{371D800F-1679-45F8-B29D-0C7A5C652EA1}</ProjectGuid>
+    <RootNamespace>Lua</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>d3d11.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>d3d11.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\directxtk_desktop_2015.2019.8.23.1\build\native\directxtk_desktop_2015.targets" Condition="Exists('..\packages\directxtk_desktop_2015.2019.8.23.1\build\native\directxtk_desktop_2015.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\directxtk_desktop_2015.2019.8.23.1\build\native\directxtk_desktop_2015.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtk_desktop_2015.2019.8.23.1\build\native\directxtk_desktop_2015.targets'))" />
+  </Target>
+</Project>
