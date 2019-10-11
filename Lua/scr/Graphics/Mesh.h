@@ -20,13 +20,12 @@ public:
 	void SetColor(Color color);
 	void SetType(std::string type);
 	std::string GetType();
-	float GetX() { return this->pos.x; }
-	float GetY() { return this->pos.y; }
 	XMMATRIX worldMatrix = XMMatrixIdentity();
 	std::vector<Vertex> vertices;
 	VertexBuffer<Vertex> vertexBuffer;
 	UINT IndexCount = 0;
 private:
+
 	void UpdateMatrix();
 	std::string type;
 	Color color;

@@ -34,8 +34,7 @@ bool Graphics::Initialize(HWND hwnd, int width, int height,
 	engine = new LuaEngine();
 	meshManager.Init(device.Get(),deviceContext.Get());
 	meshManager.AddScript(engine->L());
-	std::string filePath = "test.lua";
-	engine->ExecuteFile(filePath.c_str(), state);
+	engine->ExecuteFile("test.lua", state);
 	engine->CallGlobalVariable("ReadFile");
 	return true;
 }
@@ -188,8 +187,6 @@ void Graphics::RenderFrame()
 		engine->CallGlobalVariable("ReadFile");
 	}
 
-
-	
 	ImGui::End();
 	//Assemble Together Draw Data
 	ImGui::Render();

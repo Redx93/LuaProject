@@ -12,10 +12,7 @@ RenderbleGameObject::RenderbleGameObject()
 	deviceContext = nullptr;
 }
 
-RenderbleGameObject::~RenderbleGameObject()
-{	
-
-}
+RenderbleGameObject::~RenderbleGameObject()	{	}
 
 bool RenderbleGameObject::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, 
 	Color color)

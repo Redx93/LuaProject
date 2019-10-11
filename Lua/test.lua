@@ -4,7 +4,6 @@ function update()
 	for i=1, numberOfSprite do
 			SpriteMetaTable[i]:Draw()
 	end
-	 --print("number Of sprites : ".. numberOfSprite)
  end
 
 --[[

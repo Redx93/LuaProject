@@ -85,8 +85,8 @@ public:
 	static int GetPosition(lua_State* L)
 	{
 		RenderbleGameObject* sprite = (RenderbleGameObject*)lua_touserdata(L, -1);
-		lua_Number x = sprite->GetX();
-		lua_Number y = sprite->GetY();
+		lua_Number x = sprite->GetPositionFloat3().x;
+		lua_Number y = sprite->GetPositionFloat3().y;
 		lua_pushnumber(L, x);
 		lua_pushnumber(L, y);
 		return 2;
@@ -115,12 +115,12 @@ public:
 		const char* index = lua_tostring(L, -1);
 		if (strcmp(index, "x") == 0)
 		{
-			lua_pushnumber(L, sprite->GetX());
+			lua_pushnumber(L, sprite->GetPositionFloat3().x);
 			return 1;
 		}
 		else if (strcmp(index, "y") == 0)
 		{
-			lua_pushnumber(L, sprite->GetY());
+			lua_pushnumber(L, sprite->GetPositionFloat3().y);
 			return 1;
 		}
 		else
