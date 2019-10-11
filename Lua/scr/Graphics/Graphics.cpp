@@ -85,6 +85,10 @@ bool Intersect = false;
 static int fpsCounter = 0;
 void Graphics::RenderFrame()
 {
+
+
+
+
 	AddedModel = false;
 	float bgcolor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 	this->deviceContext->ClearRenderTargetView(this->renderTargetView.Get(), bgcolor);
@@ -153,41 +157,37 @@ void Graphics::RenderFrame()
 	////}
 	}
 
-	if (this->renderGrid)
-		this->UpdateGrid();
-
-	////Draw Text
-	static std::string fpsString = "FPS: 0";
-	fpsCounter += 1;
-	if (fpsTimer.GetMilisecondsElapsed() > 1000.0)
-	{
-		fpsString = "FPS: " + std::to_string(fpsCounter);
-		fpsString += "\n\n\nMouse :\nLeftMouse = Select\nRightMouse = Deselect\n\nButtons :\n1 = Environment\n2 = Enemy\n3 = Player\n4 = Teleport\n";
-		fpsCounter = 0;
-	}
-	spriteBatch->Begin();
-	spriteFont->DrawString(spriteBatch.get(), StringToWide(fpsString).c_str(), DirectX::XMFLOAT2(0, 0), DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.0f,0.0f), DirectX::XMFLOAT2(1.0f, 1.0f));
-	spriteBatch->End();
-
-	static int counter = 0;
 	// Start the Dear ImGui frame
 	ImGui_ImplDX11_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 	//Create ImGui Test Window
-	ImGui::Begin("Test");
+	ImGui::Begin("InputManger");
 	ImGui::Text("MousePosition ( %i , %i )", mouse->GetPosX(), mouse->GetPosY());
 	ImGui::Checkbox("Render Grid", &renderGrid);
-	/*ImGui::Text("Number Of Meshes :  %i", this->models.size());*/
-	ImGui::Checkbox("Intersect with model", &Intersect);
-	bool LoadLevel = false;
-	ImGui::Checkbox("Load Level :", &LoadLevel);
-	if (LoadLevel && fpsTimer.GetMilisecondsElapsed() >= 1)
+	if (renderGrid)
 	{
-		engine->CallGlobalVariable("ReadFile");
+		this->UpdateGrid();
+	}
+	ImGui::Checkbox("Intersect with model", &Intersect);	
+	ImGui::End();
+
+	// Imgui editor
+	{
+		ImGui::Begin("Editor");   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
+		ImGui::SetWindowFontScale(2);
+		ImGui::Text(
+			"\nMouse :\nLeftMouse = Select\nRightMouse = Deselect\n\nButtons :\n1 = Environment\n2 = Enemy\n3 = Player\n4 = Teleport\n");
+		bool LoadLevel = false;
+		ImGui::Checkbox("Load Level", &LoadLevel);
+		if (LoadLevel && fpsTimer.GetMilisecondsElapsed() >= 1)
+		{
+			engine->CallGlobalVariable("ReadFile");
+		}
+		ImGui::End();
 	}
 
-	ImGui::End();
+
 	//Assemble Together Draw Data
 	ImGui::Render();
 	//Render Draw Data

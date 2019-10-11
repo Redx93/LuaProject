@@ -36,8 +36,6 @@ XMFLOAT3& GameObject::GetScaleFloat3()
 	return this->scale;
 }
 
-
-
 void GameObject::SetPositionTo(XMFLOAT3& pos)
 {
 	this->pos = pos;

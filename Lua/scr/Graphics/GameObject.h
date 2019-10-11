@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
+
 #include <DirectXMath.h>
 using namespace DirectX;
 class GameObject
@@ -41,4 +43,5 @@ protected:
 	XMVECTOR vec_left;
 	XMVECTOR vec_right;
 	XMVECTOR vec_backward;
-};
+}; 
+#endif // !

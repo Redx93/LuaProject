@@ -1,3 +1,5 @@
+#ifndef D3DBASE_H
+#define D3DBASE_H
 
 #include <SpriteBatch.h>
 #include <SpriteFont.h>
@@ -22,15 +24,11 @@ protected:
 	void UpdateConstantBuffer();
 
 	bool KeyBoardIsPressed(unsigned char& keycode);
-
 	bool mouseEvent(MouseEvent::EventType type);
+
 	MouseClass* mouse = nullptr;
 	KeyboardClass *keyboard = nullptr;
 	MeshOb* CurrentModels = nullptr;
-	Microsoft::WRL::ComPtr<ID3D11Device> device;
-	Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext;
-	Microsoft::WRL::ComPtr<IDXGISwapChain> swapchain;
-	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView;
 
 	Shader ColorShader;
 	Shader DefaultShader;
@@ -38,20 +36,18 @@ protected:
 	ConstantBuffer<CB_VS_vertexshader> cb_vs_vertexshader;
 	ConstantBuffer<CB_PS_pixelshader> cb_ps_pixelshader;
 
-
+	Microsoft::WRL::ComPtr<ID3D11Device> device;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext;
+	Microsoft::WRL::ComPtr<IDXGISwapChain> swapchain;
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView;
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> depthStencilView;
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencilBuffer;
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilState;
-
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerState;
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerState_CullFront;
-
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendState;
-
 	std::unique_ptr<DirectX::SpriteBatch> spriteBatch;
 	std::unique_ptr<DirectX::SpriteFont> spriteFont;
-
-
 public:
 	Camera camera;
 	int windowWidth = 0;
@@ -60,4 +56,4 @@ public:
 	bool AddedModel = false;
 	InputHandler* inputHandler;
 };
-
+#endif // !D3DBASE_H

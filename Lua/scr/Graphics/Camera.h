@@ -1,8 +1,8 @@
-#pragma once
+#ifndef CAMERA_H
+#define CAMERA_H
 #include <DirectXMath.h>
 #include "GameObject.h"
 using namespace DirectX;
-
 class Camera : public GameObject
 {
 public:
@@ -29,3 +29,5 @@ private:
 	const XMVECTOR DEFAULT_RIGHT_VECTOR = XMVectorSet(1.0f, 0.0f, 0.0f, 0.0f);
 
 };
+
+#endif // !CAMERA_H
