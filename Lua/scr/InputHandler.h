@@ -20,14 +20,14 @@ class InputHandler
 private:
 	bool PointInTriangle(XMVECTOR& triV1, XMVECTOR& triV2,
 		XMVECTOR& triV3, XMVECTOR& point);
-	bool PointInPlane(Ray& ray, RenderbleGameObject* m);
-	float RayTriangle(XMVECTOR &Origin,XMVECTOR& Dir, RenderbleGameObject* m);
+	bool PointInPlane(Ray& ray, MeshOb* m);
+	float RayTriangle(XMVECTOR &Origin,XMVECTOR& Dir, MeshOb* m);
 public:
 	
 	InputHandler(Camera * camera, int width, int height);
-	bool Picking(Ray& ray, RenderbleGameObject* m);
+	bool Picking(Ray& ray, MeshOb* m);
 	Ray GetRay(const int& x, const int& y);
-	void FollowMouse(Ray &ray, RenderbleGameObject * m);
+	void FollowMouse(Ray &ray, MeshOb * m);
 
 };
 

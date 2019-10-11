@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MESHOB_H
+#define MESHOB_H
 #include "Vertex.h"
 #include "VertexBuffer.h"
 #include "ConstantBuffer.h"
@@ -6,14 +7,11 @@
 #include <vector>
 using namespace DirectX;
 
-class RenderbleGameObject : public GameObject
+class MeshOb : public GameObject
 {
 public:
-	/*Mesh(MeshType type = MeshType::Environment):type(type) { }
-	Mesh(const Mesh& other);
-	Mesh& operator=(const Mesh other)*/
-	RenderbleGameObject();
-	 ~RenderbleGameObject();
+	MeshOb();
+	 ~MeshOb();
 	bool Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext,
 		Color color = Colours::Red);
 	void Draw();
@@ -25,13 +23,15 @@ public:
 	VertexBuffer<Vertex> vertexBuffer;
 	UINT IndexCount = 0;
 private:
-
 	void UpdateMatrix();
+
 	std::string type;
 	Color color;
-	ID3D11Device * device = nullptr;
-	ID3D11DeviceContext * deviceContext = nullptr;
-
+	/* constant buffers*/
 	ConstantBuffer<CB_PS_Color> cb_vs_Color;
 	ConstantBuffer<CB_VS_vertexshader> cb_vs_vertexshader;
+
+	ID3D11Device* device = nullptr;
+	ID3D11DeviceContext* deviceContext = nullptr;
 };
+#endif // !

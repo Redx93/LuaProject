@@ -6,15 +6,15 @@
 #include <iostream>
 using namespace std;
 
-RenderbleGameObject::RenderbleGameObject()
+MeshOb::MeshOb()
 {
 	device = nullptr;
 	deviceContext = nullptr;
 }
 
-RenderbleGameObject::~RenderbleGameObject()	{	}
+MeshOb::~MeshOb()	{	}
 
-bool RenderbleGameObject::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, 
+bool MeshOb::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, 
 	Color color)
 {
 	this->device = device;
@@ -122,7 +122,7 @@ bool RenderbleGameObject::Initialize(ID3D11Device * device, ID3D11DeviceContext 
 }
 
 
-void RenderbleGameObject::Draw()
+void MeshOb::Draw()
 {	
 	//Update Color
 	this->deviceContext->PSSetConstantBuffers(0, 1, this->cb_vs_Color.GetAddressOf());
@@ -136,14 +136,14 @@ void RenderbleGameObject::Draw()
 	this->deviceContext->Draw(36, 0);
 }
 
-void RenderbleGameObject::SetColor(Color color)
+void MeshOb::SetColor(Color color)
 {
 	cb_vs_Color.data.color = color;
 	this->cb_vs_Color.ApplyChanges();
 }
 
 
-void RenderbleGameObject::SetType(std::string type)
+void MeshOb::SetType(std::string type)
 {
 	if (type == "Environment")
 	{
@@ -164,11 +164,11 @@ void RenderbleGameObject::SetType(std::string type)
 	this->type = type;
 }
 
-std::string RenderbleGameObject::GetType()
+std::string MeshOb::GetType()
 {
 	return this->type;
 }
-void RenderbleGameObject::UpdateMatrix()
+void MeshOb::UpdateMatrix()
 {
 	this->worldMatrix = XMMatrixRotationRollPitchYaw(this->rot.x, this->rot.y, this->rot.z)
 		* XMMatrixTranslation(this->pos.x, this->pos.y, this->pos.z)

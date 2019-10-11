@@ -7,7 +7,7 @@ InputHandler::InputHandler(Camera* camera, int width, int height)
 	this->height = height;
 }
 
-bool InputHandler::Picking(Ray &ray, RenderbleGameObject* m)
+bool InputHandler::Picking(Ray &ray, MeshOb* m)
 {
 	int distanse = RayTriangle(ray.Origin, ray.Dir, m);
 	if (distanse > 0)
@@ -17,7 +17,7 @@ bool InputHandler::Picking(Ray &ray, RenderbleGameObject* m)
 	return false;
 }
 
-float InputHandler::RayTriangle(XMVECTOR &Origin, XMVECTOR& Dir, RenderbleGameObject* m)
+float InputHandler::RayTriangle(XMVECTOR &Origin, XMVECTOR& Dir, MeshOb* m)
 {
 	//pick vertices
 	auto vertices = m->vertices;
@@ -115,7 +115,7 @@ bool InputHandler::PointInTriangle(XMVECTOR& v0, XMVECTOR& v1, XMVECTOR& v2, XMV
 	return InsideOfTriangle;
 }
 
-bool InputHandler::PointInPlane(Ray& ray, RenderbleGameObject* m)
+bool InputHandler::PointInPlane(Ray& ray, MeshOb* m)
 {
 	XMVECTOR Origin = ray.Origin;
 	XMVECTOR Dir = ray.Dir;
@@ -200,7 +200,7 @@ Ray InputHandler::GetRay(const int& x, const int& y)
 
 }
 
-void InputHandler::FollowMouse(Ray& ray,RenderbleGameObject* m)
+void InputHandler::FollowMouse(Ray& ray,MeshOb* m)
 {
 	PointInPlane(ray, m);
 }

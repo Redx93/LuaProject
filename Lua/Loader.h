@@ -12,8 +12,8 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext;
 public:
 	void Initialize(Microsoft::WRL::ComPtr<ID3D11Device> device, Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext);
-	void SaveLevel(std::vector<RenderbleGameObject*> meshes);
-	void LoadMap(std::vector<RenderbleGameObject*>& meshes);
+	void SaveLevel(std::vector<MeshOb*> meshes);
+	void LoadMap(std::vector<MeshOb*>& meshes);
 
 };
 

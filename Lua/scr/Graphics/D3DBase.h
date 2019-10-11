@@ -26,7 +26,7 @@ protected:
 	bool mouseEvent(MouseEvent::EventType type);
 	MouseClass* mouse = nullptr;
 	KeyboardClass *keyboard = nullptr;
-	RenderbleGameObject* CurrentModels = nullptr;
+	MeshOb* CurrentModels = nullptr;
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext;
 	Microsoft::WRL::ComPtr<IDXGISwapChain> swapchain;
