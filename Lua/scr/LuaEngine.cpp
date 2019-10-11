@@ -1,7 +1,8 @@
 #include "LuaEngine.h"
 //executes a lua script file
-void LuaEngine::ExecuteFile(const char* file, int& state)
+void LuaEngine::ExecuteFile(const char* file)
 {
+	int state = 0;
 	if (file == NULL)
 		return;
 	//// Load the string and call it with lua_pcall to catch errors. If there is an error, handle it.

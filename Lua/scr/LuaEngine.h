@@ -20,7 +20,7 @@ public:
 	lua_State* L();
 	void CallGlobalVariable(const char* globalvar);
 	//Execute Lua File
-	void ExecuteFile(const char* file, int& state);
+	void ExecuteFile(const char* file);
 	std::string GetString(const char* p);
 	void SetGlobalVariable(const char* globaName, const char* variable, lua_State* L);
 	//Execute Lua Expression (contained in string)

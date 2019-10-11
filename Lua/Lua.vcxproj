@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
+    <None Include="LibLua.lua" />
     <None Include="lua53.dll" />
     <None Include="Luafiles\test.lua" />
     <None Include="Luafiles\Text.lua" />
@@ -28,7 +29,7 @@
     <None Include="scr\imgui.ini" />
     <None Include="scr\Includes\SimpleMath.inl" />
     <None Include="scr\test.lua" />
-    <None Include="test.lua" />
+    <None Include="mainLua.lua" />
     <None Include="x64\Debug\Lua.tlog\CL.command.1.tlog" />
     <None Include="x64\Debug\Lua.tlog\CL.read.1.tlog" />
     <None Include="x64\Debug\Lua.tlog\CL.write.1.tlog" />
@@ -52,7 +53,6 @@
     <Text Include="x64\Debug\Lua.vcxproj.FileListAbsolute.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Loader.cpp" />
     <ClCompile Include="scr\Engine.cpp" />
     <ClCompile Include="scr\ErrorLogger.cpp" />
     <ClCompile Include="scr\Graphics\Camera.cpp" />
@@ -79,7 +79,6 @@
     <ClCompile Include="scr\WindowContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Loader.h" />
     <ClInclude Include="scr\Engine.h" />
     <ClInclude Include="scr\ErrorLogger.h" />
     <ClInclude Include="scr\Graphics\Camera.h" />

@@ -2,11 +2,6 @@
 SpriteMetaTable = { }
 numberOfSprite = 0
 
-function CreateModel(model)
-	SpriteMetaTable[numberOfSprite] = model
-	numberOfSprite = numberOfSprite + 1 --Increment
-end
-
 function WritetoFile()
 --[[ That mode string: `r´ for reading, a `w´ for writing (which also erases any previous content of the file),
 	or an `a´ for appending,`b´ to open binary files.]]--
@@ -38,7 +33,6 @@ function ReadFile()
 	local yArr = {} --y value float 
 	local typeArr = {} -- type string
 
-	print("Inside Read file") 
 	--brute force data into lines[] array
 	for line in io.lines(file) do
 		lines[#lines+1] = line
@@ -60,10 +54,8 @@ function ReadFile()
 		end
 		--print("Table-- " .. lines[i])
 	end	
-
 	--this for-loop is only for printing
 	for i=1, #typeArr do
-	
 		--print("x: "..xArr[i]..", y: "..yArr[i]..", type: "..typeArr[i])
 		sprite1  = Sprite.new()
 		sprite1:SetPosition(xArr[i],yArr[i])
@@ -71,6 +63,5 @@ function ReadFile()
 		SpriteMetaTable[i] = sprite1
 		numberOfSprite = numberOfSprite + 1
 	end
-
 end
 

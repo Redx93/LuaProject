@@ -38,7 +38,8 @@
     <None Include="Luafiles\test.lua" />
     <None Include="scr\test.lua" />
     <None Include="lua53.dll" />
-    <None Include="test.lua" />
+    <None Include="LibLua.lua" />
+    <None Include="mainLua.lua" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Level.txt" />
@@ -50,9 +51,6 @@
     <Text Include="test2.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Loader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="scr\Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -127,9 +125,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Loader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="scr\WindowContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -23,16 +23,12 @@ public:
 	ID3D11DeviceContext* GetDeviceContext() { return this->deviceContext.Get(); }
 private:
 	LuaEngine* engine;
-	int state;
 	MeshManger meshManager;
-
 
 	bool InitializeScene();
 	//grid
 	float gridDimension = 10.0f;
 	int gridSections = 10;
-
 	//imgui
 	bool renderGrid = true;
-	bool FollowMouse = true;
 };

@@ -34,7 +34,7 @@ bool Graphics::Initialize(HWND hwnd, int width, int height,
 	engine = new LuaEngine();
 	meshManager.Init(device.Get(),deviceContext.Get());
 	meshManager.AddScript(engine->L());
-	engine->ExecuteFile("test.lua", state);
+	engine->ExecuteFile("mainLua.lua");
 	engine->CallGlobalVariable("ReadFile");
 	return true;
 }
@@ -84,8 +84,6 @@ bool Graphics::InitizlizeGrid()
 bool Intersect = false;
 void Graphics::RenderFrame()
 {
-
-	AddedModel = false;
 	float bgcolor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 	this->deviceContext->ClearRenderTargetView(this->renderTargetView.Get(), bgcolor);
 	this->deviceContext->ClearDepthStencilView(this->depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
@@ -152,25 +150,25 @@ void Graphics::RenderFrame()
 	////}
 	}
 
-	// Start the Dear ImGui frame
-	ImGui_ImplDX11_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
-	//Create ImGui Test Window
-	ImGui::Begin("InputManger");
-	ImGui::Text("MousePosition ( %i , %i )", mouse->GetPosX(), mouse->GetPosY());
-	ImGui::Checkbox("Render Grid", &renderGrid);
-	if (renderGrid)
 	{
-		this->UpdateGrid();
+		ImGui_ImplDX11_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
+		//Create ImGui Test Window
+		ImGui::Begin("InputManger");
+		ImGui::Text("MousePosition ( %i , %i )", mouse->GetPosX(), mouse->GetPosY());
+		ImGui::Checkbox("Render Grid", &renderGrid);
+		if (renderGrid)
+		{
+			this->UpdateGrid();
+		}
+		ImGui::Checkbox("Intersect with model", &Intersect);	
+		ImGui::End();
 	}
-	ImGui::Checkbox("Intersect with model", &Intersect);	
-	ImGui::End();
-
 	// Imgui editor
 	{
 		ImGui::Begin("Editor");   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-		ImGui::SetWindowFontScale(2);
+		ImGui::SetWindowFontScale(1.5);
 		ImGui::Text(
 			"Mouse :\nLeftMouse = Select\nRightMouse = Deselect\n\nButtons :\n1 = Environment\n2 = Enemy\n3 = Player\n4 = Teleport\n");
 		bool LoadLevel = false;
@@ -180,10 +178,9 @@ void Graphics::RenderFrame()
 			engine->CallGlobalVariable("ReadFile");
 		}
 		ImGui::End();
+		ImGui::Render();
+		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 	}
-
-	ImGui::Render();
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 	this->swapchain->Present(1, NULL);
 }
 
