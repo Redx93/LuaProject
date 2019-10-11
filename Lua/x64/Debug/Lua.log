@@ -1,4 +1,29 @@
-﻿  Graphics.cpp
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Graphics.cpp(72,75): warning C4267:  'argument': conversion from 'size_t' to 'UINT', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Graphics.cpp(115,34): warning C4267:  'initializing': conversion from 'size_t' to 'UINT', possible loss of data
+﻿  Engine.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(100,29): warning C4244:  'argument': conversion from 'lua_Number' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(100,23): warning C4244:  'argument': conversion from 'lua_Number' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(150,12): warning C4244:  'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(155,12): warning C4244:  'initializing': conversion from 'int' to 'float', possible loss of data
+  Graphics.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Engine.cpp(24,11): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(100,29): warning C4244:  'argument': conversion from 'lua_Number' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(100,23): warning C4244:  'argument': conversion from 'lua_Number' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(150,12): warning C4244:  'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(155,12): warning C4244:  'initializing': conversion from 'int' to 'float', possible loss of data
+  RenderWindow.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Graphics.cpp(75,75): warning C4267:  'argument': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(100,29): warning C4244:  'argument': conversion from 'lua_Number' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(100,23): warning C4244:  'argument': conversion from 'lua_Number' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(150,12): warning C4244:  'initializing': conversion from 'int' to 'float', possible loss of data
+  Source.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(155,12): warning C4244:  'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(100,29): warning C4244:  'argument': conversion from 'lua_Number' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(100,23): warning C4244:  'argument': conversion from 'lua_Number' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(150,12): warning C4244:  'initializing': conversion from 'int' to 'float', possible loss of data
+  WindowContainer.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(155,12): warning C4244:  'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(100,29): warning C4244:  'argument': conversion from 'lua_Number' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(100,23): warning C4244:  'argument': conversion from 'lua_Number' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(150,12): warning C4244:  'initializing': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(155,12): warning C4244:  'initializing': conversion from 'int' to 'float', possible loss of data
   Lua.vcxproj -> C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\Lua.exe

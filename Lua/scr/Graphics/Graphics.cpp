@@ -5,11 +5,7 @@ Graphics::~Graphics()
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();
-
-	for (int i = 0; i < models.size(); i++)
-	{
-		delete models[i];
-	}
+	delete engine;
 }
 
 bool Graphics::Initialize(HWND hwnd, int width, int height,
@@ -34,6 +30,13 @@ bool Graphics::Initialize(HWND hwnd, int width, int height,
 	ImGui_ImplDX11_Init(this->device.Get(), this->deviceContext.Get());
 	ImGui::StyleColorsDark();
 
+	// script
+	engine = new LuaEngine();
+	meshManager.Init(device.Get(),deviceContext.Get());
+	meshManager.AddScript(engine->L());
+	std::string filePath = "test.lua";
+	engine->ExecuteFile(filePath.c_str(), state);
+	engine->CallGlobalVariable("ReadFile");
 	return true;
 }
 
@@ -89,68 +92,70 @@ void Graphics::RenderFrame()
 	this->deviceContext->ClearDepthStencilView(this->depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
 	this->SetupShader(this->DefaultShader, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		
+	//update camera buffer
+	this->UpdateConstantBuffer();
+	
+	engine->CallGlobalVariable("update");
+	{ 
+	////picking get the ray
+	//Ray ray = inputHandler->GetRay(mouse->GetPosX(), mouse->GetPosY());
+	//{
+	//	
+	//	char keyCode = this->keyboard->ReadKey().GetKeyCode();
+	//	//Models
+	//	unsigned char buttonPressed = 'l';
+	//	if (this->CurrentModels == nullptr &&
+	//		this->KeyBoardIsPressed(buttonPressed) && 
+	//		fpsTimer.GetAsSeconds() >= 0.6)
+	//	{
+	//		if (buttonPressed != 'l')
+	//		{
+	//		MeshType type = this->GetMeshType(buttonPressed);
+	//		RenderbleGameObject* m  = new RenderbleGameObject();
+	//		m->Initialize(device.Get(), deviceContext.Get());
+	//		m->SetType(type);
+	//		m->SetColor(type);
 
-
-	//picking get the ray
-	Ray ray = inputHandler->GetRay(mouse->GetPosX(), mouse->GetPosY());
-	{
-		
-		char keyCode = this->keyboard->ReadKey().GetKeyCode();
-		//Models
-		unsigned char buttonPressed = 'l';
-		if (this->CurrentModels == nullptr &&
-			this->KeyBoardIsPressed(buttonPressed) && 
-			fpsTimer.GetAsSeconds() >= 0.6)
-		{
-			if (buttonPressed != 'l')
-			{
-			MeshType type = this->GetMeshType(buttonPressed);
-			RenderbleGameObject* m  = new RenderbleGameObject();
-			m->Initialize(device.Get(), deviceContext.Get());
-			m->SetType(type);
-			m->SetColor(type);
-
-			this->models.push_back(m);
-			UINT index = models.size() - 1;
-			this->CurrentModels = models[models.size() - 1];
-			}
-		}
-		//Mouse Intersection
-		for (auto& mesh : models)
-		{
-			Intersect = inputHandler->Picking(ray, mesh);
-			if (CurrentModels != nullptr)
-			{
-				inputHandler->FollowMouse(ray, CurrentModels);
-				if (mouseEvent(MouseEvent::EventType::RPress))
-				{
-					CurrentModels = nullptr;
-					this->SaveLevel(this->models);
-					fpsTimer.Restart();
-				}
-			}
-			else if(this->CurrentModels == nullptr)
-			{
-				if (mouseEvent(MouseEvent::EventType::LPress) && Intersect)
-				{
-					this->CurrentModels = mesh;
-				}
-			}
-		}
-	}
+	//		this->models.push_back(m);
+	//		UINT index = models.size() - 1;
+	//		this->CurrentModels = models[models.size() - 1];
+	//		}
+	//	}
+	//	//Mouse Intersection
+	//	for (auto& mesh : models)
+	//	{
+	//		Intersect = inputHandler->Picking(ray, mesh);
+	//		if (CurrentModels != nullptr)
+	//		{
+	//			inputHandler->FollowMouse(ray, CurrentModels);
+	//			if (mouseEvent(MouseEvent::EventType::RPress))
+	//			{
+	//				CurrentModels = nullptr;
+	//				this->SaveLevel(this->models);
+	//				fpsTimer.Restart();
+	//			}
+	//		}
+	//		else if(this->CurrentModels == nullptr)
+	//		{
+	//			if (mouseEvent(MouseEvent::EventType::LPress) && Intersect)
+	//			{
+	//				this->CurrentModels = mesh;
+	//			}
+	//		}
+	//	}
+	//}
 
 	//Draw
-	for (auto& mesh : models)
-	{
-		this->UpdateConstantBuffer(mesh);
-		mesh->Draw();
+	//for (auto& mesh : models)
+	//{
+	//	this->UpdateConstantBuffer(mesh);
+	//	mesh->Draw();
 
+	////}
 	}
-	{
-		if(this->renderGrid)
-			this->UpdateGrid();
-	}
+
+	if (this->renderGrid)
+		this->UpdateGrid();
 
 	////Draw Text
 	static std::string fpsString = "FPS: 0";
@@ -174,17 +179,15 @@ void Graphics::RenderFrame()
 	ImGui::Begin("Test");
 	ImGui::Text("MousePosition ( %i , %i )", mouse->GetPosX(), mouse->GetPosY());
 	ImGui::Checkbox("Render Grid", &renderGrid);
-	ImGui::Text("Number Of Meshes :  %i", this->models.size());
+	/*ImGui::Text("Number Of Meshes :  %i", this->models.size());*/
 	ImGui::Checkbox("Intersect with model", &Intersect);
 	bool LoadLevel = false;
 	ImGui::Checkbox("Load Level :", &LoadLevel);
 	if (LoadLevel && fpsTimer.GetMilisecondsElapsed() >= 1)
 	{
-		this->LoadMap(models);
+		engine->CallGlobalVariable("ReadFile");
 	}
-	/*if (this->CurrentModels != nullptr && Intersect) {
-		ImGui::Text("Current Mesh(Type : %s)", CurrentModels->getTypeToString());
-	}*/
+
 
 	
 	ImGui::End();

@@ -6,13 +6,6 @@
 #include <vector>
 using namespace DirectX;
 
-enum MeshType
-{
-	Environment,
-	Enemy,
-	Player,
-	Teleport
-};
 class RenderbleGameObject : public GameObject
 {
 public:
@@ -22,30 +15,24 @@ public:
 	RenderbleGameObject();
 	 ~RenderbleGameObject();
 	bool Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext,
-		Color color = Colours::White);
+		Color color = Colours::Red);
 	void Draw();
 	void SetColor(Color color);
-	void SetColor(MeshType type);
-	void SetType(MeshType type);
-	Color GetColor();
-	MeshType GetMeshType(const unsigned char keycode);
-	MeshType GetMeshType(std::string keycode);
-	std::string GetMeshType(MeshType type);
-	MeshType GetType() { return this->type; }
-
-
+	void SetType(std::string type);
+	std::string GetType();
+	float GetX() { return this->pos.x; }
+	float GetY() { return this->pos.y; }
 	XMMATRIX worldMatrix = XMMatrixIdentity();
 	std::vector<Vertex> vertices;
 	VertexBuffer<Vertex> vertexBuffer;
 	UINT IndexCount = 0;
 private:
 	void UpdateMatrix();
-
-	MeshType type;
+	std::string type;
 	Color color;
 	ID3D11Device * device = nullptr;
 	ID3D11DeviceContext * deviceContext = nullptr;
 
 	ConstantBuffer<CB_PS_Color> cb_vs_Color;
-	//IndexBuffer indexBuffer;
+	ConstantBuffer<CB_VS_vertexshader> cb_vs_vertexshader;
 };

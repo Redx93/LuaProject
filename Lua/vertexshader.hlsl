@@ -2,7 +2,10 @@ cbuffer mycBuffer : register(b0)
 {
     float4x4 mat;
 }; 
-
+cbuffer myBuffer : register(b1)
+{
+	float4x4 world;
+};
 struct VS_INPUT
 {
     float3 inPos : POSITION;
@@ -20,7 +23,9 @@ struct VS_OUTPUT
 VS_OUTPUT main(VS_INPUT input) 
 {
     VS_OUTPUT output;
-    output.outPosition = mul(float4(input.inPos, 1.0f), mat);
-  //  output.outColor = input.inColor;
+	output.outPosition = mul(float4(input.inPos, 1.0f), world);
+	output.outPosition = mul(output.outPosition, mat);
+	//float4x4 wpvmatrix = mat * world;
+   // output.outPosition = mul(float4(input.inPos, 1.0f), wpvmatrix);
     return output;
 }

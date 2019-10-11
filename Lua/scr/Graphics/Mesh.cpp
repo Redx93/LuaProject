@@ -109,6 +109,7 @@ bool RenderbleGameObject::Initialize(ID3D11Device * device, ID3D11DeviceContext 
 		this->color = color;
 		this->cb_vs_Color.data.color = color;
 		this->cb_vs_Color.ApplyChanges();
+		cb_vs_vertexshader.Initialize(device, deviceContext);
 	}
 	catch (COMException & exception)
 	{
@@ -128,6 +129,10 @@ void RenderbleGameObject::Draw()
 {	
 	//Update Color
 	this->deviceContext->PSSetConstantBuffers(0, 1, this->cb_vs_Color.GetAddressOf());
+	
+	cb_vs_vertexshader.data.mat = XMMatrixTranspose(worldMatrix);
+	cb_vs_vertexshader.ApplyChanges();
+	this->deviceContext->VSSetConstantBuffers(1, 1, this->cb_vs_vertexshader.GetAddressOf());
 
 	UINT offset = 0;
 	this->deviceContext->IASetVertexBuffers(0, 1, this->vertexBuffer.GetAddressOf(), this->vertexBuffer.Stride(), &offset);
@@ -140,114 +145,32 @@ void RenderbleGameObject::SetColor(Color color)
 	this->cb_vs_Color.ApplyChanges();
 }
 
-void RenderbleGameObject::SetColor(MeshType type)
+
+void RenderbleGameObject::SetType(std::string type)
 {
-	switch (type)
+	if (type == "Environment")
 	{
-	case MeshType::Environment :
-		this->SetColor(Colours::White);
-		color = Colours::White;
-		break;
-	case MeshType::Enemy:
-		this->SetColor(Colours::Red);
-		color = Colours::Red;
-		break;
-	case MeshType::Player :
-		this->SetColor(Colours::Blue);
-		color = Colours::Blue;
-		break;
-	case MeshType::Teleport :
-		this->SetColor(Colours::Green);
-		color = Colours::Green;
-		break;
-
-	default:
-		this->SetColor(Colours::White);
-		color = Colours::White;
-		break;
+		SetColor(Colours::White);
 	}
-}
-
-void RenderbleGameObject::SetType(MeshType type)
-{
+	else if (type == "Enemy")
+	{
+		SetColor(Colours::Red);
+	}
+	else if (type == "Player")
+	{
+		SetColor(Colours::Blue);
+	}
+	else if (type == "Teleport")
+	{
+		SetColor(Colours::Grey);
+	}
 	this->type = type;
 }
 
-Color RenderbleGameObject::GetColor()
+std::string RenderbleGameObject::GetType()
 {
-	return color;
+	return this->type;
 }
-
-MeshType RenderbleGameObject::GetMeshType(const unsigned char keycode)
-{
-	MeshType type;
-	switch (keycode)
-	{
-	case '1':
-		type = MeshType::Environment;
-		break;
-	case '2':
-		type = MeshType::Enemy;
-		break;
-	case '3':
-		type = MeshType::Player;
-		break;
-	case '4':
-		type = MeshType::Teleport;
-		break;
-
-	default:
-		type = MeshType::Environment;
-		break;
-	}
-	return type;
-}
-
-MeshType RenderbleGameObject::GetMeshType(std::string keycode)
-{
-	MeshType type = MeshType::Environment;
-	if (keycode == "Environment")
-	{
-		type = MeshType::Environment;
-	}
-	else if (keycode == "Enemy")
-	{
-		type = MeshType::Enemy;
-	}
-	else if (keycode == "Player")
-	{
-		type = MeshType::Player;
-	}
-	else if (keycode == "Teleport")
-	{
-		type = MeshType::Teleport;
-	}
-	return type;
-}
-
-std::string RenderbleGameObject::GetMeshType(MeshType type)
-{
-	std::string mesh = "Environment";
-	if (type == MeshType::Environment)
-	{
-		mesh = "Environment";
-	}
-	else if (type == MeshType::Enemy)
-	{
-		mesh = "Enemy";
-	}
-	else if (type == MeshType::Player)
-	{
-		mesh = "Player";
-	}
-	else if (type == MeshType::Teleport)
-	{
-		mesh = "Teleport";
-	}
-	return mesh;
-}
-
-
 void RenderbleGameObject::UpdateMatrix()
 {
 	this->worldMatrix = XMMatrixRotationRollPitchYaw(this->rot.x, this->rot.y, this->rot.z)

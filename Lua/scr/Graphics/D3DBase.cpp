@@ -22,8 +22,6 @@ bool D3DBase::InitializeD3DBase(HWND hwnd, int width, int height)
 		return false;
 
 	inputHandler = new InputHandler(&camera, width, height);
-
-	this->Initialize(device, deviceContext);
 	return true;
 }
 
@@ -189,9 +187,9 @@ void D3DBase::SetupShader(Shader shader, D3D11_PRIMITIVE_TOPOLOGY topology)
 	this->deviceContext->PSSetShader(shader.PS.GetShader(), NULL, 0);
 }
 
-void D3DBase::UpdateConstantBuffer(RenderbleGameObject* m)
+void D3DBase::UpdateConstantBuffer()
 {
-	this->cb_vs_vertexshader.data.mat = m->worldMatrix * camera.GetViewMatrix() * camera.GetProjectionMatrix();
+	this->cb_vs_vertexshader.data.mat =  camera.GetViewMatrix() * camera.GetProjectionMatrix();
 	this->cb_vs_vertexshader.data.mat = XMMatrixTranspose(this->cb_vs_vertexshader.data.mat);
 	this->cb_vs_vertexshader.ApplyChanges();
 	this->deviceContext->VSSetConstantBuffers(0, 1, this->cb_vs_vertexshader.GetAddressOf());
@@ -227,72 +225,6 @@ bool D3DBase::KeyBoardIsPressed(unsigned char& keycode)
 		}
 	}
 	return keyboardPressed;
-}
-
-MeshType D3DBase::GetMeshType(const unsigned char keycode)
-{
-	MeshType type;
-	switch (keycode)
-	{
-	case '1':
-		type = MeshType::Environment;
-		break;
-	case '2':
-		type = MeshType::Enemy;
-		break;
-	case '3':
-		type = MeshType::Player;
-		break;
-	case '4':
-		type = MeshType::Teleport;
-		break;
-
-	default:
-		type = MeshType::Environment;
-		break;
-	}
-	return type;
-}
-
-MeshType D3DBase::GetMeshType(std::string keycode)
-{
-	MeshType type = MeshType::Environment;
-	if (keycode == "Environment")
-	{
-		type = MeshType::Environment;
-	}else if(keycode == "Enemy")
-	{
-		type = MeshType::Enemy;
-	}else if(keycode == "Player")
-	{
-		type = MeshType::Player;
-	}else if(keycode == "Teleport")
-	{
-		type = MeshType::Teleport;
-	}
-	return type;
-}
-
-std::string D3DBase::GetMeshType(MeshType type)
-{
-	std::string mesh;
-	if (type == 1)
-	{
-		mesh = "Environment";
-	}
-	else if (type ==2)
-	{
-		mesh = "Enemy";
-	}
-	else if (type == 3)
-	{
-		mesh = "Player";
-	}
-	else if (type == 4)
-	{
-		mesh = "Teleport";
-	}
-	return mesh;
 }
 
 bool D3DBase::mouseEvent(MouseEvent::EventType type)

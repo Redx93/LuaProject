@@ -5,6 +5,8 @@
 #include "ImGUI\\imgui_impl_dx11.h"
 #include "Mesh.h"
 #include "D3DBase.h"
+#include "..//LuaEngine.h"
+#include "MeshManger.h"
 class Graphics : public D3DBase
 {
 public:
@@ -17,8 +19,14 @@ public:
 	void UpdateGrid();
 
 	VertexBuffer<Vertex_COLOR> vb_grid;
-	std::vector<RenderbleGameObject*> models;
+	ID3D11Device* GetDevice() { return this->device.Get(); }
+	ID3D11DeviceContext* GetDeviceContext() { return this->deviceContext.Get(); }
 private:
+	LuaEngine* engine;
+	int state;
+	MeshManger meshManager;
+
+
 	bool InitializeScene();
 	//grid
 	float gridDimension = 10.0f;

@@ -9,8 +9,8 @@
 #include "..//Mouse/MouseClass.h"
 #include "..//Mouse/MouseEvent.h"
 #include "..//Keyboard/KeyboardClass.h"
-#include "../..//Loader.h"
-class D3DBase : public Loader
+
+class D3DBase
 {
 protected:
 	D3DBase(){}
@@ -19,14 +19,9 @@ protected:
 	bool InitializeDirectX(HWND hwnd);
 	bool InitializeShaders();
 	void SetupShader(Shader shader, D3D11_PRIMITIVE_TOPOLOGY );
-	void UpdateConstantBuffer(RenderbleGameObject *m);
+	void UpdateConstantBuffer();
 
 	bool KeyBoardIsPressed(unsigned char& keycode);
-
-
-	MeshType GetMeshType(const unsigned char keycode);
-	MeshType GetMeshType(std::string keycode);
-	std::string GetMeshType(MeshType type);
 
 	bool mouseEvent(MouseEvent::EventType type);
 	MouseClass* mouse = nullptr;
