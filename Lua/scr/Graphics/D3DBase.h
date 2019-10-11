@@ -32,7 +32,6 @@ protected:
 	Microsoft::WRL::ComPtr<IDXGISwapChain> swapchain;
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView;
 
-
 	Shader ColorShader;
 	Shader DefaultShader;
 

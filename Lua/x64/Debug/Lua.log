@@ -1,2 +1,19 @@
-﻿  GameObject.cpp
+﻿  Engine.cpp
+  Camera.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Engine.cpp(24,11): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Camera.cpp(41,30): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Camera.cpp(41,24): warning C4244:  'initializing': conversion from 'double' to 'const float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Camera.cpp(42,15): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+  D3DBase.cpp
+  Graphics.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Camera.cpp(48,13): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+  InputHandler.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Graphics.cpp(74,75): warning C4267:  'argument': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\InputHandler.cpp(12,15): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\InputHandler.cpp(153,26): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+  RenderWindow.cpp
+  Source.cpp
+  WindowContainer.cpp
+  Generating Code...
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\InputHandler.cpp(154,26): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
   Lua.vcxproj -> C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\Lua.exe
