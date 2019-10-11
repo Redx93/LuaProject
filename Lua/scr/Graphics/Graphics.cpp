@@ -82,12 +82,8 @@ bool Graphics::InitizlizeGrid()
 	return true;
 }
 bool Intersect = false;
-static int fpsCounter = 0;
 void Graphics::RenderFrame()
 {
-
-
-
 
 	AddedModel = false;
 	float bgcolor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
@@ -153,7 +149,6 @@ void Graphics::RenderFrame()
 	//{
 	//	this->UpdateConstantBuffer(mesh);
 	//	mesh->Draw();
-
 	////}
 	}
 
@@ -177,7 +172,7 @@ void Graphics::RenderFrame()
 		ImGui::Begin("Editor");   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
 		ImGui::SetWindowFontScale(2);
 		ImGui::Text(
-			"\nMouse :\nLeftMouse = Select\nRightMouse = Deselect\n\nButtons :\n1 = Environment\n2 = Enemy\n3 = Player\n4 = Teleport\n");
+			"Mouse :\nLeftMouse = Select\nRightMouse = Deselect\n\nButtons :\n1 = Environment\n2 = Enemy\n3 = Player\n4 = Teleport\n");
 		bool LoadLevel = false;
 		ImGui::Checkbox("Load Level", &LoadLevel);
 		if (LoadLevel && fpsTimer.GetMilisecondsElapsed() >= 1)
@@ -187,18 +182,13 @@ void Graphics::RenderFrame()
 		ImGui::End();
 	}
 
-
-	//Assemble Together Draw Data
 	ImGui::Render();
-	//Render Draw Data
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-
 	this->swapchain->Present(1, NULL);
 }
 
 void Graphics::UpdateGrid()
 {
-	
 	this->SetupShader(this->ColorShader, D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
 	//Update Constant buffer with WVP Matrix
 	XMMATRIX world = XMMatrixIdentity();
@@ -230,7 +220,6 @@ bool Graphics::InitializeScene()
 		hr = this->cb_ps_pixelshader.Initialize(this->device.Get(), this->deviceContext.Get());
 		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
 
-	
 		camera.SetPosition(0.0f, 0.0f, -2.0f);
 		camera.SetProjectionValues(90.0f, static_cast<float>(windowWidth) /
 			static_cast<float>(windowHeight), 0.1f, 1000.0f);
