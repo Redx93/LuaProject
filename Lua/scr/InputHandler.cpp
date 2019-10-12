@@ -88,6 +88,22 @@ float InputHandler::RayTriangle(XMVECTOR &Origin, XMVECTOR& Dir, MeshOb* m)
 	return -1;
 }
 
+bool InputHandler::PointInAABB(const XMFLOAT3& point, const XMFLOAT3& mesh)
+{
+	/*construct the aabb*/
+	XMFLOAT3 max = XMFLOAT3(mesh.x + 1, mesh.y + 1, mesh.z + 1);
+	XMFLOAT3 min = XMFLOAT3(mesh.x - 1, mesh.y - 1, mesh.z - 1);
+	bool inside = false;
+	/*check if its inside*/
+	if (point.x > min.x && point.x < max.x &&
+		point.y > min.y && point.y < max.y &&
+		point.z > min.z && point.z < max.z)
+	{
+		inside = true;
+	}
+	return inside;
+}
+
 bool InputHandler::PointInTriangle(XMVECTOR& v0, XMVECTOR& v1, XMVECTOR& v2, XMVECTOR& point)
 {
 	bool InsideOfTriangle = false;

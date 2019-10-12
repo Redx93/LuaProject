@@ -22,6 +22,8 @@ private:
 		XMVECTOR& triV3, XMVECTOR& point);
 	bool PointInPlane(Ray& ray, MeshOb* m);
 	float RayTriangle(XMVECTOR &Origin,XMVECTOR& Dir, MeshOb* m);
+	/* Test */
+	bool PointInAABB(const XMFLOAT3& point, const XMFLOAT3& mesh);
 public:
 	
 	InputHandler(Camera * camera, int width, int height);
