@@ -1,3 +1,42 @@
-﻿  Graphics.cpp
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Graphics.cpp(74,75): warning C4267:  'argument': conversion from 'size_t' to 'UINT', possible loss of data
+﻿  Loader.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\Loader.cpp(61,78): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\Loader.cpp(61,56): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\Loader.cpp(61,34): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+x64\Debug\Camera.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\D3DBase.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\Engine.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\ErrorLogger.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\GameObject.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\Graphics.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\imgui.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\imgui_demo.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\imgui_draw.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\imgui_impl_dx11.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\imgui_impl_win32.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\imgui_widgets.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\InputHandler.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\KeyboardClass.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\KeyboardEvent.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\Loader.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\Mesh.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\MouseClass.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\MouseEvent.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\RenderWindow.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\Shaders.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\Source.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\Timer.obj : warning LNK4042: object specified more than once; extras ignored
+x64\Debug\WindowContainer.obj : warning LNK4042: object specified more than once; extras ignored
+Timer.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'Timer.obj' or at 'C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\vc142.pdb'; linking object as if no debug info
+MouseEvent.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'MouseEvent.obj' or at 'C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\vc142.pdb'; linking object as if no debug info
+MouseClass.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'MouseClass.obj' or at 'C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\vc142.pdb'; linking object as if no debug info
+KeyboardEvent.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'KeyboardEvent.obj' or at 'C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\vc142.pdb'; linking object as if no debug info
+KeyboardClass.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'KeyboardClass.obj' or at 'C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\vc142.pdb'; linking object as if no debug info
+Shaders.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'Shaders.obj' or at 'C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\vc142.pdb'; linking object as if no debug info
+imgui_widgets.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'imgui_widgets.obj' or at 'C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\vc142.pdb'; linking object as if no debug info
+imgui_impl_win32.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'imgui_impl_win32.obj' or at 'C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\vc142.pdb'; linking object as if no debug info
+imgui_impl_dx11.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'imgui_impl_dx11.obj' or at 'C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\vc142.pdb'; linking object as if no debug info
+imgui_draw.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'imgui_draw.obj' or at 'C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\vc142.pdb'; linking object as if no debug info
+imgui_demo.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'imgui_demo.obj' or at 'C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\vc142.pdb'; linking object as if no debug info
+imgui.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'imgui.obj' or at 'C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\vc142.pdb'; linking object as if no debug info
+ErrorLogger.obj : warning LNK4099: PDB 'vc142.pdb' was not found with 'ErrorLogger.obj' or at 'C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\vc142.pdb'; linking object as if no debug info
   Lua.vcxproj -> C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\Lua.exe

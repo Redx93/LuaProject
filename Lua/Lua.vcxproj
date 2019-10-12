@@ -53,6 +53,7 @@
     <Text Include="x64\Debug\Lua.vcxproj.FileListAbsolute.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Loader.cpp" />
     <ClCompile Include="scr\Engine.cpp" />
     <ClCompile Include="scr\ErrorLogger.cpp" />
     <ClCompile Include="scr\Graphics\Camera.cpp" />
@@ -79,6 +80,7 @@
     <ClCompile Include="scr\WindowContainer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Loader.h" />
     <ClInclude Include="scr\Engine.h" />
     <ClInclude Include="scr\ErrorLogger.h" />
     <ClInclude Include="scr\Graphics\Camera.h" />
