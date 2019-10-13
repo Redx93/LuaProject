@@ -1,10 +1,29 @@
 #include "InputHandler.h"
 
-InputHandler::InputHandler(Camera* camera, int width, int height)
+InputHandler::InputHandler()
 {
-	this->camera = camera;
-	this->width = width;
-	this->height = height;
+	//this->camera = camera;
+	//this->mouse = mouse;
+	//this->keyboard = keyboard;
+	//this->width = width;
+	//this->height = height;
+}
+
+InputHandler::~InputHandler()
+{
+	//delete mouse;
+	//delete keyboard;
+}
+
+unsigned char InputHandler::GetKeyCode()const 
+{
+	return this->keyboard->ReadChar();
+}
+
+void InputHandler::setValues(MouseClass* mouse, KeyboardClass* keyboard)
+{
+	this->keyboard = keyboard;
+	this->mouse = mouse;
 }
 
 bool InputHandler::Picking(Ray &ray, MeshOb* m)

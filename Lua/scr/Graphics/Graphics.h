@@ -7,10 +7,11 @@
 #include "D3DBase.h"
 #include "..//LuaEngine.h"
 #include "MeshManger.h"
+#include "..//InputManager.h"
 class Graphics : public D3DBase
 {
 public:
-	Graphics(){}
+	Graphics();
 	~Graphics();
 	bool Initialize(HWND hwnd, int width, int height, MouseClass* mouse ,
 		KeyboardClass* keyboard);
@@ -24,6 +25,7 @@ public:
 private:
 	LuaEngine* engine;
 	MeshManger meshManager;
+	InputManager* inputManager;
 
 	bool InitializeScene();
 	//grid

@@ -1,8 +1,9 @@
 --package.path = '/usr/LibLua.lua;'
 require("LibLua")
 
--- InputManger = new InputManger()
+inputManager = InputManager.new()
 function update()
+	theKey=inputManager:GetKey()
 	for i=1, numberOfSprite do
 			SpriteMetaTable[i]:Draw()
 	end

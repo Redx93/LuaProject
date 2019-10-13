@@ -21,7 +21,7 @@ bool D3DBase::InitializeD3DBase(HWND hwnd, int width, int height)
 	if (!InitializeShaders())
 		return false;
 
-	inputHandler = new InputHandler(&camera, width, height);
+	//inputHandler = new InputHandler(&camera, width, height);
 	return true;
 }
 

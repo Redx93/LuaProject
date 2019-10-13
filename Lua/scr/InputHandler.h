@@ -2,8 +2,11 @@
 #include <DirectXMath.h>
 #include "Graphics/Mesh.h"
 #include "Graphics/Camera.h"
+#include "Mouse/MouseClass.h"
+//#include "Mouse.h"
+#include "Keyboard/KeyboardClass.h"
+//#include "Keyboard.h"
 using namespace DirectX;
-
 
 struct Ray
 {
@@ -15,6 +18,9 @@ struct Ray
 class InputHandler
 {
 	Camera* camera;
+
+
+	//screen size
 	int width;
 	int height;
 private:
@@ -26,7 +32,13 @@ private:
 	bool PointInAABB(const XMFLOAT3& point, const XMFLOAT3& mesh);
 public:
 	
-	InputHandler(Camera * camera, int width, int height);
+	InputHandler();//xy 
+	~InputHandler();
+	unsigned char GetKeyCode()const; //char
+	MouseClass* mouse;
+	KeyboardClass* keyboard;
+
+	void setValues(MouseClass* mouse, KeyboardClass* keyboard);
 	bool Picking(Ray& ray, MeshOb* m);
 	Ray GetRay(const int& x, const int& y);
 	void FollowMouse(Ray &ray, MeshOb * m);

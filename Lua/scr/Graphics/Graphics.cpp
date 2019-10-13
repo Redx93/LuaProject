@@ -1,11 +1,16 @@
 #include "Graphics.h"
 
+Graphics::Graphics()
+{
+}
+
 Graphics::~Graphics()
 {
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
 	ImGui::DestroyContext();
 	delete engine;
+	delete inputManager;
 }
 
 bool Graphics::Initialize(HWND hwnd, int width, int height,
@@ -21,6 +26,7 @@ bool Graphics::Initialize(HWND hwnd, int width, int height,
 
 	this->mouse = mouse;
 	this->keyboard = Keyboard;
+	this->inputManager = new InputManager(this->mouse,this->keyboard, width, height);
 
 	//Setup ImGui
 	IMGUI_CHECKVERSION();
@@ -34,7 +40,9 @@ bool Graphics::Initialize(HWND hwnd, int width, int height,
 	engine = new LuaEngine();
 	meshManager.Init(device.Get(),deviceContext.Get());
 	meshManager.AddScript(engine->L());
+	inputManager->AddScript(engine->L());
 	engine->ExecuteFile("mainLua.lua");
+	inputManager->setValues();
 	engine->CallGlobalVariable("ReadFile");
 	return true;
 }

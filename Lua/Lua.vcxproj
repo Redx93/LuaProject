@@ -69,6 +69,7 @@
     <ClCompile Include="scr\Graphics\Mesh.cpp" />
     <ClCompile Include="scr\Graphics\Shaders.cpp" />
     <ClCompile Include="scr\InputHandler.cpp" />
+    <ClCompile Include="scr\InputManager.cpp" />
     <ClCompile Include="scr\Keyboard\KeyboardClass.cpp" />
     <ClCompile Include="scr\Keyboard\KeyboardEvent.cpp" />
     <ClCompile Include="scr\LuaEngine.cpp" />
@@ -124,6 +125,7 @@
     <ClInclude Include="scr\Includes\WICTextureLoader.h" />
     <ClInclude Include="scr\Includes\XboxDDSTextureLoader.h" />
     <ClInclude Include="scr\InputHandler.h" />
+    <ClInclude Include="scr\InputManager.h" />
     <ClInclude Include="scr\Keyboard\KeyboardClass.h" />
     <ClInclude Include="scr\Keyboard\KeyboardEvent.h" />
     <ClInclude Include="scr\LuaEngine.h" />
