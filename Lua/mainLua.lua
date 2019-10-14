@@ -10,7 +10,7 @@ function update()
 	if keychar == '1' then
 		currentObject = SpriteMetaTable[1];
 	end
-	if mouse == '1' then
+	if mouse == '2' then
 		currentObject = nil
 	end
 	

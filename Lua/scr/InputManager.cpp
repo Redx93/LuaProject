@@ -19,16 +19,27 @@ int InputManager::GetMouseEvent(lua_State* L_state)
 	InputHandler* ih = (InputHandler*)lua_touserdata(L_state, -1);
 	EventLua &luaEvent= ih->GetEvent();
 	if (ih->mouse->EventBufferIsEmpty() == true)
-	{	
-		luaEvent.mouse = "";
-		lua_pushstring(L_state, luaEvent.mouse.c_str());
-	}
-	if(ih->mouse->EventBufferIsEmpty() == false)
 	{
-		MouseEvent e  = ih->mouse->ReadEvent();
-		luaEvent.mouse = e.GetType();
-		lua_pushstring(L_state, luaEvent.mouse.c_str());
+		luaEvent.mouse = "";
 	}
+	while (!ih->mouse->EventBufferIsEmpty())
+	{
+		MouseEvent me = ih->mouse->ReadEvent();
+		if (ih->mouse->IsRightDown() | ih->mouse->IsLeftDown())
+		{
+			if (me.GetType() == MouseEvent::EventType::RPress)
+			{
+				if(luaEvent.mouse != "2")
+					luaEvent.mouse = "2";
+			}
+			else if (me.GetType() == MouseEvent::EventType::LPress)
+			{
+				if (luaEvent.mouse != "0")
+					luaEvent.mouse = "0";
+			}
+		}
+	}
+	lua_pushstring(L_state, luaEvent.mouse.c_str());
 	return 1;
 }
 
@@ -36,16 +47,23 @@ int InputManager::GetKeyEvent(lua_State* L_state)
 {	
 	InputHandler* ih = (InputHandler*)lua_touserdata(L_state, -1);
 	EventLua &luaEvent = ih->GetEvent();
-	if (ih->keyboard->CharBufferIsEmpty() == true)
+	
+	if (ih->keyboard->KeyBufferIsEmpty() == true )
 	{
-		lua_pushstring(L_state, luaEvent.key.c_str());
+		luaEvent.key = "";
 	}
-	else
+	while (!ih->keyboard->KeyBufferIsEmpty())
 	{
-		luaEvent.key = ih->GetKeyCode();
-		lua_pushstring(L_state, luaEvent.key.c_str());
+		KeyboardEvent me = ih->keyboard->ReadKey();
+		if (me.IsPress())
+		{
+			if (me.GetKeyCode() == '1')
+			{
+					luaEvent.key = "1";
+			}
+		}
 	}
-
+	lua_pushstring(L_state, luaEvent.key.c_str());
 	return 1;
 }
 
