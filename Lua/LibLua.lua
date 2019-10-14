@@ -1,6 +1,14 @@
 --module (..., package.seeall)--enable to  be seen from other module
 SpriteMetaTable = { }
-numberOfSprite = 0
+numberOfSprite = 1
+
+function CreateMeshFile(x,y,type)
+		sprite1  = Sprite.new()
+		sprite1:SetPosition(x,y)
+		sprite1:SetType(type)
+		SpriteMetaTable[numberOfSprite] = sprite1
+		numberOfSprite = numberOfSprite + 1
+end
 
 function WritetoFile()
 --[[ That mode string: `r´ for reading, a `w´ for writing (which also erases any previous content of the file),
@@ -57,11 +65,7 @@ function ReadFile()
 	--this for-loop is only for printing
 	for i=1, #typeArr do
 		--print("x: "..xArr[i]..", y: "..yArr[i]..", type: "..typeArr[i])
-		sprite1  = Sprite.new()
-		sprite1:SetPosition(xArr[i],yArr[i])
-		sprite1:SetType(typeArr[i])
-		SpriteMetaTable[i] = sprite1
-		numberOfSprite = numberOfSprite + 1
+		CreateMeshFile(xArr[i],yArr[i],typeArr[i])
 	end
 end
 

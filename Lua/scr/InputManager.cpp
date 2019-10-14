@@ -29,13 +29,13 @@ int InputManager::GetMouseEvent(lua_State* L_state)
 		{
 			if (me.GetType() == MouseEvent::EventType::RPress)
 			{
-				if(luaEvent.mouse != "2")
-					luaEvent.mouse = "2";
+				if(luaEvent.mouse != "RPress")
+					luaEvent.mouse = "RPress";
 			}
 			else if (me.GetType() == MouseEvent::EventType::LPress)
 			{
-				if (luaEvent.mouse != "0")
-					luaEvent.mouse = "0";
+				if (luaEvent.mouse != "LPress")
+					luaEvent.mouse = "LPress";
 			}
 		}
 	}
@@ -57,10 +57,7 @@ int InputManager::GetKeyEvent(lua_State* L_state)
 		KeyboardEvent me = ih->keyboard->ReadKey();
 		if (me.IsPress())
 		{
-			if (me.GetKeyCode() == '1')
-			{
-					luaEvent.key = "1";
-			}
+			luaEvent.key = me.GetKeyCode();
 		}
 	}
 	lua_pushstring(L_state, luaEvent.key.c_str());
