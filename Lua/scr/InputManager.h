@@ -2,12 +2,14 @@
 #define INPUTMANAGER_H
 #include "lua.hpp"
 #include "InputHandler.h"
+
 class InputManager
 {
 private:
 	InputHandler* inputhandler;
 	MouseClass* mouse;
 	KeyboardClass* keyboard;
+	EventLua luaEvent;
 public:
 	InputManager(MouseClass* mouse, KeyboardClass* keyboard, int width, int height);
 	~InputManager();

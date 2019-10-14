@@ -20,6 +20,11 @@ unsigned char InputHandler::GetKeyCode()const
 	return this->keyboard->ReadChar();
 }
 
+EventLua& InputHandler::GetEvent()
+{
+	return this->luaEvent;
+}
+
 void InputHandler::setValues(MouseClass* mouse, KeyboardClass* keyboard)
 {
 	this->keyboard = keyboard;

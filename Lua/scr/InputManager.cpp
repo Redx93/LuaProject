@@ -8,24 +8,22 @@ InputManager::InputManager(MouseClass* mouse, KeyboardClass* keyboard, int width
 
 InputManager::~InputManager()
 {
-	//delete mouse;
-	//delete keyboard;
 }
 
 int InputManager::GetMouseEvent(lua_State* L_state)
 {
 	InputHandler* ih = (InputHandler*)lua_touserdata(L_state, -1);
-	std::string mouse = "";
-
+	EventLua &luaEvent= ih->GetEvent();
 	if (ih->mouse->EventBufferIsEmpty() == true)
 	{
-		lua_pushstring(L_state, mouse.c_str());
+		
+		lua_pushstring(L_state, luaEvent.mouse.c_str());
 	}
 	else
 	{
 		MouseEvent e  = ih->mouse->ReadEvent();
-		mouse = e.GetType();
-		lua_pushstring(L_state, mouse.c_str());
+		luaEvent.mouse = e.GetType();
+		lua_pushstring(L_state, luaEvent.mouse.c_str());
 	}
 	return 1;
 }
@@ -33,17 +31,15 @@ int InputManager::GetMouseEvent(lua_State* L_state)
 int InputManager::GetKeyEvent(lua_State* L_state)
 {	
 	InputHandler* ih = (InputHandler*)lua_touserdata(L_state, -1);
-	std::string keyChar;
-	
+	EventLua &luaEvent = ih->GetEvent();
 	if (ih->keyboard->CharBufferIsEmpty() == true)
 	{
-		keyChar.push_back(ih->GetKeyCode());
-		lua_pushstring(L_state, keyChar.c_str());
+		lua_pushstring(L_state, luaEvent.key.c_str());
 	}
 	else
 	{
-		keyChar.push_back(ih->GetKeyCode());
-		lua_pushstring(L_state, keyChar.c_str());
+		luaEvent.key = ih->GetKeyCode();
+		lua_pushstring(L_state, luaEvent.key.c_str());
 	}
 
 	return 1;
