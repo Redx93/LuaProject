@@ -19,11 +19,11 @@ int InputManager::GetMouseEvent(lua_State* L_state)
 	InputHandler* ih = (InputHandler*)lua_touserdata(L_state, -1);
 	EventLua &luaEvent= ih->GetEvent();
 	if (ih->mouse->EventBufferIsEmpty() == true)
-	{
-		
+	{	
+		luaEvent.mouse = "";
 		lua_pushstring(L_state, luaEvent.mouse.c_str());
 	}
-	else
+	if(ih->mouse->EventBufferIsEmpty() == false)
 	{
 		MouseEvent e  = ih->mouse->ReadEvent();
 		luaEvent.mouse = e.GetType();
