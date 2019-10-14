@@ -14,8 +14,20 @@ InputManager::~InputManager()
 
 int InputManager::GetMouseEvent(lua_State* L_state)
 {
+	InputHandler* ih = (InputHandler*)lua_touserdata(L_state, -1);
+	std::string mouse = "";
 
-	return 0;
+	if (ih->mouse->EventBufferIsEmpty() == true)
+	{
+		lua_pushstring(L_state, mouse.c_str());
+	}
+	else
+	{
+		MouseEvent e  = ih->mouse->ReadEvent();
+		mouse = e.GetType();
+		lua_pushstring(L_state, mouse.c_str());
+	}
+	return 1;
 }
 
 int InputManager::GetKeyEvent(lua_State* L_state)
@@ -36,6 +48,13 @@ int InputManager::GetKeyEvent(lua_State* L_state)
 
 	return 1;
 }
+
+//int InputManager::GetMeshObject(lua_State* L)
+//{
+//	MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
+//
+//	return 0;
+//}
 
 int InputManager::CreateInputHandler(lua_State* L)
 {
@@ -131,8 +150,11 @@ void InputManager::AddScript(lua_State* L)
 	lua_setfield(L, -2, "new");
 
 	lua_pushcfunction(L, GetKeyEvent);
-	lua_setfield(L, -2, "GetKey");
-
+	lua_setfield(L, -2, "GetKeyEvent");
+	lua_pushcfunction(L, GetMouseEvent);
+	lua_setfield(L, -2, "GetMouseEvent");
+	//lua_pushcfunction(L, GetMeshObject);
+	//lua_setfield(L, -2, "GetMesh");
 
 	luaL_newmetatable(L, "InputMetaTable"); //
 	lua_pushstring(L, "__gc");

@@ -13,6 +13,8 @@ public:
 	~InputManager();
 	static int GetMouseEvent(lua_State *L_state);
 	static int GetKeyEvent(lua_State* L_state);
+	//static int GetMeshObject(lua_State* L_state);
+
 
 	static int CreateInputHandler(lua_State* L);
 	static int DestroyInputHandler(lua_State* L);

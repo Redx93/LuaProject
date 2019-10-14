@@ -2,11 +2,16 @@
 require("LibLua")
 
 inputManager = InputManager.new()
+
 function update()
-	theKey=inputManager:GetKey()
-	for i=1, numberOfSprite do
-			SpriteMetaTable[i]:Draw()
+	mouse = inputManager:GetMouseEvent()
+	keychar = inputManager:GetKeyEvent()
+	if keychar == '1' then
+		for i=1, numberOfSprite do
+				SpriteMetaTable[i]:Draw()
+		end
 	end
+
  end
 
 --[[
