@@ -10,7 +10,7 @@ public:
 	void SetProjectionValues(float fovDegrees, float aspectRatio, float nearZ, float farZ);
 
 	const XMMATRIX& GetViewMatrix() const;
-	const XMMATRIX& GetProjectionMatrix() const;
+	XMMATRIX& GetProjectionMatrix();
 
 	void SetLookAtPos(XMFLOAT3 lookAtPos);
 	const XMVECTOR& GetForwardVector();

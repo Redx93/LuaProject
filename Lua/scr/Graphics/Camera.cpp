@@ -19,7 +19,7 @@ const XMMATRIX& Camera::GetViewMatrix() const
 	return this->viewMatrix;
 }
 
-const XMMATRIX& Camera::GetProjectionMatrix() const
+XMMATRIX& Camera::GetProjectionMatrix()
 {
 	return this->projectionMatrix;
 }

@@ -13,6 +13,7 @@ struct Ray
 	XMVECTOR Origin;
 	XMVECTOR Dir;
 	Ray(XMVECTOR Origin, XMVECTOR Dir) :Origin(Origin), Dir(Dir){}
+	Ray() :Origin(), Dir() {}
 };
 class EventLua
 {
@@ -26,7 +27,8 @@ class InputHandler
 {
 	Camera* camera;
 
-
+	EventLua luaEvent;
+	Ray ray;
 	//screen size
 	int width;
 	int height;
@@ -37,9 +39,6 @@ private:
 	float RayTriangle(XMVECTOR &Origin,XMVECTOR& Dir, MeshOb* m);
 	/* Test */
 	bool PointInAABB(const XMFLOAT3& point, const XMFLOAT3& mesh);
-
-
-	EventLua luaEvent;
 public:
 	
 	InputHandler();//xy 
@@ -49,9 +48,10 @@ public:
 	KeyboardClass* keyboard;
 	EventLua& GetEvent();
 	void setValues(MouseClass* mouse, KeyboardClass* keyboard);
+	void SetCamera(Camera* camera, int width, int height);
 	bool Picking(Ray& ray, MeshOb* m);
-	Ray GetRay(const int& x, const int& y);
-	void FollowMouse(Ray &ray, MeshOb * m);
+	void GetRay(const int& x, const int& y);
+	void FollowMouse(MeshOb * m);
 
 };
 

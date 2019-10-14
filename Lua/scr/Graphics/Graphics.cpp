@@ -26,7 +26,8 @@ bool Graphics::Initialize(HWND hwnd, int width, int height,
 
 	this->mouse = mouse;
 	this->keyboard = Keyboard;
-	this->inputManager = new InputManager(this->mouse,this->keyboard, width, height);
+	this->inputManager = new InputManager(this->mouse,this->keyboard,
+		&this->camera, width, height);
 
 	//Setup ImGui
 	IMGUI_CHECKVERSION();

@@ -31,6 +31,13 @@ void InputHandler::setValues(MouseClass* mouse, KeyboardClass* keyboard)
 	this->mouse = mouse;
 }
 
+void InputHandler::SetCamera(Camera* camera,int width,int height)
+{
+	this->camera = camera;
+	this->width = width;
+	this->height = height;
+}
+
 bool InputHandler::Picking(Ray &ray, MeshOb* m)
 {
 	int distanse = RayTriangle(ray.Origin, ray.Dir, m);
@@ -204,8 +211,10 @@ bool InputHandler::PointInPlane(Ray& ray, MeshOb* m)
 	return false;
 }
 
-Ray InputHandler::GetRay(const int& x, const int& y)
+void InputHandler::GetRay(const int& x, const int& y)
 {
+	/* check if x and y is the same as last time we checked */
+
 	XMFLOAT4X4 P;
 	XMStoreFloat4x4(&P, camera->GetProjectionMatrix());
 
@@ -236,11 +245,11 @@ Ray InputHandler::GetRay(const int& x, const int& y)
 	XMVECTOR Dir = XMVector3TransformNormal(pickRayInViewSpaceDir, pickRayToWorldSpaceMatrix);
 	Dir = XMVector3Normalize(Dir);
 
-	return Ray(Origin,Dir);
-
+	ray = Ray(Origin,Dir);
 }
 
-void InputHandler::FollowMouse(Ray& ray,MeshOb* m)
+void InputHandler::FollowMouse(MeshOb* m)
 {
+	GetRay(this->mouse->GetPosX(),this->mouse->GetPosY());
 	PointInPlane(ray, m);
 }

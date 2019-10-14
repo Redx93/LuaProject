@@ -1,9 +1,13 @@
 #include "InputManager.h"
 
-InputManager::InputManager(MouseClass* mouse, KeyboardClass* keyboard, int width, int height)
+InputManager::InputManager(MouseClass* mouse, KeyboardClass* keyboard,
+	Camera* camera, int width, int height)
 {
+	this->camera = camera;
 	this->mouse = mouse;
 	this->keyboard = keyboard;
+	this->width = width;
+	this->height = height;
 }
 
 InputManager::~InputManager()
@@ -43,6 +47,16 @@ int InputManager::GetKeyEvent(lua_State* L_state)
 	}
 
 	return 1;
+}
+
+int InputManager::MeshFollow(lua_State* L)
+{
+	InputHandler* input = (InputHandler*)lua_touserdata(L, -2);
+	//Get the meshOB we want to follow mouse
+	MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
+	// call the follow function
+	input->FollowMouse(sprite);
+	return 0;
 }
 
 //int InputManager::GetMeshObject(lua_State* L)
@@ -130,7 +144,7 @@ void InputManager::AddInputManager(InputHandler* input)
 void InputManager::setValues()
 {
 	this->inputhandler->setValues(this->mouse,this->keyboard);
-
+	this->inputhandler->SetCamera(this->camera,this->width, height);
 }
 
 void InputManager::AddScript(lua_State* L)
@@ -149,8 +163,8 @@ void InputManager::AddScript(lua_State* L)
 	lua_setfield(L, -2, "GetKeyEvent");
 	lua_pushcfunction(L, GetMouseEvent);
 	lua_setfield(L, -2, "GetMouseEvent");
-	//lua_pushcfunction(L, GetMeshObject);
-	//lua_setfield(L, -2, "GetMesh");
+	lua_pushcfunction(L, MeshFollow);
+	lua_setfield(L, -2, "Follow");
 
 	luaL_newmetatable(L, "InputMetaTable"); //
 	lua_pushstring(L, "__gc");
