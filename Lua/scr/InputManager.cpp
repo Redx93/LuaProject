@@ -74,6 +74,25 @@ int InputManager::MeshFollow(lua_State* L)
 	return 0;
 }
 
+int InputManager::GetMousePosition(lua_State* L)
+{
+	InputHandler* input = (InputHandler*)lua_touserdata(L, -1);
+
+	XMFLOAT2 position = input->GetMousePos();
+	lua_pushnumber(L, position.x);
+	lua_pushnumber(L, position.y);
+	return 2;
+}
+
+int InputManager::CollideWith(lua_State* L)
+{
+	InputHandler* input = (InputHandler*)lua_touserdata(L, -2);
+	MeshOb* mesh = (MeshOb*)lua_touserdata(L, -1);
+	bool collision = input->CollideWith(mesh);
+	lua_pushboolean(L, collision);
+	return 1;
+}
+
 //int InputManager::GetMeshObject(lua_State* L)
 //{
 //	MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
@@ -180,6 +199,12 @@ void InputManager::AddScript(lua_State* L)
 	lua_setfield(L, -2, "GetMouseEvent");
 	lua_pushcfunction(L, MeshFollow);
 	lua_setfield(L, -2, "Follow");
+
+	lua_pushcfunction(L, GetMousePosition);
+	lua_setfield(L, -2, "GetPos");
+
+	lua_pushcfunction(L, CollideWith);
+	lua_setfield(L, -2, "Collide");
 
 	luaL_newmetatable(L, "InputMetaTable"); //
 	lua_pushstring(L, "__gc");

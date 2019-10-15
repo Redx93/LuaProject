@@ -5,29 +5,37 @@ inputManager = InputManager.new()
 local currentObject = nil
 
 function CreateMesh(type)
-		--create Object
-		sprite  = Sprite.new()
-		--in c call function for setting it to mouse position
-		sprite:setType(type)
-		SpriteMetaTable[numberOfSprite] = sprite
-		numberOfSprite = numberOfSprite + 1
+	local x , y = inputManager:GetPos()
+	--create Object
+	sprite  = Sprite.new()
+	--in c call function for setting it to mouse position
+	sprite:SetPosition(x, y)
+	sprite:SetType(type)
+	SpriteMetaTable[numberOfSprite] = sprite
+	numberOfSprite = numberOfSprite + 1
+	--return sprite so we can use it to follow mouse
+	return sprite
 end
 function update()
 	mouse = inputManager:GetMouseEvent()
 	keychar = inputManager:GetKeyEvent()
 
-	if keychar == '1' then
-		currentObject = SpriteMetaTable[1];
+	if keychar == '1' or keychar == '2' or keychar == '3' or keychar == '4' then
+		currentObject = CreateMesh(keychar)
 	end
 	if mouse == 'RPress' then
 		currentObject = nil
 	end
 	--[[
-	if mouse "leftclick"
-		for i =1, numberOfSprite do
-		inputManager:CheckCollision(SpriteMetaTable[i])
+	for i = 1, numberOfSprite do
+		if mouse == "LPress" then
+			b_collide = inputManager:Collide(SpriteMetaTable[i])
+			if b_collide == true then
+				currentObject = SpriteMetaTable[0]
+			end
 		end
-	]]--
+	end
+		]]--
 	--[[
 	if mouse "rightClick"
 		currentObject = nil

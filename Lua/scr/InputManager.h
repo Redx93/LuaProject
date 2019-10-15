@@ -14,12 +14,15 @@ private:
 	int width;
 	int height;
 public:
+
 	InputManager(MouseClass* mouse, KeyboardClass* keyboard, Camera * camera,
 		int width, int height);
 	~InputManager();
 	static int GetMouseEvent(lua_State *L_state);
 	static int GetKeyEvent(lua_State* L_state);
 	static int MeshFollow(lua_State* L);
+	static int GetMousePosition(lua_State* L);
+	static int CollideWith(lua_State* L);
 
 	static int CreateInputHandler(lua_State* L);
 	static int DestroyInputHandler(lua_State* L);

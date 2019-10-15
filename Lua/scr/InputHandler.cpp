@@ -253,3 +253,61 @@ void InputHandler::FollowMouse(MeshOb* m)
 	GetRay(this->mouse->GetPosX(),this->mouse->GetPosY());
 	PointInPlane(ray, m);
 }
+
+bool InputHandler::CollideWith(MeshOb* m)
+{
+	return Picking(ray, m);
+}
+
+XMFLOAT2 InputHandler::GetMousePos()
+{
+	XMFLOAT2 Postion(0,0);
+	/* Get ray */
+	GetRay(this->mouse->GetPosX(), this->mouse->GetPosY());
+	/* Check collison*/
+
+	XMVECTOR Origin = ray.Origin;
+	XMVECTOR Dir = ray.Dir;
+
+	XMVECTOR v0 = XMVectorSet(0, 0, 0, 0);
+	XMVECTOR Normal = XMVectorSet(0, 0, 1, 0);
+	//Get plane equation ("Ax + By + Cz + D = 0") Variables
+	float PlaneA = XMVectorGetX(Normal);
+	float PlaneB = XMVectorGetY(Normal);
+	float PlaneC = XMVectorGetZ(Normal);
+	//D = (-n.x * p.x) - (n.y * p.y) - (n.z * p.z)
+	float PlaneD = (-PlaneA * XMVectorGetX(v0) - PlaneB * XMVectorGetY(v0) - PlaneC * XMVectorGetZ(v0));
+
+	//Now we find where (on the ray) the ray intersects with the triangles plane
+		//Ax + By + Cz + D
+		//float ep1 = (orgin * normal)
+	float ep1 = (XMVectorGetX(Origin) * PlaneA) + (XMVectorGetY(Origin) * PlaneB) + (XMVectorGetZ(Origin) * PlaneC);
+	//float ep2 = (orgin * normal)
+	float ep2 = (XMVectorGetX(Dir) * PlaneA) + (XMVectorGetY(Dir) * PlaneB) + (XMVectorGetZ(Dir) * PlaneC);
+
+	float t = 0.f;
+	//Make sure there are no divide-by-zeros
+	if (ep2 != 0.0f)
+		//t = -(orgin*n) + d/(dir*n)
+		t = -(ep1 + PlaneD) / (ep2);
+
+	//Make sure you don't pick objects behind the camera
+	if (t > 0.0f)
+	{
+		float half = 0.5;
+		//Get the point on the plane
+		float	PointX = XMVectorGetX(Origin) + XMVectorGetX(Dir) * t;
+		float	PointY = XMVectorGetY(Origin) + XMVectorGetY(Dir) * t;
+		//floor to one digit then + 0.5 
+		PointX = floor(PointX) + half;
+		PointY = floor(PointY) + half;
+		float	PointZ = XMVectorGetZ(Origin) + XMVectorGetZ(Dir) * t;
+		// point = orgin + Dir * t;
+		// w = 0 because its a point and not a vector
+		XMVECTOR pointInPlane = XMVectorSet(PointX, PointY, PointZ, 0.0f);
+		XMFLOAT3 newPostion;
+		XMStoreFloat3(&newPostion, pointInPlane);
+		Postion = XMFLOAT2(newPostion.x, newPostion.y);
+	}
+	return Postion;
+}

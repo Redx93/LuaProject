@@ -53,5 +53,7 @@ public:
 	void GetRay(const int& x, const int& y);
 	void FollowMouse(MeshOb * m);
 
+	bool CollideWith(MeshOb* m);
+	XMFLOAT2 GetMousePos();
 };
 

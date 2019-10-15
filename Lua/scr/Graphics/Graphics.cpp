@@ -171,6 +171,7 @@ void Graphics::RenderFrame()
 		{
 			this->UpdateGrid();
 		}
+		ImGui::Text("number of meshes : %i", meshManager.numberOfSpritesExisting);
 		ImGui::Checkbox("Intersect with model", &Intersect);	
 		ImGui::End();
 	}
