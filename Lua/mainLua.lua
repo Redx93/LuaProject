@@ -23,10 +23,31 @@ function update()
 	if keychar == '1' or keychar == '2' or keychar == '3' or keychar == '4' then
 		currentObject = CreateMesh(keychar)
 	end
+--[[
+	local collide
 	if mouse == 'RPress' then
+		local i = 1
+		while SpriteMetaTable[i] do
+			collide = inputManager:Collide(SpriteMetaTable[i])
+			if collide == true then
+			break end
+			i = i + 1 
+		end	
+		if collide == false then
 		currentObject = nil
+		end
 	end
-	
+	]]--
+
+	for i = 1, numberOfSprite do
+		if mouse == 'RPress' then
+			local b_collide = inputManager:Collide(SpriteMetaTable[i])
+			if b_collide == false then
+				currentObject = nil
+			end
+		end
+	end
+
 	for i = 1, numberOfSprite do
 		if mouse == "LPress" then
 			local b_collide = inputManager:Collide(SpriteMetaTable[i])
