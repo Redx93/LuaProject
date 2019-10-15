@@ -88,9 +88,16 @@ int InputManager::CollideWith(lua_State* L)
 {
 	InputHandler* input = (InputHandler*)lua_touserdata(L, -2);
 	MeshOb* mesh = (MeshOb*)lua_touserdata(L, -1);
-	bool collision = input->CollideWith(mesh);
-	lua_pushboolean(L, collision);
-	return 1;
+	if (mesh != nullptr)
+	{
+		bool collision = input->CollideWith(mesh);
+		lua_pushboolean(L, collision);
+
+		return 1;
+	}
+	else
+		return 0;
+
 }
 
 int InputManager::CreateInputHandler(lua_State* L)

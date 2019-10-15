@@ -227,7 +227,7 @@ bool Graphics::InitializeScene()
 		hr = this->cb_ps_pixelshader.Initialize(this->device.Get(), this->deviceContext.Get());
 		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
 
-		camera.SetPosition(0.0f, 0.0f, -2.0f);
+		camera.SetPosition(0.0f, 0.0f, -3.0f);
 		camera.SetProjectionValues(90.0f, static_cast<float>(windowWidth) /
 			static_cast<float>(windowHeight), 0.1f, 1000.0f);
 	}
