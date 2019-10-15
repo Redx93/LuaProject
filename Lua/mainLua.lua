@@ -32,10 +32,11 @@ function update()
 			local b_collide = inputManager:Collide(SpriteMetaTable[i])
 			if b_collide == true then
 				currentObject = SpriteMetaTable[i]
-				do return end
+				break
 			end
 		end
 	end
+
 	if currentObject ~= nil then
 		inputManager:Follow(currentObject)
 	end

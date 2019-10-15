@@ -10,10 +10,11 @@ private:
 
 	ID3D11Device* Device;
 	ID3D11DeviceContext* DeviceContext;
-
-public:	
 	int numberOfSpritesExisting = 0;
 	int numberOfSpritesMade = 0;
+public:	
+
+	int GetNumberOfMeshses();
 	void Init(ID3D11Device* d, ID3D11DeviceContext *dc)
 	{ this->Device = d; this->DeviceContext = dc; }
 	~MeshManger()

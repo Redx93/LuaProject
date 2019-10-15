@@ -171,7 +171,7 @@ void Graphics::RenderFrame()
 		{
 			this->UpdateGrid();
 		}
-		ImGui::Text("number of meshes : %i", meshManager.numberOfSpritesExisting);
+		//ImGui::Text("number of meshes : %i", meshManager.GetNumberOfMeshses());
 		ImGui::Checkbox("Intersect with model", &Intersect);	
 		ImGui::End();
 	}
@@ -181,6 +181,12 @@ void Graphics::RenderFrame()
 		ImGui::SetWindowFontScale(1.5);
 		ImGui::Text(
 			"Mouse :\nLeftMouse = Select\nRightMouse = Deselect\n\nButtons :\n1 = Environment\n2 = Enemy\n3 = Player\n4 = Teleport\n");
+		bool SaveLevel = false;
+		ImGui::Checkbox("Save Level", &SaveLevel);
+		if (SaveLevel && fpsTimer.GetMilisecondsElapsed() >= 1)
+		{
+			engine->CallGlobalVariable("WritetoFile");
+		}
 		bool LoadLevel = false;
 		ImGui::Checkbox("Load Level", &LoadLevel);
 		if (LoadLevel && fpsTimer.GetMilisecondsElapsed() >= 1)

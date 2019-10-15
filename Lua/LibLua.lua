@@ -13,19 +13,21 @@ end
 function WritetoFile()
 --[[ That mode string: `r´ for reading, a `w´ for writing (which also erases any previous content of the file),
 	or an `a´ for appending,`b´ to open binary files.]]--
-	local file = io.open("test2","w")
-	for i=0,2 do
-		local x , y  = SpriteMetaTable[i]:GetPos()
-		local type = SpriteMetaTable[i]:GetType()
-		print(type .. " "..x .. " ".. y)
-		file:write(type .. " "..x .. " ".. y .. "\n")
+	local file = io.open("test2.txt","w")
+	for i=1,numberOfSprite do
+		local	type = SpriteMetaTable[i]:GetType();
+		local x, y = SpriteMetaTable[i]:GetPosition()
+		file:write(x .. "\n"..y .. "\n".. type .. "\n")
 	end
-
 	file:close()
 end
 
 function ReadFile()
-	local file = "test2.txt"
+	local file = io.open("test2.txt", "r")
+	for k in pairs (SpriteMetaTable) do
+		SpriteMetaTable[k] = nil
+		numberOfSprite = 1;
+	end
 	--[[
 		%a	letters, 
 		%d	digits, 
@@ -42,7 +44,7 @@ function ReadFile()
 	local typeArr = {} -- type string
 
 	--brute force data into lines[] array
-	for line in io.lines(file) do
+	for line in file:lines() do
 		lines[#lines+1] = line
 	end
 	--use lines[] array to separate the data into appropriate data-type
@@ -67,5 +69,6 @@ function ReadFile()
 		--print("x: "..xArr[i]..", y: "..yArr[i]..", type: "..typeArr[i])
 		CreateMeshFile(xArr[i],yArr[i],typeArr[i])
 	end
+	file:close()
 end
 

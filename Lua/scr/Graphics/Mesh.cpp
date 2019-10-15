@@ -148,20 +148,23 @@ void MeshOb::SetType(std::string type)
 	if (type == "Environment" || type == "1")
 	{
 		SetColor(Colours::White);
+		this->type = "Environment";
 	}
 	else if (type == "Enemy" || type == "2")
 	{
 		SetColor(Colours::Red);
+		this->type = "Enemy";
 	}
 	else if (type == "Player" || type == "3")
 	{
 		SetColor(Colours::Blue);
+		this->type = "Player";
 	}
 	else if (type == "Teleport" || type == "4")
 	{
 		SetColor(Colours::Grey);
+		this->type = "Teleport";
 	}
-	this->type = type;
 }
 
 std::string MeshOb::GetType()

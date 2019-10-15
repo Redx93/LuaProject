@@ -67,6 +67,7 @@
     <ClCompile Include="scr\Graphics\ImGui\imgui_impl_win32.cpp" />
     <ClCompile Include="scr\Graphics\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="scr\Graphics\Mesh.cpp" />
+    <ClCompile Include="scr\Graphics\MeshManger.cpp" />
     <ClCompile Include="scr\Graphics\Shaders.cpp" />
     <ClCompile Include="scr\InputHandler.cpp" />
     <ClCompile Include="scr\InputManager.cpp" />
