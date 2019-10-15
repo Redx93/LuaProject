@@ -256,6 +256,7 @@ void InputHandler::FollowMouse(MeshOb* m)
 
 bool InputHandler::CollideWith(MeshOb* m)
 {
+	GetRay(this->mouse->GetPosX(), this->mouse->GetPosY());
 	return Picking(ray, m);
 }
 

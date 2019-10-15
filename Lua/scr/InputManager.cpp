@@ -93,13 +93,6 @@ int InputManager::CollideWith(lua_State* L)
 	return 1;
 }
 
-//int InputManager::GetMeshObject(lua_State* L)
-//{
-//	MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
-//
-//	return 0;
-//}
-
 int InputManager::CreateInputHandler(lua_State* L)
 {
 	InputManager* m = (InputManager*)lua_touserdata(L, lua_upvalueindex(1));

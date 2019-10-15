@@ -26,32 +26,16 @@ function update()
 	if mouse == 'RPress' then
 		currentObject = nil
 	end
-	--[[
+	
 	for i = 1, numberOfSprite do
 		if mouse == "LPress" then
-			b_collide = inputManager:Collide(SpriteMetaTable[i])
+			local b_collide = inputManager:Collide(SpriteMetaTable[i])
 			if b_collide == true then
-				currentObject = SpriteMetaTable[0]
+				currentObject = SpriteMetaTable[i]
+				do return end
 			end
 		end
 	end
-		]]--
-	--[[
-	if mouse "rightClick"
-		currentObject = nil
-	end
-	]]--
-	--[[
-	if currentObject ~= nil then
-		inputManager:Follow(currentObject)
-	end
-	]]--
-	--[[
-		if keychar == '1' or keychar =='2' or keychar == '3' or keychar =='4' then
-		CreateMesh(keychar)
-	end
-	]]--
-
 	if currentObject ~= nil then
 		inputManager:Follow(currentObject)
 	end
