@@ -1,3 +1,2 @@
-﻿  Graphics.cpp
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Graphics.cpp(83,75): warning C4267:  'argument': conversion from 'size_t' to 'UINT', possible loss of data
-  Lua.vcxproj -> C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\Lua.exe
+﻿  Enemy.cpp
+  Lua.vcxproj -> C:\Users\Karlos\Documents\GitHub\LuaProject\x64\Debug\Lua.exe

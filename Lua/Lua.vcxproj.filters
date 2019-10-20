@@ -132,6 +132,9 @@
     <ClCompile Include="scr\Graphics\MeshManger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="scr\Graphics\Meshes\Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scr\WindowContainer.h">
@@ -294,6 +297,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scr\InputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scr\Graphics\Meshes\Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
