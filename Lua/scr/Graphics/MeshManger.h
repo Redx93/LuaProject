@@ -1,22 +1,27 @@
 #ifndef MESHMANGER_H
 #define MESHMANGER_H
 #include "Mesh.h"
+#include "Meshes/Enemy.h"
 #include <lua.hpp>
-
+#include "../Timer.h"
 class MeshManger
 {
 private:
 	std::vector<MeshOb*> m_meshes;
+	std::vector<XMFLOAT3> waypoints;
 
 	ID3D11Device* Device;
 	ID3D11DeviceContext* DeviceContext;
 	int numberOfSpritesExisting = 0;
 	int numberOfSpritesMade = 0;
+	Timer* theTimer;
 public:	
 
 	int GetNumberOfMeshses();
-	void Init(ID3D11Device* d, ID3D11DeviceContext *dc)
-	{ this->Device = d; this->DeviceContext = dc; }
+	void Init(ID3D11Device* d, ID3D11DeviceContext *dc, Timer* timer)
+	{
+		this->Device = d; this->DeviceContext = dc; this->theTimer = timer;
+	}
 	~MeshManger()
 	{
 	}
@@ -41,7 +46,42 @@ public:
 			i++;
 		}
 	}
+	static int setWaypoint(lua_State* L)
+	{
+		MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
+		MeshManger* sm = (MeshManger*)lua_touserdata(L, lua_upvalueindex(1)); //
+		
+		if (sprite->GetType() == "Enemy")
+		{
+			Enemy* newEnemy = (Enemy*)lua_touserdata(L, -1);
+			newEnemy->initWaypoints(sm->waypoints); //fix vector error
+		}
+		return 0;
+	}
+	static int updateEnemy(lua_State* L)
+	{
+		MeshManger* sm = (MeshManger*)lua_touserdata(L, lua_upvalueindex(1));
+		float dt = sm->theTimer->GetMilisecondsElapsed();
+		MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
+		bool wpIsEmpty = false;
+		if (sprite->GetType() == "Enemy")
+		{
+			Enemy* theEnemy = (Enemy*)lua_touserdata(L, -1);
+			wpIsEmpty = theEnemy->update(dt);
 
+		}
+		lua_pushboolean(L, wpIsEmpty);
+		return 1;
+	}
+	static int moveWPtoVector(lua_State* L)
+	{
+		MeshManger* sm = (MeshManger*)lua_touserdata(L, lua_upvalueindex(1)); //
+		MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
+		if (sprite->GetType() == "Waypoint")
+		{
+			sm->waypoints.push_back(sprite->GetPositionFloat3());
+		}
+	}
 	static int CreateMesh(lua_State* L)
 	{
 		MeshManger* sm = (MeshManger*)lua_touserdata(L, lua_upvalueindex(1));
@@ -186,6 +226,13 @@ public:
 		lua_setfield(L, -2, "GetType");
 		lua_pushcfunction(L, GetPosition);
 		lua_setfield(L, -2, "GetPosition");
+		lua_pushcfunction(L, setWaypoint);
+		lua_setfield(L, -2, "setWaypoint");
+		lua_pushcfunction(L, updateEnemy);
+		lua_setfield(L, -2, "updateEnemy");
+
+		lua_pushcfunction(L, moveWPtoVector);
+		lua_setfield(L, -2, "moveWPtoVector");
 
 		luaL_newmetatable(L, "MeshMetaTable");
 		lua_pushstring(L, "__gc");

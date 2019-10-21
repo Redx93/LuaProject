@@ -39,7 +39,7 @@ bool Graphics::Initialize(HWND hwnd, int width, int height,
 
 	// script
 	engine = new LuaEngine();
-	meshManager.Init(device.Get(),deviceContext.Get());
+	meshManager.Init(device.Get(),deviceContext.Get(),&this->fpsTimer);
 	meshManager.AddScript(engine->L());
 	inputManager->AddScript(engine->L());
 	engine->ExecuteFile("mainLua.lua");

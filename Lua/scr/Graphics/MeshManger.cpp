@@ -82,7 +82,7 @@ int MeshManger::GetNumberOfMeshses()
 //			lua_setuservalue(L, 1);
 //			sm->AddSprite((Enemy*)pointerToASprite);
 //		}
-//
+
 //		/*	void* pointerToASprite = lua_newuserdata(L, sizeof(MeshOb));
 //			new (pointerToASprite) MeshOb();
 //			luaL_getmetatable(L, "MeshMetaTable");
@@ -92,6 +92,7 @@ int MeshManger::GetNumberOfMeshses()
 //			lua_newtable(L);
 //			lua_setuservalue(L, 1);
 //
+
 //			sm->AddSprite((MeshOb*)pointerToASprite);*/
 //		return 1;
 //	}

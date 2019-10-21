@@ -3,6 +3,8 @@ require("LibLua")
 
 inputManager = InputManager.new()
 local currentObject = nil
+local nrOfEnemies = 1
+local enemiesTable = { }
 
 function CreateMesh(type)
 	local x , y = inputManager:GetPos()
@@ -67,13 +69,38 @@ function update()
 	end
  end
 
---[[
-function EditorUpdate()
-	if InputManger:MouseState() == "LeftMouse" and 
-	   InputManger:KeyInput() == "D" then
-	 DeleteMesh(SpriteMetaTable[i])
-	end
-end 
+function spawnEnemy()
+	enemy=Sprite.new("Enemy")
+	enemy:setWaypoint()
+	enemiesTable[nrOfEnemies] = enemy
+	nrOfEnemies= nrOfEnemies + 1
+	
+	--enemy:updateEnemy() 
+ end
 
-]]--
--- ~= ( != c++)
+function destroyEnemy(enemyID)
+	enemyID=nil
+	--nrOfEnemies=nrOfEnemies-1
+end
+
+function gamePhase()
+	-- body
+	for i=1,nrOfEnemies do
+		local wpIsEmpty = enemiesTable[i]:updateEnemy()  
+		enemiesTable[i]:Draw()
+		if wpIsEmpty == true then
+			destroyEnemy(enemiesTable[i])
+		end
+		
+
+	end
+	--Draw meshes
+	for i=1, numberOfSprite do
+		if SpriteMetaTable[i]:GetType()~="Waypoint" then
+			SpriteMetaTable[i]:Draw()
+		end
+			
+	end
+
+end
+
