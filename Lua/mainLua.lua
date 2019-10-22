@@ -3,8 +3,6 @@ require("LibLua")
 
 inputManager = InputManager.new()
 local currentObject = nil
-local nrOfEnemies = 1
-local enemiesTable = { }
 
 function CreateMesh(type)
 	local x , y = inputManager:GetPos()
@@ -25,21 +23,6 @@ function update()
 	if keychar == '1' or keychar == '2' or keychar == '3' or keychar == '4' then
 		currentObject = CreateMesh(keychar)
 	end
---[[
-	local collide
-	if mouse == 'RPress' then
-		local i = 1
-		while SpriteMetaTable[i] do
-			collide = inputManager:Collide(SpriteMetaTable[i])
-			if collide == true then
-			break end
-			i = i + 1 
-		end	
-		if collide == false then
-		currentObject = nil
-		end
-	end
-	]]--
 
 	for i = 1, numberOfSprite do
 		if mouse == 'RPress' then
@@ -70,12 +53,13 @@ function update()
  end
 
 function spawnEnemy()
-	enemy=Sprite.new("Enemy")
-	enemy:setWaypoint()
-	enemiesTable[nrOfEnemies] = enemy
-	nrOfEnemies= nrOfEnemies + 1
-	
-	--enemy:updateEnemy() 
+	sprite1 = Sprite.new()
+	sprite1:SetType("Enemy")
+	sprite1:CreateEnemy()
+	sprite1:SetPosition(-3.5,-6.5)
+	sprite1:SetWaypoint()
+	SpriteMetaTable[numberOfSprite] = sprite1
+	numberOfSprite = numberOfSprite + 1
  end
 
 function destroyEnemy(enemyID)
@@ -84,23 +68,13 @@ function destroyEnemy(enemyID)
 end
 
 function gamePhase()
-	-- body
-	for i=1,nrOfEnemies do
-		local wpIsEmpty = enemiesTable[i]:updateEnemy()  
-		enemiesTable[i]:Draw()
-		if wpIsEmpty == true then
-			destroyEnemy(enemiesTable[i])
-		end
-		
-
-	end
-	--Draw meshes
 	for i=1, numberOfSprite do
+		if SpriteMetaTable[i]:GetType() == "Enemy" then
+			SpriteMetaTable[i]:updateEnemy()
+		end
 		if SpriteMetaTable[i]:GetType()~="Waypoint" then
 			SpriteMetaTable[i]:Draw()
-		end
-			
+		end	
 	end
-
 end
 

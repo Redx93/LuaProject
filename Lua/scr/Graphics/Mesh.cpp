@@ -10,9 +10,14 @@ MeshOb::MeshOb()
 {
 	device = nullptr;
 	deviceContext = nullptr;
+	enemy = nullptr;
 }
 
-MeshOb::~MeshOb()	{	}
+MeshOb::~MeshOb()	
+{
+	if (enemy != nullptr)
+		delete enemy;
+}
 
 bool MeshOb::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, 
 	Color color)
@@ -113,7 +118,7 @@ bool MeshOb::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceConte
 		ErrorLogger::Log(exception);
 		return false;
 	}
-
+	////Default value, test
 	this->SetPosition(0.0f, 0.0f, 0.0f);
 	this->SetRotation(0.0f, 0.0f, 0.0f);
 	this->SetScale(1.0f, 1.0f, 1.0f);
@@ -147,7 +152,7 @@ void MeshOb::SetType(std::string type)
 {
 	if (type == "Environment" || type == "1")
 	{
-		SetColor(Colours::White);
+		SetColor(Colours::Grey);
 		this->type = "Environment";
 	}
 	else if (type == "Enemy" || type == "2")
@@ -155,21 +160,65 @@ void MeshOb::SetType(std::string type)
 		SetColor(Colours::Red);
 		this->type = "Enemy";
 	}
-	else if (type == "Player" || type == "3")
+	else if (type == "Tower" || type == "3")
 	{
 		SetColor(Colours::Blue);
-		this->type = "Player";
+		this->type = "Tower";
 	}
-	else if (type == "Teleport" || type == "4")
+	else if (type == "Waypoint" || type == "4")
 	{
-		SetColor(Colours::Grey);
-		this->type = "Teleport";
+		SetColor(Colours::White);
+		this->type = "Waypoint";
 	}
 }
 
 std::string MeshOb::GetType()
 {
 	return this->type;
+}
+void MeshOb::InitEnemy()
+{
+	this->enemy = new Enemy();
+}
+bool MeshOb::Update(float dt)
+{
+	bool result = false;
+	SimpleMath::Vector3 enemyPos = this->GetPositionFloat3();
+	
+	SimpleMath::Vector3 currentTargetWP = enemy->waypoints.front(); //confirm if this is target wp
+	//sqrtf(x*x+y*y+z*z);
+	float length = SimpleMath::Vector3::Distance(enemyPos, currentTargetWP);
+
+	if (length < 0.5)
+		CalcNewWP();
+
+	SimpleMath::Vector3 move = enemy->moveVec * dt;
+	//this->AdjustPosition(move);
+	this->SetPosition(-2.5, 2.5, 0);
+	return this->enemy->waypoints.empty();
+}
+void MeshOb::CalcNewWP()
+{
+	XMFLOAT3 from;
+	XMFLOAT3 to;
+	from = enemy->waypoints.front();
+	enemy->waypoints.erase(enemy->waypoints.begin());
+
+	if (enemy->waypoints.empty() != false)
+		to = enemy->waypoints.front();
+	//else
+	//	to = { 0.f,0.f,0.f }; //debug waypoint object goes to 0
+	//don't delete front of list (used for next round of start/end)
+
+	SimpleMath::Vector3 start = from;
+	SimpleMath::Vector3 end = to;
+	enemy->moveVec = end - start;
+	enemy->moveVec.Normalize();
+	enemy->moveVec = enemy->moveVec * enemy->speed;
+}
+void MeshOb::initWaypoints(std::vector<XMFLOAT3> newList)
+{
+	this->enemy->waypoints = newList; //merge list into this->list
 }
 void MeshOb::UpdateMatrix()
 {

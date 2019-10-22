@@ -5,7 +5,18 @@
 #include "ConstantBuffer.h"
 #include "GameObject.h"
 #include <vector>
+#include <d3d11.h>
+#include <SimpleMath.h>
 using namespace DirectX;
+
+class Enemy
+{
+public:
+	int hp = 3;
+	float speed = 10;
+	std::vector<XMFLOAT3> waypoints;
+	SimpleMath::Vector3 moveVec;
+};
 
 class MeshOb : public GameObject
 {
@@ -22,9 +33,14 @@ public:
 	std::vector<Vertex> vertices;
 	VertexBuffer<Vertex> vertexBuffer;
 	UINT IndexCount = 0;
+
+	//enemy
+	void InitEnemy();
+	bool Update(float dt); //returns if waypoints is empty
+	void CalcNewWP();
+	void initWaypoints(std::vector<XMFLOAT3> newList);
 private:
 	void UpdateMatrix();
-
 	std::string type;
 	Color color;
 	/* constant buffers*/
@@ -33,5 +49,8 @@ private:
 
 	ID3D11Device* device = nullptr;
 	ID3D11DeviceContext* deviceContext = nullptr;
+
+	//Enemy
+	Enemy* enemy;
 };
 #endif // !

@@ -67,7 +67,6 @@
     <ClCompile Include="scr\Graphics\ImGui\imgui_impl_win32.cpp" />
     <ClCompile Include="scr\Graphics\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="scr\Graphics\Mesh.cpp" />
-    <ClCompile Include="scr\Graphics\Meshes\Enemy.cpp" />
     <ClCompile Include="scr\Graphics\MeshManger.cpp" />
     <ClCompile Include="scr\Graphics\Shaders.cpp" />
     <ClCompile Include="scr\InputHandler.cpp" />
@@ -102,7 +101,6 @@
     <ClInclude Include="scr\Graphics\ImGui\imstb_truetype.h" />
     <ClInclude Include="scr\Graphics\IndexBuffer.h" />
     <ClInclude Include="scr\Graphics\Mesh.h" />
-    <ClInclude Include="scr\Graphics\Meshes\Enemy.h" />
     <ClInclude Include="scr\Graphics\MeshManger.h" />
     <ClInclude Include="scr\Graphics\Shaders.h" />
     <ClInclude Include="scr\Graphics\Vertex.h" />

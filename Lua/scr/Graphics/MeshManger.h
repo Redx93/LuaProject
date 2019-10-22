@@ -15,12 +15,14 @@ private:
 	int numberOfSpritesExisting = 0;
 	int numberOfSpritesMade = 0;
 	Timer* theTimer;
-public:	
 
+public:	
+	static MeshManger* meshmanger;
 	int GetNumberOfMeshses();
 	void Init(ID3D11Device* d, ID3D11DeviceContext *dc, Timer* timer)
 	{
 		this->Device = d; this->DeviceContext = dc; this->theTimer = timer;
+		this->meshmanger = this;
 	}
 	~MeshManger()
 	{
@@ -46,42 +48,6 @@ public:
 			i++;
 		}
 	}
-	static int setWaypoint(lua_State* L)
-	{
-		MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
-		MeshManger* sm = (MeshManger*)lua_touserdata(L, lua_upvalueindex(1)); //
-		
-		if (sprite->GetType() == "Enemy")
-		{
-			Enemy* newEnemy = (Enemy*)lua_touserdata(L, -1);
-			newEnemy->initWaypoints(sm->waypoints); //fix vector error
-		}
-		return 0;
-	}
-	static int updateEnemy(lua_State* L)
-	{
-		MeshManger* sm = (MeshManger*)lua_touserdata(L, lua_upvalueindex(1));
-		float dt = sm->theTimer->GetMilisecondsElapsed();
-		MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
-		bool wpIsEmpty = false;
-		if (sprite->GetType() == "Enemy")
-		{
-			Enemy* theEnemy = (Enemy*)lua_touserdata(L, -1);
-			wpIsEmpty = theEnemy->update(dt);
-
-		}
-		lua_pushboolean(L, wpIsEmpty);
-		return 1;
-	}
-	static int moveWPtoVector(lua_State* L)
-	{
-		MeshManger* sm = (MeshManger*)lua_touserdata(L, lua_upvalueindex(1)); //
-		MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
-		if (sprite->GetType() == "Waypoint")
-		{
-			sm->waypoints.push_back(sprite->GetPositionFloat3());
-		}
-	}
 	static int CreateMesh(lua_State* L)
 	{
 		MeshManger* sm = (MeshManger*)lua_touserdata(L, lua_upvalueindex(1));
@@ -98,17 +64,104 @@ public:
 
 		sm->AddSprite((MeshOb*)pointerToASprite);
 		return 1;
+		/*
+		MeshManger* sm = (MeshManger*)lua_touserdata(L, lua_upvalueindex(1));
+		assert(sm);
+		std::string type;
+		if (lua_isstring(L, -1))
+		{
+			type = lua_tostring(L, -1);
+		}
+		else if(lua_isstring(L, -2))
+			std::string type = lua_tostring(L, -2);
+		if (type == "Tower")
+		{
+			void* pointerToASprite = lua_newuserdata(L, sizeof(Tower));
+			new (pointerToASprite) Tower();
+			luaL_getmetatable(L, "MeshMetaTable");
+			assert(lua_istable(L, -1));
+			lua_setmetatable(L, -2);
+			lua_newtable(L);
+			lua_setuservalue(L, 1);
+			sm->AddSprite((Tower*)pointerToASprite);
+		}
+		else if (type == "Enemy")
+		{
+			void* pointerToASprite = lua_newuserdata(L, sizeof(Enemy));
+			new (pointerToASprite) Enemy();
+			luaL_getmetatable(L, "MeshMetaTable");
+			assert(lua_istable(L, -1));
+			lua_setmetatable(L, -2);
+			lua_newtable(L);
+			lua_setuservalue(L, 1);
+			sm->AddSprite((Enemy*)pointerToASprite);
+		}
+		else
+		{
+			void* pointerToASprite = lua_newuserdata(L, sizeof(MeshOb));
+			new (pointerToASprite) MeshOb();
+			luaL_getmetatable(L, "MeshMetaTable");
+			assert(lua_istable(L, -1));
+			lua_setmetatable(L, -2);
+			lua_newtable(L);
+			lua_setuservalue(L, 1);
+			sm->AddSprite((MeshOb*)pointerToASprite);
+		}*/
 	}
 	static int DestroyMesh(lua_State* L)
 	{
 		MeshManger* sm = (MeshManger*)lua_touserdata(L, lua_upvalueindex(1));
 		assert(sm);
-
 		MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
 		sm->RemoveSprite(sprite);
 		sprite->~MeshOb();
 		return 0;
 	};
+	static int CreateEnemy(lua_State* L)
+	{
+		MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
+		MeshManger* sm = MeshManger::meshmanger;
+		if (sprite->GetType() == "Enemy")
+		{
+			sprite->InitEnemy(); //fix vector error
+		}
+		return 0;
+	}
+	static int setWaypoint(lua_State* L)
+	{
+		MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
+		MeshManger* sm = MeshManger::meshmanger;
+
+		if (sprite->GetType() == "Enemy")
+		{
+			sprite->initWaypoints(sm->waypoints); //fix vector error
+		}
+		return 0;
+	}
+	static int updateEnemy(lua_State* L)
+	{
+		MeshManger* sm = MeshManger::meshmanger;
+		float dt = sm->theTimer->GetMilisecondsElapsed();
+		MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
+		bool wpIsEmpty = false;
+		if (sprite->GetType() == "Enemy")
+		{
+			wpIsEmpty = sprite->Update(dt);
+
+		}
+		lua_pushboolean(L, wpIsEmpty);
+		return 1;
+	}
+	static int moveWPtoVector(lua_State* L)
+	{
+		MeshManger* sm = MeshManger::meshmanger;
+		MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
+		if (sprite->GetType() == "Waypoint")
+		{
+			sm->waypoints.push_back(sprite->GetPositionFloat3());
+		}
+		return 0;
+	}
 	static int GetType(lua_State* L)
 	{
 		MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
@@ -132,7 +185,6 @@ public:
 		lua_pushnumber(L, y);
 		return 2;
 	}
-
 	static int SetPosition(lua_State* L)
 	{
 		MeshOb* sprite = (MeshOb*)lua_touserdata(L, -3);
@@ -226,13 +278,16 @@ public:
 		lua_setfield(L, -2, "GetType");
 		lua_pushcfunction(L, GetPosition);
 		lua_setfield(L, -2, "GetPosition");
+
 		lua_pushcfunction(L, setWaypoint);
-		lua_setfield(L, -2, "setWaypoint");
+		lua_setfield(L, -2, "SetWaypoint");
 		lua_pushcfunction(L, updateEnemy);
 		lua_setfield(L, -2, "updateEnemy");
-
 		lua_pushcfunction(L, moveWPtoVector);
 		lua_setfield(L, -2, "moveWPtoVector");
+
+		lua_pushcfunction(L, CreateEnemy);
+		lua_setfield(L, -2, "CreateEnemy");
 
 		luaL_newmetatable(L, "MeshMetaTable");
 		lua_pushstring(L, "__gc");

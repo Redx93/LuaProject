@@ -6,7 +6,7 @@ function CreateMeshFile(x,y,type)
 		sprite1  = Sprite.new()
 		sprite1:SetPosition(x,y)
 		sprite1:SetType(type)
-		if type=="Waypoint" then
+		if type == "Waypoint" then
 			sprite1:moveWPtoVector()
 		end
 		SpriteMetaTable[numberOfSprite] = sprite1

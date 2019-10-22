@@ -1,12 +1,3 @@
-﻿  Engine.cpp
-  Graphics.cpp
-C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Engine.cpp(24,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  MeshManger.cpp
-C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Graphics.cpp(83,75): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
-  Enemy.cpp
-  RenderWindow.cpp
-  Source.cpp
-  WindowContainer.cpp
-  Generating Code...
-C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\MeshManger.cpp(5,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  Lua.vcxproj -> C:\Users\Karlos\Documents\GitHub\LuaProject\x64\Debug\Lua.exe
+﻿  Mesh.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.cpp(84,92): warning C4267:  'argument': conversion from 'size_t' to 'UINT', possible loss of data
+  Lua.vcxproj -> C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\Lua.exe

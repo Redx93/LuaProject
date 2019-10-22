@@ -1,5 +1,7 @@
 #include "MeshManger.h"
 
+MeshManger * MeshManger::meshmanger = nullptr;
+
 int MeshManger::GetNumberOfMeshses()
 {
 	return m_meshes.size();
