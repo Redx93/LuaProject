@@ -8,16 +8,25 @@
 #include <d3d11.h>
 #include <SimpleMath.h>
 using namespace DirectX;
+class MeshOb;
 
 class Enemy
 {
 public:
 	int hp = 3;
-	float speed = 0.006f;;
+	float speed = 0.1f;;
 	std::vector<XMFLOAT3> waypoints;
 	SimpleMath::Vector3 moveVec;
 };
 
+class Tower
+{
+public:
+	float dmg  = 1;
+	float radius = 3;
+	bool InRange(MeshOb* ob);
+	void Shoot(MeshOb* ob);
+};
 class MeshOb : public GameObject
 {
 public:

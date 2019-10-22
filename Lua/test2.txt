@@ -164,11 +164,11 @@ Environment
 -4.5
 Environment
 -3.5
--5.5
+-6.5
 Waypoint
 -3.5
 2.5
 Waypoint
-3.5
+5.5
 2.5
 Waypoint

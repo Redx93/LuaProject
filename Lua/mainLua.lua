@@ -72,6 +72,7 @@ function gamePhase()
 		if SpriteMetaTable[i]:GetType() == "Enemy" then
 			SpriteMetaTable[i]:updateEnemy()
 		end
+
 		if SpriteMetaTable[i]:GetType()~="Waypoint" then
 			SpriteMetaTable[i]:Draw()
 		end	

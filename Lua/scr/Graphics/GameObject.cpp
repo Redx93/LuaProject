@@ -70,11 +70,11 @@ void GameObject::AdjustPosition(const XMVECTOR& pos)
 	this->UpdateMatrix();
 }
 
-void GameObject::AdjustPosition(const XMFLOAT3& pos)
+void GameObject::AdjustPosition(const XMFLOAT3& pos1)
 {
-	this->pos.x += pos.y;
-	this->pos.y += pos.y;
-	this->pos.z += pos.z;
+	this->pos.x += pos1.x;
+	this->pos.y += pos1.y;
+	this->pos.z += pos1.z;
 	this->posVector = XMLoadFloat3(&this->pos);
 	this->UpdateMatrix();
 }

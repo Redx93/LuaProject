@@ -46,7 +46,7 @@ bool Graphics::Initialize(HWND hwnd, int width, int height,
 	engine->ExecuteFile("mainLua.lua");
 	inputManager->setValues();
 	engine->CallGlobalVariable("ReadFile");
-	engine->CallGlobalVariable("spawnEnemy");
+	//engine->CallGlobalVariable("spawnEnemy");
 	return true;
 }
 
@@ -105,7 +105,7 @@ void Graphics::RenderFrame()
 	//update camera buffer
 	this->UpdateConstantBuffer();
 	
-	engine->CallGlobalVariable("gamePhase");
+	engine->CallGlobalVariable("update");
 	{ 
 	////picking get the ray
 	//Ray ray = inputHandler->GetRay(mouse->GetPosX(), mouse->GetPosY());

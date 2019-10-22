@@ -1,7 +1,6 @@
 #ifndef MESHMANGER_H
 #define MESHMANGER_H
 #include "Mesh.h"
-#include "Meshes/Enemy.h"
 #include <lua.hpp>
 #include "../Timer.h"
 class MeshManger

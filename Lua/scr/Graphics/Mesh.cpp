@@ -192,36 +192,36 @@ bool MeshOb::Update(float dt)
 	if (length < 0.5)
 		CalcNewWP();
 
-	SimpleMath::Vector3 move = enemy->moveVec;
-	this->AdjustPosition(move * enemy->speed * dt);
+	SimpleMath::Vector3 move = enemy->moveVec * dt;
+	this->AdjustPosition(move);
 	//this->SetPosition(-2.5, 2.5, 0);
 	return this->enemy->waypoints.empty();
 }
 void MeshOb::CalcNewWP()
 {
-	//XMFLOAT3 from;
-	//XMFLOAT3 to;
-	//from = enemy->waypoints.front();
-	//enemy->waypoints.erase(enemy->waypoints.begin());
-
-	//if (enemy->waypoints.empty() != true)
-	//	to = enemy->waypoints.front();
-	////else
-	////	to = { 0.f,0.f,0.f }; //debug waypoint object goes to 0
-	////don't delete front of list (used for next round of start/end)
-
-	//SimpleMath::Vector3 start = from;
-	//SimpleMath::Vector3 end = to;
-	//enemy->moveVec = end - start;
-	//enemy->moveVec.Normalize();
-	//enemy->moveVec = enemy->moveVec * enemy->speed;
-
-	SimpleMath::Vector3 start = enemy->waypoints[0];
-	SimpleMath::Vector3 goal = enemy->waypoints[1];
+	XMFLOAT3 from;
+	XMFLOAT3 to;
+	from = enemy->waypoints.front();
 	enemy->waypoints.erase(enemy->waypoints.begin());
-	SimpleMath::Vector3 Dir = goal - start;
-	Dir.Normalize();
-	enemy->moveVec = Dir;
+
+	if (enemy->waypoints.empty() != true)
+		to = enemy->waypoints.front();
+	//else
+	//	to = { 0.f,0.f,0.f }; //debug waypoint object goes to 0
+	//don't delete front of list (used for next round of start/end)
+
+	SimpleMath::Vector3 start = from;
+	SimpleMath::Vector3 end = to;
+	enemy->moveVec = end - start;
+	enemy->moveVec.Normalize();
+	enemy->moveVec = enemy->moveVec * enemy->speed;
+
+	//SimpleMath::Vector3 start = enemy->waypoints[0];
+	//SimpleMath::Vector3 goal = enemy->waypoints[1];
+	//enemy->waypoints.erase(enemy->waypoints.begin());
+	//SimpleMath::Vector3 Dir = goal - start;
+	//Dir.Normalize();
+	//enemy->moveVec = Dir;
 
 	
 }
