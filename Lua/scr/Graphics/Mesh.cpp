@@ -229,6 +229,31 @@ void MeshOb::initWaypoints(std::vector<XMFLOAT3> newList)
 {
 	this->enemy->waypoints = newList; //merge list into this->list
 }
+void MeshOb::InitTower()
+{
+	this->tower = new Tower();
+}
+bool MeshOb::InRange(MeshOb* incomingOb)
+{
+	bool result = false;
+	SimpleMath::Vector3 towerPos = this->GetPositionFloat3();
+	SimpleMath::Vector3 enemyPos = incomingOb->GetPositionFloat3();
+	float distance = SimpleMath::Vector3::Distance(towerPos, enemyPos);
+	if (distance <= tower->radius)
+		result = true;
+
+	return result;
+}
+void MeshOb::Shoot(MeshOb* incomingOb)
+{
+	SimpleMath::Vector3 originPos = this->GetPositionFloat3();
+	SimpleMath::Vector3 targetPos = incomingOb->GetPositionFloat3();
+	SimpleMath::Vector3 projectileVec = targetPos - originPos;
+	projectileVec.Normalize();
+	projectileVec = projectileVec * tower->projectileSpeed;
+
+	//projectileVec is now the vector to use for 1 projectile
+}
 void MeshOb::UpdateMatrix()
 {
 	this->worldMatrix = XMMatrixRotationRollPitchYaw(this->rot.x, this->rot.y, this->rot.z)

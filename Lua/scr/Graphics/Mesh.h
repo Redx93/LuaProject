@@ -24,8 +24,7 @@ class Tower
 public:
 	float dmg  = 1;
 	float radius = 3;
-	bool InRange(MeshOb* ob);
-	void Shoot(MeshOb* ob);
+	float projectileSpeed = 0.2;
 };
 class MeshOb : public GameObject
 {
@@ -48,6 +47,11 @@ public:
 	bool Update(float dt); //returns if waypoints is empty
 	void CalcNewWP();
 	void initWaypoints(std::vector<XMFLOAT3> newList);
+	//tower
+	void InitTower();
+	bool InRange(MeshOb* incomingOb);
+	void Shoot(MeshOb* incomingOb);
+
 private:
 	void UpdateMatrix();
 	std::string type;
@@ -61,5 +65,6 @@ private:
 
 	//Enemy
 	Enemy* enemy;
+	Tower* tower;
 };
 #endif // !

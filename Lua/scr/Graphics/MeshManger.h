@@ -116,6 +116,7 @@ public:
 		sprite->~MeshOb();
 		return 0;
 	};
+	//enemy
 	static int CreateEnemy(lua_State* L)
 	{
 		MeshOb* sprite = (MeshOb*)lua_touserdata(L, -1);
@@ -158,6 +159,41 @@ public:
 		if (sprite->GetType() == "Waypoint")
 		{
 			sm->waypoints.push_back(sprite->GetPositionFloat3());
+		}
+		return 0;
+	}
+	//tower
+	static int CreateTower(lua_State* L)
+	{
+		MeshOb* tower = (MeshOb*)lua_touserdata(L, -1);
+		MeshManger* sm = MeshManger::meshmanger;
+		if (tower->GetType() == "Tower")
+		{
+			tower->InitTower(); //fix vector error
+		}
+		return 0;
+	}
+	static int InRangeTower(lua_State* L)
+	{
+		MeshManger* sm = MeshManger::meshmanger;
+		MeshOb* tower = (MeshOb*)lua_touserdata(L, -2);
+		MeshOb* enemy = (MeshOb*)lua_touserdata(L, -1);
+		bool isInRange = false;
+		if (tower->GetType() == "Tower" && enemy->GetType() == "Enemy")
+		{
+			isInRange = tower->InRange(enemy);
+		}
+		lua_pushboolean(L, isInRange);
+		return 1;
+	}
+	static int Shoot(lua_State* L)
+	{
+		MeshManger* sm = MeshManger::meshmanger;
+		MeshOb* tower = (MeshOb*)lua_touserdata(L, -2);
+		MeshOb* enemy = (MeshOb*)lua_touserdata(L, -1);
+		if (tower->GetType() == "Tower" && enemy->GetType() == "Enemy")
+		{
+			tower->Shoot(enemy);
 		}
 		return 0;
 	}
