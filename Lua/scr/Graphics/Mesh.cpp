@@ -193,8 +193,8 @@ bool MeshOb::Update(float dt)
 		CalcNewWP();
 
 	SimpleMath::Vector3 move = enemy->moveVec * dt;
-	//this->AdjustPosition(move);
-	this->SetPosition(-2.5, 2.5, 0);
+	this->AdjustPosition(move);
+	//this->SetPosition(-2.5, 2.5, 0);
 	return this->enemy->waypoints.empty();
 }
 void MeshOb::CalcNewWP()

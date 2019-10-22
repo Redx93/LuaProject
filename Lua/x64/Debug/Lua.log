@@ -1,3 +1,31 @@
-﻿  Mesh.cpp
+﻿  Loader.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\Loader.cpp(61,78): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\Loader.cpp(61,56): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+  Engine.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\Loader.cpp(61,34): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(144,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+  D3DBase.cpp
+  Graphics.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Engine.cpp(24,11): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(144,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+  Mesh.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Graphics.cpp(85,75): warning C4267:  'argument': conversion from 'size_t' to 'UINT', possible loss of data
+  MeshManger.cpp
 C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.cpp(84,92): warning C4267:  'argument': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(144,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+  InputHandler.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.cpp(7,24): warning C4267:  'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\InputHandler.cpp(43,15): warning C4244:  'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\InputHandler.cpp(200,26): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\InputHandler.cpp(201,26): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\InputHandler.cpp(303,26): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+  InputManager.cpp
+  RenderWindow.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\InputHandler.cpp(304,26): warning C4244:  '=': conversion from 'double' to 'float', possible loss of data
+  Source.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(144,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+  WindowContainer.cpp
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(144,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(144,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
   Lua.vcxproj -> C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\Lua.exe

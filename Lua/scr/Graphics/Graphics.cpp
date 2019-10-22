@@ -2,6 +2,7 @@
 
 Graphics::Graphics()
 {
+	timer.Start();
 }
 
 Graphics::~Graphics()
@@ -39,7 +40,7 @@ bool Graphics::Initialize(HWND hwnd, int width, int height,
 
 	// script
 	engine = new LuaEngine();
-	meshManager.Init(device.Get(),deviceContext.Get(),&this->fpsTimer);
+	meshManager.Init(device.Get(),deviceContext.Get(),&this->timer);
 	meshManager.AddScript(engine->L());
 	inputManager->AddScript(engine->L());
 	engine->ExecuteFile("mainLua.lua");
@@ -94,6 +95,8 @@ bool Graphics::InitizlizeGrid()
 bool Intersect = false;
 void Graphics::RenderFrame()
 {
+	timer.Restart();
+
 	float bgcolor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 	this->deviceContext->ClearRenderTargetView(this->renderTargetView.Get(), bgcolor);
 	this->deviceContext->ClearDepthStencilView(this->depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
