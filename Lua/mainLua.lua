@@ -56,7 +56,7 @@ function spawnEnemy()
 	sprite1 = Sprite.new()
 	sprite1:SetType("Enemy")
 	sprite1:CreateEnemy()
-	sprite1:SetPosition(-3.5,-6.5)
+	sprite1:SetPosition(-3.5,-5.5)
 	sprite1:SetWaypoint()
 	SpriteMetaTable[numberOfSprite] = sprite1
 	numberOfSprite = numberOfSprite + 1

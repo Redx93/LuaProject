@@ -184,7 +184,7 @@ void Graphics::RenderFrame()
 		ImGui::Begin("Editor");   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
 		ImGui::SetWindowFontScale(1.5);
 		ImGui::Text(
-			"Mouse :\nLeftMouse = Select\nRightMouse = Deselect\n\nButtons :\n1 = Environment\n2 = Enemy\n3 = Player\n4 = Teleport\n");
+			"Mouse :\nLeftMouse = Select\nRightMouse = Deselect\n\nButtons :\n1 = Environment\n2 = Enemy\n3 = Tower\n4 = Waypoint\n");
 		bool SaveLevel = false;
 		ImGui::Checkbox("Save Level", &SaveLevel);
 		if (SaveLevel && fpsTimer.GetMilisecondsElapsed() >= 1)

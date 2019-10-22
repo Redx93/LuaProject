@@ -19,7 +19,7 @@ function WritetoFile()
 	or an `a´ for appending,`b´ to open binary files.]]--
 	local file = io.open("test2.txt","w")
 	for i=1,numberOfSprite do
-		local	type = SpriteMetaTable[i]:GetType();
+		local	type = SpriteMetaTable[i]:GetType()
 		local x, y = SpriteMetaTable[i]:GetPosition()
 		file:write(x .. "\n"..y .. "\n".. type .. "\n")
 	end
