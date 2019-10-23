@@ -16,7 +16,7 @@ function CreateMesh(type)
 	--return sprite so we can use it to follow mouse
 	return sprite
 end
-function update()
+function update() --edit phase
 	mouse = inputManager:GetMouseEvent()
 	keychar = inputManager:GetKeyEvent()
 
@@ -56,8 +56,8 @@ function spawnEnemy()
 	sprite1 = Sprite.new()
 	sprite1:SetType("Enemy")
 	sprite1:CreateEnemy()
-	sprite1:SetPosition(-3.5,-5.5)
-	sprite1:SetWaypoint()
+	--sprite1:SetPosition(-3.5,-5.5)
+	sprite1:SetWaypoint() --init Waypoint here
 	SpriteMetaTable[numberOfSprite] = sprite1
 	numberOfSprite = numberOfSprite + 1
  end
@@ -67,12 +67,26 @@ function destroyEnemy(enemyID)
 	--nrOfEnemies=nrOfEnemies-1
 end
 
-function gamePhase()
+function gamePhase() 
 	for i=1, numberOfSprite do
 		if SpriteMetaTable[i]:GetType() == "Enemy" then
-			SpriteMetaTable[i]:updateEnemy()
+			local enemyInGoal = SpriteMetaTable[i]:updateEnemy()
+			if enemyInGoal == true then
+				--SpriteMetaTable[i]:SetPosition(0,0)
+				--destroyEnemy(SpriteMetaTable[i])
+			end
 		end
 
+		--fix
+		--if SpriteMetaTable[i]:GetType() == "Tower" then
+		--	for j=1, numberOfSprite do
+		--		enemytype = SpriteMetaTable[j]
+		--		if enemytype:GetType() == "Enemy" then
+		--			SpriteMetaTable[i]:InRangeTower(enemytype)
+		--		end	
+		--	end
+		--end 
+		--
 		if SpriteMetaTable[i]:GetType()~="Waypoint" then
 			SpriteMetaTable[i]:Draw()
 		end	

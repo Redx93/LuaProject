@@ -14,7 +14,7 @@ class Enemy
 {
 public:
 	int hp = 3;
-	float speed = 0.1f;;
+	float speed = 0.008f;;
 	std::vector<XMFLOAT3> waypoints;
 	SimpleMath::Vector3 moveVec;
 };

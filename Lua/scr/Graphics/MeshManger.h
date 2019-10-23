@@ -324,6 +324,15 @@ public:
 		lua_pushcfunction(L, CreateEnemy);
 		lua_setfield(L, -2, "CreateEnemy");
 
+		lua_pushcfunction(L, InRangeTower);
+		lua_setfield(L, -2, "InRangeTower");
+		lua_pushcfunction(L, Shoot);
+		lua_setfield(L, -2, "Shoot");
+		lua_pushcfunction(L, CreateTower);
+		lua_setfield(L, -2, "CreateTower");
+
+		
+
 		luaL_newmetatable(L, "MeshMetaTable");
 		lua_pushstring(L, "__gc");
 		lua_pushlightuserdata(L, this);

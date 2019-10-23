@@ -46,7 +46,7 @@ bool Graphics::Initialize(HWND hwnd, int width, int height,
 	engine->ExecuteFile("mainLua.lua");
 	inputManager->setValues();
 	engine->CallGlobalVariable("ReadFile");
-	//engine->CallGlobalVariable("spawnEnemy");
+	engine->CallGlobalVariable("spawnEnemy");
 	return true;
 }
 
@@ -105,7 +105,7 @@ void Graphics::RenderFrame()
 	//update camera buffer
 	this->UpdateConstantBuffer();
 	
-	engine->CallGlobalVariable("update");
+	engine->CallGlobalVariable("gamePhase");
 	{ 
 	////picking get the ray
 	//Ray ray = inputHandler->GetRay(mouse->GetPosX(), mouse->GetPosY());
@@ -179,6 +179,31 @@ void Graphics::RenderFrame()
 		ImGui::Checkbox("Intersect with model", &Intersect);	
 		ImGui::End();
 	}
+	//{
+	//	//menu in imgui
+	//	ImGui::Begin("Menu");   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
+	//	ImGui::SetWindowFontScale(1.5);
+	//	static int current = 0;
+	//	ImGui::SliderInt("Menu State", &current, 0, 2);
+
+
+	//	if (current==0)
+	//	{
+	//		ImGui::Text("Edit Phase");
+	//		//engine->CallGlobalVariable("ReadFile");
+	//		engine->CallGlobalVariable("update");
+	//	}
+	//	else if (current == 1)
+	//	{
+	//		ImGui::Text("Game Phase");
+	//		//engine->CallGlobalVariable("spawnEnemy");
+	//		engine->CallGlobalVariable("gamePhase");
+	//		
+	//	}
+
+	//	ImGui::End();
+
+	//}
 	// Imgui editor
 	{
 		ImGui::Begin("Editor");   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)

@@ -179,26 +179,32 @@ std::string MeshOb::GetType()
 void MeshOb::InitEnemy()
 {
 	this->enemy = new Enemy();
+
 }
 bool MeshOb::Update(float dt)
 {
-	bool result = false;
-	SimpleMath::Vector3 enemyPos = this->GetPositionFloat3();
-	
-	SimpleMath::Vector3 currentTargetWP = enemy->waypoints.front(); //confirm if this is target wp
-	//sqrtf(x*x+y*y+z*z);
-	float length = SimpleMath::Vector3::Distance(enemyPos, currentTargetWP);
 
-	if (length < 0.5)
-		CalcNewWP();
+	if (!this->enemy->waypoints.empty())
+	{
+		SimpleMath::Vector3 enemyPos = this->GetPositionFloat3();
 
-	SimpleMath::Vector3 move = enemy->moveVec * dt;
-	this->AdjustPosition(move);
-	//this->SetPosition(-2.5, 2.5, 0);
+
+		SimpleMath::Vector3 currentTargetWP = enemy->waypoints.front(); //confirm if this is target wp
+		//sqrtf(x*x+y*y+z*z);
+		float length = SimpleMath::Vector3::Distance(enemyPos, currentTargetWP);
+
+		if (length <= 0.01)
+			CalcNewWP();
+
+		SimpleMath::Vector3 move = enemy->moveVec * dt;
+		this->AdjustPosition(move);
+	}
+
 	return this->enemy->waypoints.empty();
 }
 void MeshOb::CalcNewWP()
 {
+
 	XMFLOAT3 from;
 	XMFLOAT3 to;
 	from = enemy->waypoints.front();
@@ -223,11 +229,13 @@ void MeshOb::CalcNewWP()
 	//Dir.Normalize();
 	//enemy->moveVec = Dir;
 
-	
+
 }
 void MeshOb::initWaypoints(std::vector<XMFLOAT3> newList)
 {
 	this->enemy->waypoints = newList; //merge list into this->list
+	this->SetPosition(this->enemy->waypoints[0]);
+
 }
 void MeshOb::InitTower()
 {
