@@ -4,13 +4,20 @@ require("LibLua")
 inputManager = InputManager.new()
 local currentObject = nil
 
+--EnemyMetaTable = { }
+--numberOfEnemies = 1
+
+
 function CreateMesh(type)
 	local x , y = inputManager:GetPos()
 	--create Object
 	sprite  = Sprite.new()
 	--in c call function for setting it to mouse position
 	sprite:SetPosition(x, y)
-	sprite:SetType(type)
+	sprite:SetType(type)  
+	if sprite:GetType() == "Tower" then
+		sprite:CreateTower()
+	end
 	SpriteMetaTable[numberOfSprite] = sprite
 	numberOfSprite = numberOfSprite + 1
 	--return sprite so we can use it to follow mouse
@@ -58,9 +65,16 @@ function spawnEnemy()
 	sprite1:CreateEnemy()
 	--sprite1:SetPosition(-3.5,-5.5)
 	sprite1:SetWaypoint() --init Waypoint here
+
+
+	--EnemyMetaTable[numberOfEnemies]= sprite1
+	--numberOfEnemies = numberOfEnemies + 1 
+
 	SpriteMetaTable[numberOfSprite] = sprite1
 	numberOfSprite = numberOfSprite + 1
  end
+
+
 
 function destroyEnemy(enemyID)
 	enemyID=nil
@@ -68,28 +82,62 @@ function destroyEnemy(enemyID)
 end
 
 function gamePhase() 
+	--draw
 	for i=1, numberOfSprite do
+		if SpriteMetaTable[i]:GetType()~="Waypoint" then
+			SpriteMetaTable[i]:Draw()
+		end	
+
 		if SpriteMetaTable[i]:GetType() == "Enemy" then
 			local enemyInGoal = SpriteMetaTable[i]:updateEnemy()
 			if enemyInGoal == true then
 				--SpriteMetaTable[i]:SetPosition(0,0)
 				--destroyEnemy(SpriteMetaTable[i])
 			end
+
+			for j=1, numberOfSprite do
+				if SpriteMetaTable[j]:GetType() == "Tower" then
+					if SpriteMetaTable[j]:InRangeTower(SpriteMetaTable[i]) == true then
+						SpriteMetaTable[j]:Shoot(SpriteMetaTable[i])
+					end
+				end
+			end
+
 		end
+
+
+	end
+
+
+	--physics
+	--for i=1, numberOfSprite do
+		--if SpriteMetaTable[i]:GetType() == "Enemy" then
+		--	local enemyInGoal = SpriteMetaTable[i]:updateEnemy()
+		--	if enemyInGoal == true then
+				--SpriteMetaTable[i]:SetPosition(0,0)
+				--destroyEnemy(SpriteMetaTable[i])
+		--	end
+		--end
 
 		--fix
 		--if SpriteMetaTable[i]:GetType() == "Tower" then
-		--	for j=1, numberOfSprite do
-		--		enemytype = SpriteMetaTable[j]
-		--		if enemytype:GetType() == "Enemy" then
-		--			SpriteMetaTable[i]:InRangeTower(enemytype)
-		--		end	
-		--	end
+			--local newSpriteTable = {} 
+			--newSpriteTable = SpriteMetaTable
+			--newSpriteTable:InRangeTower()
+			--towerAttack(SpriteMetaTable[i], SpriteMetaTable)
 		--end 
-		--
-		if SpriteMetaTable[i]:GetType()~="Waypoint" then
-			SpriteMetaTable[i]:Draw()
+	--end
+
+
+
+end
+
+function towerAttack(tower, table )
+
+	for j=1, numberOfSprite do
+		local enemytype = table[j]
+		if table[j]:GetType() == "Enemy" then
+			tower:InRangeTower(enemytype)
 		end	
 	end
 end
-

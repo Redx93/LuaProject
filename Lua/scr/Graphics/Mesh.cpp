@@ -11,12 +11,15 @@ MeshOb::MeshOb()
 	device = nullptr;
 	deviceContext = nullptr;
 	enemy = nullptr;
+	tower = nullptr;
 }
 
 MeshOb::~MeshOb()	
 {
 	if (enemy != nullptr)
 		delete enemy;
+	if (tower!= nullptr)
+		delete tower;
 }
 
 bool MeshOb::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, 
@@ -152,7 +155,7 @@ void MeshOb::SetType(std::string type)
 {
 	if (type == "Environment" || type == "1")
 	{
-		SetColor(Colours::Grey);
+		SetColor(Colours::Yellow);
 		this->type = "Environment";
 	}
 	else if (type == "Enemy" || type == "2")
@@ -169,6 +172,10 @@ void MeshOb::SetType(std::string type)
 	{
 		SetColor(Colours::White);
 		this->type = "Waypoint";
+	}
+	else if (type == "Projectile")
+	{
+		SetColor(Colours::Yellow);
 	}
 }
 

@@ -1,4 +1,6 @@
-﻿  Mesh.cpp
+﻿  Graphics.cpp
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Vertex.h(28,35): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Mesh.h(27,29): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Mesh.cpp(84,92): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\MeshManger.h(144,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Graphics.cpp(85,75): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
   Lua.vcxproj -> C:\Users\Karlos\Documents\GitHub\LuaProject\x64\Debug\Lua.exe

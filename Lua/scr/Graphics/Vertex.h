@@ -24,6 +24,8 @@ namespace Colours
 	const Color Green(0, 1, 0);
 	const Color White(1, 1, 1);
 	const Color Grey(0.5, 0.5, 0.5);
+
+	const Color Yellow(0.9, 0.9, 0.1); //yellow??
 }
 
 
