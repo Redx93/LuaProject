@@ -10,11 +10,12 @@
 using namespace DirectX;
 class MeshOb;
 
+
 class Enemy
 {
 public:
 	int hp = 3;
-	float speed = 0.005f;;
+	float speed = 0.002f;;
 	std::vector<XMFLOAT3> waypoints;
 	SimpleMath::Vector3 moveVec;
 };
@@ -24,13 +25,15 @@ class Tower
 public:
 	float dmg  = 1;
 	float radius = 3;
-	float projectileSpeed = 0.2;
+	float projectileSpeed = 1.5;
 };
 class MeshOb : public GameObject
 {
 public:
 	MeshOb();
 	 ~MeshOb();
+
+	MeshOb(const MeshOb & otherObj);
 	bool Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext,
 		Color color = Colours::Red);
 	void Draw();

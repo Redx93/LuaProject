@@ -1,5 +1,5 @@
 #include "Graphics.h"
-
+ProjectileManager* Graphics::projectileManager = nullptr;
 Graphics::Graphics()
 {
 	timer.Start();
@@ -12,6 +12,7 @@ Graphics::~Graphics()
 	ImGui::DestroyContext();
 	delete engine;
 	delete inputManager;
+	delete projectileManager;
 }
 
 bool Graphics::Initialize(HWND hwnd, int width, int height,
@@ -29,6 +30,8 @@ bool Graphics::Initialize(HWND hwnd, int width, int height,
 	this->keyboard = Keyboard;
 	this->inputManager = new InputManager(this->mouse,this->keyboard,
 		&this->camera, width, height);
+
+	this->projectileManager = new ProjectileManager(this->device.Get(),this->deviceContext.Get());
 
 	//Setup ImGui
 	IMGUI_CHECKVERSION();
@@ -104,7 +107,7 @@ void Graphics::RenderFrame()
 	this->SetupShader(this->DefaultShader, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	//update camera buffer
 	this->UpdateConstantBuffer();
-	
+	this->projectileManager->update(this->timer.GetMilisecondsElapsed());
 	engine->CallGlobalVariable("gamePhase");
 	{ 
 	////picking get the ray

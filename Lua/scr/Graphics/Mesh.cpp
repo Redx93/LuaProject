@@ -1,5 +1,5 @@
 #include "Mesh.h"
-
+#include "Graphics.h"
 #include<vector> // for vector 
 #include<algorithm> // for copy() and assign() 
 #include<iterator> // for back_inserter 
@@ -22,7 +22,30 @@ MeshOb::~MeshOb()
 		delete tower;
 }
 
-bool MeshOb::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, 
+MeshOb::MeshOb(const MeshOb& otherObj) 
+{
+	this->type = otherObj.type;
+	this->color = otherObj.color;
+
+	this->cb_vs_Color = otherObj.cb_vs_Color;
+	this->cb_vs_vertexshader = otherObj.cb_vs_vertexshader;
+
+	this->device = otherObj.device;
+	this->deviceContext = otherObj.deviceContext;
+
+	this->enemy = otherObj.enemy;
+	this->tower = otherObj.tower;
+
+	this->worldMatrix = otherObj.worldMatrix;
+	this->vertices = otherObj.vertices;
+	this->vertexBuffer = otherObj.vertexBuffer;
+	this->IndexCount = otherObj.IndexCount;
+	this->pos = otherObj.pos;
+	this->rot = otherObj.rot;
+
+}
+
+bool MeshOb::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext,
 	Color color)
 {
 	this->device = device;
@@ -155,7 +178,7 @@ void MeshOb::SetType(std::string type)
 {
 	if (type == "Environment" || type == "1")
 	{
-		SetColor(Colours::Yellow);
+		SetColor(Colours::Grey);
 		this->type = "Environment";
 	}
 	else if (type == "Enemy" || type == "2")
@@ -176,6 +199,7 @@ void MeshOb::SetType(std::string type)
 	else if (type == "Projectile")
 	{
 		SetColor(Colours::Yellow);
+		this->type = "Projectile";
 	}
 }
 
@@ -200,7 +224,7 @@ bool MeshOb::Update(float dt)
 		//sqrtf(x*x+y*y+z*z);
 		float length = SimpleMath::Vector3::Distance(enemyPos, currentTargetWP);
 
-		if (length <= 0.01)
+		if (length <= 0.04)
 			CalcNewWP();
 
 		SimpleMath::Vector3 move = enemy->moveVec * dt;
@@ -267,7 +291,9 @@ void MeshOb::Shoot(MeshOb* incomingOb)
 	projectileVec.Normalize();
 	projectileVec = projectileVec * tower->projectileSpeed;
 
-	//projectileVec is now the vector to use for 1 projectile
+
+	Graphics::projectileManager->create(projectileVec);
+	
 }
 void MeshOb::UpdateMatrix()
 {

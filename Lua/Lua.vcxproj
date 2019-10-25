@@ -68,6 +68,7 @@
     <ClCompile Include="scr\Graphics\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="scr\Graphics\Mesh.cpp" />
     <ClCompile Include="scr\Graphics\MeshManger.cpp" />
+    <ClCompile Include="scr\Graphics\ProjectileManager.cpp" />
     <ClCompile Include="scr\Graphics\Shaders.cpp" />
     <ClCompile Include="scr\InputHandler.cpp" />
     <ClCompile Include="scr\InputManager.cpp" />
@@ -102,6 +103,7 @@
     <ClInclude Include="scr\Graphics\IndexBuffer.h" />
     <ClInclude Include="scr\Graphics\Mesh.h" />
     <ClInclude Include="scr\Graphics\MeshManger.h" />
+    <ClInclude Include="scr\Graphics\ProjectileManager.h" />
     <ClInclude Include="scr\Graphics\Shaders.h" />
     <ClInclude Include="scr\Graphics\Vertex.h" />
     <ClInclude Include="scr\Graphics\VertexBuffer.h" />

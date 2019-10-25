@@ -8,6 +8,7 @@
 #include "..//LuaEngine.h"
 #include "MeshManger.h"
 #include "..//InputManager.h"
+#include "ProjectileManager.h"
 class Graphics : public D3DBase
 {
 public:
@@ -19,6 +20,8 @@ public:
 	void RenderFrame();
 	void UpdateGrid();
 
+
+	static ProjectileManager* projectileManager;
 	VertexBuffer<Vertex_COLOR> vb_grid;
 	ID3D11Device* GetDevice() { return this->device.Get(); }
 	ID3D11DeviceContext* GetDeviceContext() { return this->deviceContext.Get(); }
@@ -26,6 +29,7 @@ private:
 	LuaEngine* engine;
 	MeshManger meshManager;
 	InputManager* inputManager;
+	
 
 	bool InitializeScene();
 	//grid
