@@ -28,10 +28,9 @@ bool Graphics::Initialize(HWND hwnd, int width, int height,
 
 	this->mouse = mouse;
 	this->keyboard = Keyboard;
-	this->inputManager = new InputManager(this->mouse,this->keyboard,
-		&this->camera, width, height);
+	//this->inputManager = new InputManager(this->mouse,this->keyboard,&this->camera, width, height);
 
-	this->projectileManager = new ProjectileManager(this->device.Get(),this->deviceContext.Get());
+	//this->projectileManager = new ProjectileManager(this->device.Get(),this->deviceContext.Get());
 
 	//Setup ImGui
 	IMGUI_CHECKVERSION();
@@ -42,14 +41,16 @@ bool Graphics::Initialize(HWND hwnd, int width, int height,
 	ImGui::StyleColorsDark();
 
 	// script
-	engine = new LuaEngine();
-	meshManager.Init(device.Get(),deviceContext.Get(),&this->timer);
-	meshManager.AddScript(engine->L());
-	inputManager->AddScript(engine->L());
-	engine->ExecuteFile("mainLua.lua");
-	inputManager->setValues();
-	engine->CallGlobalVariable("ReadFile");
-	engine->CallGlobalVariable("spawnEnemy");
+	//meshManager.Init(device.Get(),deviceContext.Get(),&this->timer);
+	ResetScript();
+
+	//engine = new LuaEngine();
+	//meshManager.AddScript(engine->L());
+	//inputManager->AddScript(engine->L());
+	//engine->ExecuteFile("mainLua.lua");
+	//inputManager->setValues();
+	//engine->CallGlobalVariable("ReadFile");
+	//engine->CallGlobalVariable("spawnEnemy");
 	return true;
 }
 
@@ -96,6 +97,8 @@ bool Graphics::InitizlizeGrid()
 	return true;
 }
 bool Intersect = false;
+static int current = 1;
+static int hasScriptChanged = -1;
 void Graphics::RenderFrame()
 {
 	timer.Restart();
@@ -109,62 +112,6 @@ void Graphics::RenderFrame()
 	this->UpdateConstantBuffer();
 	this->projectileManager->update(this->timer.GetMilisecondsElapsed());
 	engine->CallGlobalVariable("gamePhase");
-	{ 
-	////picking get the ray
-	//Ray ray = inputHandler->GetRay(mouse->GetPosX(), mouse->GetPosY());
-	//{
-	//	
-	//	char keyCode = this->keyboard->ReadKey().GetKeyCode();
-	//	//Models
-	//	unsigned char buttonPressed = 'l';
-	//	if (this->CurrentModels == nullptr &&
-	//		this->KeyBoardIsPressed(buttonPressed) && 
-	//		fpsTimer.GetAsSeconds() >= 0.6)
-	//	{
-	//		if (buttonPressed != 'l')
-	//		{
-	//		MeshType type = this->GetMeshType(buttonPressed);
-	//		RenderbleGameObject* m  = new RenderbleGameObject();
-	//		m->Initialize(device.Get(), deviceContext.Get());
-	//		m->SetType(type);
-	//		m->SetColor(type);
-
-	//		this->models.push_back(m);
-	//		UINT index = models.size() - 1;
-	//		this->CurrentModels = models[models.size() - 1];
-	//		}
-	//	}
-	//	//Mouse Intersection
-	//	for (auto& mesh : models)
-	//	{
-	//		Intersect = inputHandler->Picking(ray, mesh);
-	//		if (CurrentModels != nullptr)
-	//		{
-	//			inputHandler->FollowMouse(ray, CurrentModels);
-	//			if (mouseEvent(MouseEvent::EventType::RPress))
-	//			{
-	//				CurrentModels = nullptr;
-	//				this->SaveLevel(this->models);
-	//				fpsTimer.Restart();
-	//			}
-	//		}
-	//		else if(this->CurrentModels == nullptr)
-	//		{
-	//			if (mouseEvent(MouseEvent::EventType::LPress) && Intersect)
-	//			{
-	//				this->CurrentModels = mesh;
-	//			}
-	//		}
-	//	}
-	//}
-
-	//Draw
-	//for (auto& mesh : models)
-	//{
-	//	this->UpdateConstantBuffer(mesh);
-	//	mesh->Draw();
-	////}
-	}
 
 	{
 		ImGui_ImplDX11_NewFrame();
@@ -182,31 +129,28 @@ void Graphics::RenderFrame()
 		ImGui::Checkbox("Intersect with model", &Intersect);	
 		ImGui::End();
 	}
-	//{
-	//	//menu in imgui
-	//	ImGui::Begin("Menu");   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-	//	ImGui::SetWindowFontScale(1.5);
-	//	static int current = 0;
-	//	ImGui::SliderInt("Menu State", &current, 0, 2);
+	{
+		//menu in imgui
+		ImGui::Begin("Menu");   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
+		ImGui::SetWindowFontScale(1.5);
+		ImGui::SliderInt("Menu State", &current, 1, 2);
 
+		if (current==1)
+		{
+			ImGui::Text("Edit Phase");
+			this->ResetScript();
+			engine->CallGlobalVariable("update");
+		}
+		else if (current == 2)
+		{
+			ImGui::Text("Game Phase");
+			this->ResetScript();
+			engine->CallGlobalVariable("spawnEnemy");
+			engine->CallGlobalVariable("gamePhase");	
+		}
+		ImGui::End();
+	}
 
-	//	if (current==0)
-	//	{
-	//		ImGui::Text("Edit Phase");
-	//		//engine->CallGlobalVariable("ReadFile");
-	//		engine->CallGlobalVariable("update");
-	//	}
-	//	else if (current == 1)
-	//	{
-	//		ImGui::Text("Game Phase");
-	//		//engine->CallGlobalVariable("spawnEnemy");
-	//		engine->CallGlobalVariable("gamePhase");
-	//		
-	//	}
-
-	//	ImGui::End();
-
-	//}
 	// Imgui editor
 	{
 		ImGui::Begin("Editor");   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
@@ -252,6 +196,34 @@ void Graphics::UpdateGrid()
 	if (renderXYaxis)
 		this->deviceContext->Draw(this->vb_grid.VertexCount() / 2, this->vb_grid.VertexCount() / 2);
 }
+
+
+void Graphics::ResetScript()
+{
+	if (current != hasScriptChanged)
+	{
+	hasScriptChanged = current;
+		if (inputManager != nullptr)
+			delete inputManager;
+		if (projectileManager != nullptr)
+			delete projectileManager;
+		if(engine != nullptr)
+			delete this->engine;
+
+		this->inputManager = new InputManager(this->mouse, this->keyboard,&this->camera, windowWidth, windowHeight);
+		this->projectileManager = new ProjectileManager(this->device.Get(),this->deviceContext.Get());
+		meshManager.Init(device.Get(), deviceContext.Get(), &this->timer);
+
+		engine = new LuaEngine();
+		meshManager.AddScript(engine->L());
+		inputManager->AddScript(engine->L());
+		engine->ExecuteFile("mainLua.lua");
+		inputManager->setValues();
+		engine->CallGlobalVariable("ReadFile");
+	}
+
+}
+
 
 
 bool Graphics::InitializeScene()
