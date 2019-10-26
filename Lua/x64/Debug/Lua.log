@@ -1,2 +1,3 @@
-﻿  compilation object save succeeded; see C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\vertexshader.cso
-  Lua.vcxproj -> C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\Lua.exe
+﻿  ProjectileManager.cpp
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Vertex.h(28,35): warning C4305: 'argument': truncation from 'double' to 'float'
+  Lua.vcxproj -> C:\Users\Karlos\Documents\GitHub\LuaProject\x64\Debug\Lua.exe

@@ -308,7 +308,6 @@
     <FxCompile Include="VS_Color.hlsl" />
     <FxCompile Include="vertexshader.hlsl" />
     <FxCompile Include="pixelshader.hlsl" />
-    <FxCompile Include="GS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="scr\Data\Textures\piano.PNG">
