@@ -27,7 +27,7 @@ function update() --edit phase
 	mouse = inputManager:GetMouseEvent()
 	keychar = inputManager:GetKeyEvent()
 
-	if keychar == '1' or keychar == '2' or keychar == '3' or keychar == '4' then
+	if keychar == '1' or keychar == '3' or keychar == '4' then
 		currentObject = CreateMesh(keychar)
 	end
 
@@ -84,9 +84,9 @@ end
 function gamePhase() 
 	--draw
 	for i=1, numberOfSprite do
-		if SpriteMetaTable[i]:GetType()~="Waypoint" then
+		--if SpriteMetaTable[i]:GetType()~="Waypoint" then
 			SpriteMetaTable[i]:Draw()
-		end	
+		--end	
 
 		if SpriteMetaTable[i]:GetType() == "Enemy" then
 			local enemyInGoal = SpriteMetaTable[i]:updateEnemy()

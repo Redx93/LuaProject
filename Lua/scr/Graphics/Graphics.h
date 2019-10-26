@@ -19,7 +19,7 @@ public:
 	bool InitizlizeGrid();
 	void RenderFrame();
 	void UpdateGrid();
-
+	void ResetScript();
 
 	static ProjectileManager* projectileManager;
 	VertexBuffer<Vertex_COLOR> vb_grid;
