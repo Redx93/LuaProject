@@ -29,6 +29,18 @@ private:
 	Microsoft::WRL::ComPtr<ID3D10Blob> shader_buffer;
 };
 
+class GeometryShader
+{
+public:
+	bool CreatGeometryShader(ID3D11Device* device, std::wstring fileName);
+	ID3D11GeometryShader* GetShader() { return shader.Get(); }
+	ID3D10Blob* GetBuffer() { return buffer.Get(); }
+private:
+	Microsoft::WRL::ComPtr<ID3D11GeometryShader> shader;
+	Microsoft::WRL::ComPtr<ID3D10Blob> buffer;
+};
+
+
 class Shader
 {
 public:
