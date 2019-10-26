@@ -15,9 +15,10 @@ class MeshOb;
 class Enemy
 {
 public:
-	int hp = 100;
-	float speed = 0.008f;;
+	int hp = 10;
+	float speed = 0.18f;;
 	std::vector<XMFLOAT3> waypoints;
+	std::vector<XMFLOAT3> waypointsStored;
 	SimpleMath::Vector3 moveVec;
 };
 
@@ -26,7 +27,7 @@ class Tower
 public:
 	float dmg  = 1;
 	float radius = 5;
-	float projectileSpeed = 0.5f;
+	float projectileSpeed = 0.05f;
 };
 class MeshOb : public GameObject
 {
@@ -51,11 +52,13 @@ public:
 	bool Update(float dt); //returns if waypoints is empty
 	void CalcNewWP();
 	void initWaypoints(std::vector<XMFLOAT3> newList);
+	void ResetWayPoint();
 	//tower
 	void InitTower();
 	bool InRange(MeshOb* incomingOb);
 	void Shoot(MeshOb* incomingOb);
-	Enemy* GetEnemy() { return this->enemy; }
+	void RemoveHP(float value) { this->enemy->hp -= value; }
+	float GetHealth() { return this->enemy->hp; }
 private:
 	void UpdateMatrix();
 	std::string type;

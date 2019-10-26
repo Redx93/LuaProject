@@ -53,6 +53,7 @@ public:
 	int windowWidth = 0;
 	int windowHeight = 0;
 	Timer fpsTimer;
+	Timer spawn;
 	InputHandler* inputHandler;
 };
 #endif // !D3DBASE_H

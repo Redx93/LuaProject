@@ -102,8 +102,8 @@ static int current = 1;
 static int hasScriptChanged = -1;
 void Graphics::RenderFrame()
 {
+	float dt = timer.GetMilisecondsElapsed();
 	timer.Restart();
-
 	float bgcolor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 	this->deviceContext->ClearRenderTargetView(this->renderTargetView.Get(), bgcolor);
 	this->deviceContext->ClearDepthStencilView(this->depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
@@ -111,7 +111,7 @@ void Graphics::RenderFrame()
 	this->SetupShader(this->DefaultShader, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	//update camera buffer
 	this->UpdateConstantBuffer();
-	this->projectileManager->update(this->timer.GetMilisecondsElapsed());
+	this->projectileManager->update(dt);
 	{
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
@@ -130,7 +130,8 @@ void Graphics::RenderFrame()
 		ImGui::Begin("Menu");   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
 		ImGui::SetWindowFontScale(1.5);
 		ImGui::SliderInt("Menu State", &current, 1, 2);
-
+		if (projectileManager->EndGame() == true)
+			current = 1;
 		if (current==1)
 		{
 			ImGui::Text("Edit Phase");
@@ -141,7 +142,6 @@ void Graphics::RenderFrame()
 		{
 			ImGui::Text("Game Phase");
 			this->ResetScript();
-			this->projectileManager->GetEnemies(this->meshManager->GetEnemies());
 			engine->CallGlobalVariable("gamePhase");	
 		}
 
@@ -223,8 +223,11 @@ void Graphics::ResetScript()
 		engine->ExecuteFile("mainLua.lua");
 		inputManager->setValues();
 		engine->CallGlobalVariable("ReadFile");
-		if(current == 2)
-			engine->CallGlobalVariable("spawnEnemy");
+		if (current == 2)
+		{		engine->CallGlobalVariable("spawnEnemy");
+			this->projectileManager->GetEnemies(this->meshManager->GetEnemies());
+		}
+	
 
 		hasScriptChanged = current;
 	}

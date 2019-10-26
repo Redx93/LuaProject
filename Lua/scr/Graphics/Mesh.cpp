@@ -228,7 +228,7 @@ bool MeshOb::Update(float dt)
 		if (length <= 0.04)
 			CalcNewWP();
 
-		SimpleMath::Vector3 move = enemy->moveVec * dt;
+		SimpleMath::Vector3 move = enemy->moveVec * enemy->speed * dt;
 		this->AdjustPosition(move);
 	}
 
@@ -263,11 +263,18 @@ void MeshOb::CalcNewWP()
 
 
 }
+
 void MeshOb::initWaypoints(std::vector<XMFLOAT3> newList)
 {
 	this->enemy->waypoints = newList; //merge list into this->list
+	this->enemy->waypointsStored = newList;
 	this->SetPosition(this->enemy->waypoints[0]);
-
+}
+void MeshOb::ResetWayPoint()
+{
+	this->enemy->waypoints.clear();
+	this->enemy->waypoints = this->enemy->waypointsStored;
+	this->SetPosition(this->enemy->waypoints[0]);
 }
 void MeshOb::InitTower()
 {
@@ -281,7 +288,6 @@ bool MeshOb::InRange(MeshOb* incomingOb)
 	float distance = SimpleMath::Vector3::Distance(towerPos, enemyPos);
 	if (distance <= tower->radius)
 		result = true;
-
 	return result;
 }
 void MeshOb::Shoot(MeshOb* incomingOb)

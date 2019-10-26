@@ -2,6 +2,7 @@
 #include <iostream>
 Projectile::Projectile()
 {
+	bool alive = false;
 }
 
 Projectile::~Projectile()
@@ -53,39 +54,44 @@ void ProjectileManager::create(SimpleMath::Vector3 direction, SimpleMath::Vector
 
 	newBullet->AdjustPosition(0.f, 0.f, -2.f);
 	newBullet->SetScale(scale, scale, scale);
-	
+	newBullet->SetAlive(true);
 	this->projectiles.push_back(newBullet);
 	
 }
 
 void ProjectileManager::update(float deltaTime)
 {
-	for (int i = projectiles.size() - 1; i >= 0; i--)
+	
+	for (int j = 0; j < enemies.size(); j++)
 	{
-		projectiles[i]->update(deltaTime);
-		projectiles[i]->Draw();
+		
 		//check collision
 		//check collision
-		for (int j = 0; j < enemies.size(); j++)
+		for (int i = 0; i < projectiles.size(); i++)
 		{
-			SimpleMath::Vector3 enemyPos = enemies[j]->GetPositionFloat3();
-			SimpleMath::Vector3 projectile = projectiles[i]->GetPositionFloat3();
-			if (SimpleMath::Vector3::Distance(enemyPos, projectile) <= 0.03);
+			if (projectiles[i]->GetAlive() == true)
 			{
-				enemies[j]->GetEnemy()->hp -= 1;
+				SimpleMath::Vector2 enemyPos = SimpleMath::Vector2(enemies[j]->GetPositionFloat3().x, enemies[j]->GetPositionFloat3().y);
+				SimpleMath::Vector2 projectile = SimpleMath::Vector2(projectiles[i]->GetPositionFloat3().x, projectiles[i]->GetPositionFloat3().y);
+				float value = SimpleMath::Vector2::Distance(enemyPos, projectile);
+				if (std::abs(value) <= 0.5f)
+				{
+					enemies[j]->RemoveHP(5);
+					enemies[j]->ResetWayPoint();
+					projectiles[i]->SetAlive(false);
+				}
+				if (enemies[j]->GetHealth() == 0)
+				{
+					std::cout << "enemy is dead" << std::endl;
+					this->endGame = true;
+					
+				}
+				projectiles[i]->update(deltaTime);
+				projectiles[i]->Draw();
 			}
-			if (enemies[j]->GetEnemy()->hp == 0)
-			{
-				std::cout << "enemy is dead" << std::endl;
-				enemies[j]->SetPosition(1000000, 1000000, 0);
-			}
+
 		}
 	}
-	/*for (int i = 0; i < projectiles.size(); i++)
-	{
-		projectiles[i]->update(deltaTime);
-		projectiles[i]->Draw();
-	}*/
 }
 
 void ProjectileManager::GetEnemies(std::vector<MeshOb*> enemies)
