@@ -305,7 +305,10 @@ void MeshOb::Shoot(MeshOb* incomingOb)
 }
 void MeshOb::UpdateMatrix()
 {
-	this->worldMatrix = XMMatrixRotationRollPitchYaw(this->rot.x, this->rot.y, this->rot.z)
-		* XMMatrixTranslation(this->pos.x, this->pos.y, this->pos.z)
-		* XMMatrixScaling(this->scale.x, this->scale.y, this->scale.z);
+	this->worldMatrix =
+		 XMMatrixRotationRollPitchYaw(this->rot.x, this->rot.y, this->rot.z)
+		
+		* XMMatrixScaling(this->scale.x, this->scale.y, this->scale.z)
+		* XMMatrixTranslation(this->pos.x, this->pos.y, this->pos.z);
+
 }

@@ -142,8 +142,8 @@ void GameObject::UpdateMatrix()
 
 void GameObject::SetScale(float xScale, float yScale, float zScale)
 {
-	scale.x = xScale;
-	scale.y = yScale;
-	scale.z = zScale;
+	this->scale.x = xScale;
+	this->scale.y = yScale;
+	this->scale.z = zScale;
 	UpdateMatrix();
 }

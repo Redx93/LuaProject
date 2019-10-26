@@ -43,16 +43,18 @@ void ProjectileManager::create(SimpleMath::Vector3 direction, SimpleMath::Vector
 {
 	float scale = 1.f;
 	Projectile* newBullet = new Projectile;
-	this->projectiles.push_back(newBullet);
-	this->projectiles[this->projectiles.size() - 1]->setDirection(direction);
-	this->projectiles[this->projectiles.size() - 1]->Initialize(this->device, this->deviceContext);
-	this->projectiles[this->projectiles.size() - 1]->SetType("Projectile");
-
-	this->projectiles[this->projectiles.size() - 1]->SetScale(scale, scale, scale);
-	this->projectiles[this->projectiles.size() - 1]->SetPosition(origin);
-	this->projectiles[this->projectiles.size() - 1]->AdjustPosition(0.f, 0.f, -2.f); //-8.f, 2.f
 	
-		///.push_back(newBullet);
+	newBullet->setDirection(direction);
+	newBullet->Initialize(this->device, this->deviceContext);
+	newBullet->SetType("Projectile");
+
+	
+	newBullet->SetPosition(origin);
+
+	newBullet->AdjustPosition(0.f, 0.f, -2.f);
+	newBullet->SetScale(scale, scale, scale);
+	
+	this->projectiles.push_back(newBullet);
 	
 }
 
