@@ -37,5 +37,6 @@ private:
 	int gridSections = 10;
 	//imgui
 	bool renderGrid = true;
+
 	Timer timer;
 };

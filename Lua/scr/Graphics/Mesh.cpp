@@ -12,6 +12,7 @@ MeshOb::MeshOb()
 	deviceContext = nullptr;
 	enemy = nullptr;
 	tower = nullptr;
+	this->projectileTimer.Start();
 }
 
 MeshOb::~MeshOb()	
@@ -285,14 +286,21 @@ bool MeshOb::InRange(MeshOb* incomingOb)
 }
 void MeshOb::Shoot(MeshOb* incomingOb)
 {
-	SimpleMath::Vector3 originPos = this->GetPositionFloat3();
-	SimpleMath::Vector3 targetPos = incomingOb->GetPositionFloat3();
-	SimpleMath::Vector3 projectileVec = targetPos - originPos;
-	projectileVec.Normalize();
-	projectileVec = projectileVec * tower->projectileSpeed;
 
 
-	Graphics::projectileManager->create(projectileVec);
+	if (this->projectileTimer.GetAsSeconds()>=0.5)
+	{
+		SimpleMath::Vector3 originPos = this->GetPositionFloat3();
+		SimpleMath::Vector3 targetPos = incomingOb->GetPositionFloat3();
+		SimpleMath::Vector3 projectileVec = targetPos - originPos;
+		projectileVec.Normalize();
+		projectileVec = projectileVec * tower->projectileSpeed;
+
+
+		Graphics::projectileManager->create(projectileVec, this->GetPositionFloat3());
+		this->projectileTimer.Restart();
+	}
+	
 	
 }
 void MeshOb::UpdateMatrix()

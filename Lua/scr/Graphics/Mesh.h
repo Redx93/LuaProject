@@ -7,6 +7,7 @@
 #include <vector>
 #include <d3d11.h>
 #include <SimpleMath.h>
+#include "../Timer.h"
 using namespace DirectX;
 class MeshOb;
 
@@ -15,7 +16,7 @@ class Enemy
 {
 public:
 	int hp = 3;
-	float speed = 0.002f;;
+	float speed = 0.008f;;
 	std::vector<XMFLOAT3> waypoints;
 	SimpleMath::Vector3 moveVec;
 };
@@ -25,16 +26,16 @@ class Tower
 public:
 	float dmg  = 1;
 	float radius = 3;
-	float projectileSpeed = 1.5;
+	float projectileSpeed = 0.05f;
 };
 class MeshOb : public GameObject
 {
 public:
 	MeshOb();
-	 ~MeshOb();
+	~MeshOb();
 
-	MeshOb(const MeshOb & otherObj);
-	bool Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext,
+	MeshOb(const MeshOb& otherObj);
+	bool Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext,
 		Color color = Colours::Red);
 	void Draw();
 	void SetColor(Color color);
@@ -66,8 +67,10 @@ private:
 	ID3D11Device* device = nullptr;
 	ID3D11DeviceContext* deviceContext = nullptr;
 
-	//Enemy
+	Timer projectileTimer;
 	Enemy* enemy;
 	Tower* tower;
+
+	
 };
 #endif // !
