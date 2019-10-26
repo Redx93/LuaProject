@@ -27,7 +27,7 @@ public:
 	ID3D11DeviceContext* GetDeviceContext() { return this->deviceContext.Get(); }
 private:
 	LuaEngine* engine;
-	MeshManger meshManager;
+	MeshManger *meshManager;
 	InputManager* inputManager;
 	
 

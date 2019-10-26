@@ -15,7 +15,7 @@ class MeshOb;
 class Enemy
 {
 public:
-	int hp = 3;
+	int hp = 100;
 	float speed = 0.008f;;
 	std::vector<XMFLOAT3> waypoints;
 	SimpleMath::Vector3 moveVec;
@@ -25,7 +25,7 @@ class Tower
 {
 public:
 	float dmg  = 1;
-	float radius = 3;
+	float radius = 5;
 	float projectileSpeed = 0.5f;
 };
 class MeshOb : public GameObject
@@ -55,7 +55,7 @@ public:
 	void InitTower();
 	bool InRange(MeshOb* incomingOb);
 	void Shoot(MeshOb* incomingOb);
-
+	Enemy* GetEnemy() { return this->enemy; }
 private:
 	void UpdateMatrix();
 	std::string type;

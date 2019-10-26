@@ -13,6 +13,7 @@ Graphics::~Graphics()
 	delete engine;
 	delete inputManager;
 	delete projectileManager;
+	delete meshManager;
 }
 
 bool Graphics::Initialize(HWND hwnd, int width, int height,
@@ -140,8 +141,7 @@ void Graphics::RenderFrame()
 		{
 			ImGui::Text("Game Phase");
 			this->ResetScript();
-			engine->CallGlobalVariable("spawnEnemy");
-			this->projectileManager->GetEnemies(this->meshManager.GetEnemies());
+			this->projectileManager->GetEnemies(this->meshManager->GetEnemies());
 			engine->CallGlobalVariable("gamePhase");	
 		}
 
@@ -203,25 +203,32 @@ void Graphics::ResetScript()
 {
 	if (current != hasScriptChanged)
 	{
-	hasScriptChanged = current;
 		if (inputManager != nullptr)
 			delete inputManager;
 		if (projectileManager != nullptr)
 			delete projectileManager;
 		if(engine != nullptr)
 			delete this->engine;
+		if (meshManager != nullptr)
+			delete meshManager;
 
 		this->inputManager = new InputManager(this->mouse, this->keyboard,&this->camera, windowWidth, windowHeight);
 		this->projectileManager = new ProjectileManager(this->device.Get(),this->deviceContext.Get());
-		meshManager.Init(device.Get(), deviceContext.Get(), &this->timer);
+		this->meshManager = new MeshManger();
+		meshManager->Init(device.Get(), deviceContext.Get(), &this->timer);
 
 		engine = new LuaEngine();
-		meshManager.AddScript(engine->L());
+		meshManager->AddScript(engine->L());
 		inputManager->AddScript(engine->L());
 		engine->ExecuteFile("mainLua.lua");
 		inputManager->setValues();
 		engine->CallGlobalVariable("ReadFile");
+		if(current == 2)
+			engine->CallGlobalVariable("spawnEnemy");
+
+		hasScriptChanged = current;
 	}
+
 
 }
 
