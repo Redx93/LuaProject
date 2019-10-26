@@ -256,3 +256,9 @@ Tower
 5.5
 1.5
 Waypoint
+0.5
+1.5
+Environment
+3.5
+2.5
+Environment

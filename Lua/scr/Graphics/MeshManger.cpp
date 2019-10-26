@@ -3,6 +3,20 @@
 MeshManger * MeshManger::meshmanger = nullptr;
 
 
+std::vector<MeshOb*> MeshManger::GetEnemies()
+{
+	std::vector<MeshOb*> temp;
+	for (int i = 0; i < m_meshes.size(); i++)
+	{
+		if (this->m_meshes[i]->GetType()=="Enemy")
+		{
+			temp.push_back(this->m_meshes[i]);
+		}
+	}
+	
+	return temp;
+}
+
 int MeshManger::GetNumberOfMeshses()
 {
 	return m_meshes.size();

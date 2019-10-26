@@ -111,8 +111,6 @@ void Graphics::RenderFrame()
 	//update camera buffer
 	this->UpdateConstantBuffer();
 	this->projectileManager->update(this->timer.GetMilisecondsElapsed());
-	engine->CallGlobalVariable("gamePhase");
-
 	{
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
@@ -121,10 +119,7 @@ void Graphics::RenderFrame()
 		ImGui::Begin("InputManger");
 		ImGui::Text("MousePosition ( %i , %i )", mouse->GetPosX(), mouse->GetPosY());
 		ImGui::Checkbox("Render Grid", &renderGrid);
-		if (renderGrid)
-		{
-			this->UpdateGrid();
-		}
+	
 		//ImGui::Text("number of meshes : %i", meshManager.GetNumberOfMeshses());
 		ImGui::Checkbox("Intersect with model", &Intersect);	
 		ImGui::End();
@@ -146,11 +141,17 @@ void Graphics::RenderFrame()
 			ImGui::Text("Game Phase");
 			this->ResetScript();
 			engine->CallGlobalVariable("spawnEnemy");
+			this->projectileManager->GetEnemies(this->meshManager.GetEnemies());
 			engine->CallGlobalVariable("gamePhase");	
 		}
-		ImGui::End();
-	}
 
+		ImGui::End();
+
+	}
+	if (renderGrid)
+	{
+		this->UpdateGrid();
+	}
 	// Imgui editor
 	{
 		ImGui::Begin("Editor");   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)

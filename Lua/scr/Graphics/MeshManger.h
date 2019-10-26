@@ -17,6 +17,7 @@ private:
 
 public:	
 	static MeshManger* meshmanger;
+	std::vector<MeshOb*> GetEnemies();
 	int GetNumberOfMeshses();
 	void Init(ID3D11Device* d, ID3D11DeviceContext *dc, Timer* timer)
 	{

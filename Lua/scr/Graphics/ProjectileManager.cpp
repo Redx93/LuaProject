@@ -63,7 +63,15 @@ void ProjectileManager::update(float deltaTime)
 	for (int i = 0; i < projectiles.size(); i++)
 	{
 		//check collision
+
+
 		projectiles[i]->update(deltaTime);
 		projectiles[i]->Draw();
 	}
+}
+
+void ProjectileManager::GetEnemies(std::vector<MeshOb*> enemies)
+{
+	this->enemies.clear();
+	this->enemies = enemies;
 }

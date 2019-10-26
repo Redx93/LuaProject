@@ -19,7 +19,7 @@ class ProjectileManager
 {
 private:
 	std::vector<Projectile*> projectiles;
-	std::vector<MeshOb> enemies;
+	std::vector<MeshOb*> enemies;
 	ID3D11Device* device;
 	ID3D11DeviceContext* deviceContext;
 
@@ -30,5 +30,7 @@ public:
 
 	void create(SimpleMath::Vector3 direction, SimpleMath::Vector3);
 	void update(float deltaTime);
+
+	void GetEnemies(std::vector<MeshOb*> enemies);
 	//void 
 };

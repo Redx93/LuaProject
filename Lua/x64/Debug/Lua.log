@@ -1,6 +1,31 @@
-﻿  Graphics.cpp
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Vertex.h(28,35): warning C4305:  'argument': truncation from 'double' to 'float'
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(144,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Graphics.cpp(89,75): warning C4267:  'argument': conversion from 'size_t' to 'UINT', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Graphics.cpp(113,67): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
-  Lua.vcxproj -> C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\Lua.exe
+﻿  Engine.cpp
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Vertex.h(28,35): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Graphics.cpp
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Engine.cpp(24,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Vertex.h(28,35): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Graphics.cpp(89,75): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
+  Mesh.cpp
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Graphics.cpp(113,67): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Vertex.h(28,35): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  MeshManger.cpp
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Mesh.cpp(111,92): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Vertex.h(28,35): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  ProjectileManager.cpp
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\MeshManger.cpp(22,24): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Vertex.h(28,35): warning C4305: 'argument': truncation from 'double' to 'float'
+  RenderWindow.cpp
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\ProjectileManager.cpp(38,34): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Vertex.h(28,35): warning C4305: 'argument': truncation from 'double' to 'float'
+  Source.cpp
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Vertex.h(28,35): warning C4305: 'argument': truncation from 'double' to 'float'
+  WindowContainer.cpp
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Vertex.h(28,35): warning C4305: 'argument': truncation from 'double' to 'float'
+  Generating Code...
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Lua.vcxproj -> C:\Users\Karlos\Documents\GitHub\LuaProject\x64\Debug\Lua.exe
