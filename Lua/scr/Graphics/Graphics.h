@@ -38,5 +38,6 @@ private:
 	//imgui
 	bool renderGrid = true;
 
+	Timer enemySpawnTimer;
 	Timer timer;
 };

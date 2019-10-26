@@ -27,7 +27,7 @@ function update() --edit phase
 	mouse = inputManager:GetMouseEvent()
 	keychar = inputManager:GetKeyEvent()
 
-	if keychar == '1' or keychar == '3' or keychar == '4' then
+	if keychar == '1' or  keychar == '2' or keychar == '3' or keychar == '4' then
 		currentObject = CreateMesh(keychar)
 	end
 
@@ -72,6 +72,9 @@ function spawnEnemy()
 
 	SpriteMetaTable[numberOfSprite] = sprite1
 	numberOfSprite = numberOfSprite + 1
+
+
+
  end
 
 
@@ -81,19 +84,34 @@ function destroyEnemy(enemyID)
 	--nrOfEnemies=nrOfEnemies-1
 end
 
-function gamePhase() 
-	--draw
+function Render()
 	for i=1, numberOfSprite do
-		--if SpriteMetaTable[i]:GetType()~="Waypoint" then
-			SpriteMetaTable[i]:Draw()
-		--end	
-
+		SpriteMetaTable[i]:Draw()
 		if SpriteMetaTable[i]:GetType() == "Enemy" then
 			local enemyInGoal = SpriteMetaTable[i]:updateEnemy()
 			if enemyInGoal == true then
 				--SpriteMetaTable[i]:SetPosition(0,0)
 				--destroyEnemy(SpriteMetaTable[i])
 			end
+		end
+
+		
+	end
+end
+
+function gamePhase() 
+	--draw
+	for i=1, numberOfSprite do
+		--if SpriteMetaTable[i]:GetType()~="Waypoint" then
+			--SpriteMetaTable[i]:Draw()
+		--end	
+
+		if SpriteMetaTable[i]:GetType() == "Enemy" then
+			--local enemyInGoal = SpriteMetaTable[i]:updateEnemy()
+			--if enemyInGoal == true then
+				--SpriteMetaTable[i]:SetPosition(0,0)
+				--destroyEnemy(SpriteMetaTable[i])
+			--end
 
 			for j=1, numberOfSprite do
 				if SpriteMetaTable[j]:GetType() == "Tower" then
@@ -105,11 +123,8 @@ function gamePhase()
 
 		end
 
-
-
-
 	end
-
+	
 
 	--physics
 	--for i=1, numberOfSprite do

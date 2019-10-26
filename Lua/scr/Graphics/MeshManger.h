@@ -124,7 +124,8 @@ public:
 		MeshManger* sm = MeshManger::meshmanger;
 		if (sprite->GetType() == "Enemy")
 		{
-			sprite->InitEnemy(); //fix vector error
+			sprite->InitEnemy(); 
+			
 		}
 		return 0;
 	}

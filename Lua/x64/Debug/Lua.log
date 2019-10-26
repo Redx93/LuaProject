@@ -1,10 +1,6 @@
-﻿  ProjectileManager.cpp
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Vertex.h(28,35): warning C4305:  'argument': truncation from 'double' to 'float'
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\ProjectileManager.cpp(38,34): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\ProjectileManager.cpp(63,37): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Source.cpp
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\ProjectileManager.cpp(73,68): warning C4390:  ';': empty controlled statement found; is this the intent?
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Vertex.h(28,35): warning C4305:  'argument': truncation from 'double' to 'float'
-  Generating Code...
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-  Lua.vcxproj -> C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\Lua.exe
+﻿  Graphics.cpp
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Vertex.h(28,35): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\MeshManger.h(146,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Graphics.cpp(93,75): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Graphics.cpp(108,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Lua.vcxproj -> C:\Users\Karlos\Documents\GitHub\LuaProject\x64\Debug\Lua.exe

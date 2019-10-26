@@ -12,6 +12,7 @@ function CreateMeshFile(x,y,type)
 		if type == "Tower" then
 			sprite1:CreateTower()
 		end
+
 		SpriteMetaTable[numberOfSprite] = sprite1
 		numberOfSprite = numberOfSprite + 1
 

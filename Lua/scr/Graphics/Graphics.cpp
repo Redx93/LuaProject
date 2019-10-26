@@ -1,7 +1,10 @@
 #include "Graphics.h"
+static int nrOfEnemies;
 ProjectileManager* Graphics::projectileManager = nullptr;
 Graphics::Graphics()
 {
+	nrOfEnemies = 0;
+	enemySpawnTimer.Start();
 	timer.Start();
 }
 
@@ -102,8 +105,8 @@ static int current = 1;
 static int hasScriptChanged = -1;
 void Graphics::RenderFrame()
 {
+	float deltaTime = timer.GetMilisecondsElapsed();
 	timer.Restart();
-
 	float bgcolor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 	this->deviceContext->ClearRenderTargetView(this->renderTargetView.Get(), bgcolor);
 	this->deviceContext->ClearDepthStencilView(this->depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
@@ -111,7 +114,7 @@ void Graphics::RenderFrame()
 	this->SetupShader(this->DefaultShader, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	//update camera buffer
 	this->UpdateConstantBuffer();
-	this->projectileManager->update(this->timer.GetMilisecondsElapsed());
+	this->projectileManager->update(deltaTime);
 	{
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
@@ -142,7 +145,9 @@ void Graphics::RenderFrame()
 			ImGui::Text("Game Phase");
 			this->ResetScript();
 			this->projectileManager->GetEnemies(this->meshManager->GetEnemies());
-			engine->CallGlobalVariable("gamePhase");	
+			engine->CallGlobalVariable("gamePhase");
+			engine->CallGlobalVariable("Render");
+			ImGui::Text("Score: %d", this->projectileManager->GetScore());
 		}
 
 		ImGui::End();
@@ -201,6 +206,8 @@ void Graphics::UpdateGrid()
 
 void Graphics::ResetScript()
 {
+
+
 	if (current != hasScriptChanged)
 	{
 		if (inputManager != nullptr)
@@ -223,12 +230,25 @@ void Graphics::ResetScript()
 		engine->ExecuteFile("mainLua.lua");
 		inputManager->setValues();
 		engine->CallGlobalVariable("ReadFile");
-		if(current == 2)
-			engine->CallGlobalVariable("spawnEnemy");
+
 
 		hasScriptChanged = current;
 	}
 
+	
+	if (current == 2 && nrOfEnemies < 10 )
+	{
+
+
+		if (enemySpawnTimer.GetAsSeconds() >= 2.f)
+		{
+			nrOfEnemies++;
+			engine->CallGlobalVariable("spawnEnemy");
+			enemySpawnTimer.Restart();
+		}
+
+
+	}
 
 }
 

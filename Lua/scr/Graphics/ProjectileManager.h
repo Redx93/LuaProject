@@ -22,7 +22,7 @@ private:
 	std::vector<MeshOb*> enemies;
 	ID3D11Device* device;
 	ID3D11DeviceContext* deviceContext;
-
+	int score;
 
 public:
 	ProjectileManager(ID3D11Device* dev, ID3D11DeviceContext* devCont);
@@ -32,5 +32,5 @@ public:
 	void update(float deltaTime);
 
 	void GetEnemies(std::vector<MeshOb*> enemies);
-	//void 
+	int GetScore()const;
 };
