@@ -107,7 +107,7 @@ void ProjectileManager::update(float deltaTime)
 				}
 				if (enemies[j]->CheckEnemyInGoal()==true)
 				{
-
+					this->endGame = true;
 				}
 				
 				projectiles[i]->update(deltaTime);

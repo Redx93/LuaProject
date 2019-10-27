@@ -27,7 +27,7 @@ class Tower
 public:
 	float dmg  = 1;
 	float radius = 5;
-	float projectileSpeed = 0.01f;
+	float projectileSpeed = 0.1f;
 };
 class MeshOb : public GameObject
 {
