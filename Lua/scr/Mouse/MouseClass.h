@@ -2,7 +2,7 @@
 #include "MouseEvent.h"
 #include <queue>
 
-class MouseClass
+class Mouse
 {
 public:
 	void OnLeftPressed(int x, int y);

@@ -7,15 +7,15 @@ class InputManager
 {
 private:
 	InputHandler* inputhandler;
-	MouseClass* mouse;
-	KeyboardClass* keyboard;
+	Mouse* mouse;
+	Keyboard* keyboard;
 	Camera* camera;
 	EventLua luaEvent;
 	int width;
 	int height;
 public:
 
-	InputManager(MouseClass* mouse, KeyboardClass* keyboard, Camera * camera,
+	InputManager(Mouse* mouse, Keyboard* keyboard, Camera * camera,
 		int width, int height);
 	~InputManager();
 	static int GetMouseEvent(lua_State *L_state);

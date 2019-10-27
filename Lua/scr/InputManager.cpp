@@ -1,6 +1,6 @@
 #include "InputManager.h"
 
-InputManager::InputManager(MouseClass* mouse, KeyboardClass* keyboard,
+InputManager::InputManager(Mouse* mouse, Keyboard* keyboard,
 	Camera* camera, int width, int height)
 {
 	this->camera = camera;

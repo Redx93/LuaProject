@@ -44,10 +44,10 @@ public:
 	InputHandler();//xy 
 	~InputHandler();
 	unsigned char GetKeyCode()const; //char
-	MouseClass* mouse;
-	KeyboardClass* keyboard;
+	Mouse* mouse;
+	Keyboard* keyboard;
 	EventLua& GetEvent();
-	void setValues(MouseClass* mouse, KeyboardClass* keyboard);
+	void setValues(Mouse* mouse, Keyboard* keyboard);
 	void SetCamera(Camera* camera, int width, int height);
 	bool Picking(Ray& ray, MeshOb* m);
 	void GetRay(const int& x, const int& y);

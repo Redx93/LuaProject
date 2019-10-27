@@ -54,14 +54,14 @@ bool D3DBase::InitializeDirectX(HWND hwnd)
 			NULL, //Supported feature level
 			this->deviceContext.GetAddressOf()); //Device Context Address
 
-		COM_ERROR_IF_FAILED(hr, "Failed to create device and swapchain.");
+		COM_ERROR(hr, "Failed to create device and swapchain.");
 
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
 		hr = this->swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(backBuffer.GetAddressOf()));
-		COM_ERROR_IF_FAILED(hr, "GetBuffer Failed.");
+		COM_ERROR(hr, "GetBuffer Failed.");
 
 		hr = this->device->CreateRenderTargetView(backBuffer.Get(), NULL, this->renderTargetView.GetAddressOf());
-		COM_ERROR_IF_FAILED(hr, "Failed to create render target view.");
+		COM_ERROR(hr, "Failed to create render target view.");
 
 		//Describe our Depth/Stencil Buffer
 		CD3D11_TEXTURE2D_DESC depthStencilTextureDesc(DXGI_FORMAT_D24_UNORM_S8_UINT, this->windowWidth, this->windowHeight);
@@ -69,10 +69,10 @@ bool D3DBase::InitializeDirectX(HWND hwnd)
 		depthStencilTextureDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 
 		hr = this->device->CreateTexture2D(&depthStencilTextureDesc, NULL, this->depthStencilBuffer.GetAddressOf());
-		COM_ERROR_IF_FAILED(hr, "Failed to create depth stencil buffer.");
+		COM_ERROR(hr, "Failed to create depth stencil buffer.");
 
 		hr = this->device->CreateDepthStencilView(this->depthStencilBuffer.Get(), NULL, this->depthStencilView.GetAddressOf());
-		COM_ERROR_IF_FAILED(hr, "Failed to create depth stencil view.");
+		COM_ERROR(hr, "Failed to create depth stencil view.");
 
 		this->deviceContext->OMSetRenderTargets(1, this->renderTargetView.GetAddressOf(), this->depthStencilView.Get());
 
@@ -81,7 +81,7 @@ bool D3DBase::InitializeDirectX(HWND hwnd)
 		depthstencildesc.DepthFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_LESS_EQUAL;
 
 		hr = this->device->CreateDepthStencilState(&depthstencildesc, this->depthStencilState.GetAddressOf());
-		COM_ERROR_IF_FAILED(hr, "Failed to create depth stencil state.");
+		COM_ERROR(hr, "Failed to create depth stencil state.");
 
 		//Create & set the Viewport
 		CD3D11_VIEWPORT viewport(0.0f, 0.0f, static_cast<float>(this->windowWidth), static_cast<float>(this->windowHeight));;
@@ -90,13 +90,13 @@ bool D3DBase::InitializeDirectX(HWND hwnd)
 		//Create Rasterizer State
 		CD3D11_RASTERIZER_DESC rasterizerDesc(D3D11_DEFAULT);
 		hr = this->device->CreateRasterizerState(&rasterizerDesc, this->rasterizerState.GetAddressOf());
-		COM_ERROR_IF_FAILED(hr, "Failed to create rasterizer state.");
+		COM_ERROR(hr, "Failed to create rasterizer state.");
 
 		//Create Rasterizer State for culling front
 		CD3D11_RASTERIZER_DESC rasterizerDesc_CullFront(D3D11_DEFAULT);
 		rasterizerDesc_CullFront.CullMode = D3D11_CULL_MODE::D3D11_CULL_FRONT;
 		hr = this->device->CreateRasterizerState(&rasterizerDesc_CullFront, this->rasterizerState_CullFront.GetAddressOf());
-		COM_ERROR_IF_FAILED(hr, "Failed to create rasterizer state.");
+		COM_ERROR(hr, "Failed to create rasterizer state.");
 
 		//Create Blend State
 		D3D11_RENDER_TARGET_BLEND_DESC rtbd = { 0 };
@@ -113,12 +113,12 @@ bool D3DBase::InitializeDirectX(HWND hwnd)
 		blendDesc.RenderTarget[0] = rtbd;
 
 		hr = this->device->CreateBlendState(&blendDesc, this->blendState.GetAddressOf());
-		COM_ERROR_IF_FAILED(hr, "Failed to create blend state.");
+		COM_ERROR(hr, "Failed to create blend state.");
 
 		spriteBatch = std::make_unique<DirectX::SpriteBatch>(this->deviceContext.Get());
 		spriteFont = std::make_unique<DirectX::SpriteFont>(this->device.Get(), L"comic_sans.spritefont");
 	}
-	catch (COMException& exception)
+	catch (Exception& exception)
 	{
 		ErrorLogger::Log(exception);
 		return false;

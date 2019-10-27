@@ -18,7 +18,7 @@ Graphics::~Graphics()
 }
 
 bool Graphics::Initialize(HWND hwnd, int width, int height,
-	MouseClass * mouse,KeyboardClass *Keyboard)
+	Mouse * mouse,Keyboard *Keyboard)
 {
 
 	if (!InitializeD3DBase(hwnd, width, height))
@@ -92,9 +92,9 @@ bool Graphics::InitizlizeGrid()
 			v2.push_back(Vertex_COLOR(0.0f - gridDimension / 2 + i * gridDimension / gridSections, +gridDimension / 2.0f - gridDimension / gridSections, 0.0f, color));
 		}
 		HRESULT hr = vb_grid.Initialize(this->device.Get(), v2.data(), v2.size());
-		COM_ERROR_IF_FAILED(hr, "Failed to initialize Grid.");
+		COM_ERROR(hr, "Failed to initialize Grid.");
 	}
-	catch (COMException& exception)
+	catch (Exception& exception)
 	{
 		ErrorLogger::Log(exception);
 		return false;
@@ -259,16 +259,16 @@ bool Graphics::InitializeScene()
 	{
 		//Initialize Constant Buffer(s)
 		HRESULT hr = this->cb_vs_vertexshader.Initialize(this->device.Get(), this->deviceContext.Get());
-		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
+		COM_ERROR(hr, "Failed to initialize constant buffer.");
 
 		hr = this->cb_ps_pixelshader.Initialize(this->device.Get(), this->deviceContext.Get());
-		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
+		COM_ERROR(hr, "Failed to initialize constant buffer.");
 
 		camera.SetPosition(0.0f, 0.0f, -3.0f);
 		camera.SetProjectionValues(90.0f, static_cast<float>(windowWidth) /
 			static_cast<float>(windowHeight), 0.1f, 1000.0f);
 	}
-	catch (COMException & exception)
+	catch (Exception & exception)
 	{
 		ErrorLogger::Log(exception);
 		return false;

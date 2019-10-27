@@ -25,7 +25,7 @@ EventLua& InputHandler::GetEvent()
 	return this->luaEvent;
 }
 
-void InputHandler::setValues(MouseClass* mouse, KeyboardClass* keyboard)
+void InputHandler::setValues(Mouse* mouse, Keyboard* keyboard)
 {
 	this->keyboard = keyboard;
 	this->mouse = mouse;
