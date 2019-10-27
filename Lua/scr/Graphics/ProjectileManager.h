@@ -26,6 +26,8 @@ private:
 	ID3D11Device* device;
 	ID3D11DeviceContext* deviceContext;
 
+
+	int score;
 	bool endGame = false;
 public:
 	ProjectileManager(ID3D11Device* dev, ID3D11DeviceContext* devCont);
@@ -35,5 +37,5 @@ public:
 	void update(float deltaTime);
 	bool EndGame() { return endGame; }
 	void GetEnemies(std::vector<MeshOb*> enemies);
-	//void 
+	int GetScore()const;
 };

@@ -1,41 +1,7 @@
-﻿  Engine.cpp
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Vertex.h(28,35): warning C4305:  'argument': truncation from 'double' to 'float'
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.h(60,29): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.h(61,40): warning C4244:  'return': conversion from 'int' to 'float', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-  Graphics.cpp
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Engine.cpp(24,11): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Vertex.h(28,35): warning C4305:  'argument': truncation from 'double' to 'float'
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.h(60,29): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.h(61,40): warning C4244:  'return': conversion from 'int' to 'float', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Graphics.cpp(90,75): warning C4267:  'argument': conversion from 'size_t' to 'UINT', possible loss of data
-  Mesh.cpp
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Graphics.cpp(105,11): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Vertex.h(28,35): warning C4305:  'argument': truncation from 'double' to 'float'
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.h(60,29): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.h(61,40): warning C4244:  'return': conversion from 'int' to 'float', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-  ProjectileManager.cpp
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.cpp(111,92): warning C4267:  'argument': conversion from 'size_t' to 'UINT', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Vertex.h(28,35): warning C4305:  'argument': truncation from 'double' to 'float'
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.h(60,29): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.h(61,40): warning C4244:  'return': conversion from 'int' to 'float', possible loss of data
-  RenderWindow.cpp
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\ProjectileManager.cpp(39,34): warning C4267:  'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Vertex.h(28,35): warning C4305:  'argument': truncation from 'double' to 'float'
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.h(60,29): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.h(61,40): warning C4244:  'return': conversion from 'int' to 'float', possible loss of data
-  Source.cpp
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Vertex.h(28,35): warning C4305:  'argument': truncation from 'double' to 'float'
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.h(60,29): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.h(61,40): warning C4244:  'return': conversion from 'int' to 'float', possible loss of data
-  WindowContainer.cpp
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Vertex.h(28,35): warning C4305:  'argument': truncation from 'double' to 'float'
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.h(60,29): warning C4244:  '-=': conversion from 'float' to 'int', possible loss of data
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\Mesh.h(61,40): warning C4244:  'return': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
-C:\Users\AlaG\Desktop\LuaEngine\Lua\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244:  'initializing': conversion from 'double' to 'float', possible loss of data
-  Lua.vcxproj -> C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\Lua.exe
+﻿  Mesh.cpp
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Vertex.h(28,35): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Mesh.h(63,29): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Mesh.h(64,40): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\MeshManger.h(145,12): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Mesh.cpp(111,92): warning C4267: 'argument': conversion from 'size_t' to 'UINT', possible loss of data
+  Lua.vcxproj -> C:\Users\Karlos\Documents\GitHub\LuaProject\x64\Debug\Lua.exe

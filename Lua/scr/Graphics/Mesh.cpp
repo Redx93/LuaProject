@@ -269,12 +269,31 @@ void MeshOb::initWaypoints(std::vector<XMFLOAT3> newList)
 	this->enemy->waypoints = newList; //merge list into this->list
 	this->enemy->waypointsStored = newList;
 	this->SetPosition(this->enemy->waypoints[0]);
+	this->goal = this->enemy->waypoints[newList.size() - 1];
 }
 void MeshOb::ResetWayPoint()
 {
 	this->enemy->waypoints.clear();
 	this->enemy->waypoints = this->enemy->waypointsStored;
 	this->SetPosition(this->enemy->waypoints[0]);
+}
+void MeshOb::AddHealth(int heals)
+{
+	this->enemy->hp += heals;
+}
+void MeshOb::SetSpeed(float newSpeed)
+{
+	this->enemy->speed = newSpeed;
+}
+bool MeshOb::CheckEnemyInGoal()
+{
+	bool result = false;
+	SimpleMath::Vector2 enemyPos = { this->GetPositionFloat3().x,this->GetPositionFloat3().y };
+	SimpleMath::Vector2 waypoint = { this->goal.x, this->goal.y};
+	if (SimpleMath::Vector2::Distance(enemyPos, waypoint) <= 0.06)
+		result = true;
+	return result;
+	
 }
 void MeshOb::InitTower()
 {

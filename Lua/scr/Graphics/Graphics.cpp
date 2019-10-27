@@ -3,6 +3,7 @@ ProjectileManager* Graphics::projectileManager = nullptr;
 Graphics::Graphics()
 {
 	timer.Start();
+	
 }
 
 Graphics::~Graphics()
@@ -100,6 +101,7 @@ bool Graphics::InitizlizeGrid()
 bool Intersect = false;
 static int current = 1;
 static int hasScriptChanged = -1;
+static float timePassed = 0.f;
 void Graphics::RenderFrame()
 {
 	float dt = timer.GetMilisecondsElapsed();
@@ -137,10 +139,14 @@ void Graphics::RenderFrame()
 			ImGui::Text("Edit Phase");
 			this->ResetScript();
 			engine->CallGlobalVariable("update");
+			timePassed = 0;
 		}
 		else if (current == 2)
 		{
+			timePassed += dt/1000;
 			ImGui::Text("Game Phase");
+			ImGui::Text("Time: %f", timePassed);
+			ImGui::Text("Score: %d", projectileManager->GetScore());
 			this->ResetScript();
 			engine->CallGlobalVariable("gamePhase");	
 		}
