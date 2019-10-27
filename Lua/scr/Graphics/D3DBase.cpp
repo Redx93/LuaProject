@@ -116,7 +116,7 @@ bool D3DBase::InitializeDirectX(HWND hwnd)
 		COM_ERROR_IF_FAILED(hr, "Failed to create blend state.");
 
 		spriteBatch = std::make_unique<DirectX::SpriteBatch>(this->deviceContext.Get());
-		spriteFont = std::make_unique<DirectX::SpriteFont>(this->device.Get(), L"scr\\Data\\Fonts\\comic_sans_ms_16.spritefont");
+		spriteFont = std::make_unique<DirectX::SpriteFont>(this->device.Get(), L"comic_sans.spritefont");
 	}
 	catch (COMException& exception)
 	{

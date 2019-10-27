@@ -1,9 +1,9 @@
 #include "Graphics.h"
+#include <sstream>
 ProjectileManager* Graphics::projectileManager = nullptr;
 Graphics::Graphics()
 {
 	timer.Start();
-	
 }
 
 Graphics::~Graphics()
@@ -53,6 +53,9 @@ bool Graphics::Initialize(HWND hwnd, int width, int height,
 	//inputManager->setValues();
 	//engine->CallGlobalVariable("ReadFile");
 	//engine->CallGlobalVariable("spawnEnemy");
+
+	spriteBatch = std::make_unique<DirectX::SpriteBatch>(this->deviceContext.Get());
+	spriteFont = std::make_unique<DirectX::SpriteFont>(this->device.Get(), L"comic_sans.spritefont");
 	return true;
 }
 
@@ -145,8 +148,6 @@ void Graphics::RenderFrame()
 		{
 			timePassed += dt/1000;
 			ImGui::Text("Game Phase");
-			ImGui::Text("Time: %f", timePassed);
-			ImGui::Text("Score: %d", projectileManager->GetScore());
 			this->ResetScript();
 			engine->CallGlobalVariable("gamePhase");	
 		}
@@ -180,6 +181,15 @@ void Graphics::RenderFrame()
 		ImGui::Render();
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 	}
+
+	stringstream strs;
+	strs << projectileManager->GetScore();
+	string temp_str = "Score : " + strs.str() +"\nTimer : " + std::to_string(timePassed);
+	spriteBatch->Begin();
+	spriteFont->DrawString(spriteBatch.get(), temp_str.c_str(), DirectX::XMFLOAT2(200, 0), DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(2.0f, 2.0f));
+	spriteBatch->End();
+
+
 	this->swapchain->Present(1, NULL);
 }
 
