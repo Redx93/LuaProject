@@ -1,3 +1,4 @@
+
 ﻿  Mesh.cpp
 C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Vertex.h(28,35): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\Mesh.h(63,29): warning C4244: '-=': conversion from 'float' to 'int', possible loss of data
@@ -13,3 +14,6 @@ C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\ProjectileManager.c
   Generating Code...
 C:\Users\Karlos\Documents\GitHub\LuaProject\Lua\scr\Graphics\ProjectileManager.cpp(87,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Lua.vcxproj -> C:\Users\Karlos\Documents\GitHub\LuaProject\x64\Debug\Lua.exe
+﻿  KeyboardClass.cpp
+  Lua.vcxproj -> C:\Users\AlaG\Desktop\LuaEngine\Lua\x64\Debug\Lua.exe
+

@@ -26,8 +26,8 @@ protected:
 	bool KeyBoardIsPressed(unsigned char& keycode);
 	bool mouseEvent(MouseEvent::EventType type);
 
-	MouseClass* mouse = nullptr;
-	KeyboardClass *keyboard = nullptr;
+	Mouse* mouse = nullptr;
+	Keyboard *keyboard = nullptr;
 	MeshOb* CurrentModels = nullptr;
 
 	Shader ColorShader;

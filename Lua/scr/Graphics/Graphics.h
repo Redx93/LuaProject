@@ -14,8 +14,8 @@ class Graphics : public D3DBase
 public:
 	Graphics();
 	~Graphics();
-	bool Initialize(HWND hwnd, int width, int height, MouseClass* mouse ,
-		KeyboardClass* keyboard);
+	bool Initialize(HWND hwnd, int width, int height, Mouse* mouse ,
+		Keyboard* keyboard);
 	bool InitizlizeGrid();
 	void RenderFrame();
 	void UpdateGrid();

@@ -109,7 +109,7 @@ bool MeshOb::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceConte
 
 		//Load Vertex Data
 		HRESULT hr = this->vertexBuffer.Initialize(this->device, vertices.data(), vertices.size());
-		COM_ERROR_IF_FAILED(hr, "Failed to initialize vertex buffer.");
+		COM_ERROR(hr, "Failed to initialize vertex buffer.");
 
 		//DWORD indices[] =
 		//{
@@ -133,14 +133,14 @@ bool MeshOb::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceConte
 		COM_ERROR_IF_FAILED(hr, "Failed to initialize index buffer.");*/
 
 		hr = cb_vs_Color.Initialize(device, deviceContext);
-		COM_ERROR_IF_FAILED(hr, "Failed to initialize Model Color.");
+		COM_ERROR(hr, "Failed to initialize Model Color.");
 
 		this->color = color;
 		this->cb_vs_Color.data.color = color;
 		this->cb_vs_Color.ApplyChanges();
 		cb_vs_vertexshader.Initialize(device, deviceContext);
 	}
-	catch (COMException & exception)
+	catch (Exception & exception)
 	{
 		ErrorLogger::Log(exception);
 		return false;

@@ -2,10 +2,10 @@
 #include "KeyboardEvent.h"
 #include <queue>
 
-class KeyboardClass
+class Keyboard
 {
 public:
-	KeyboardClass();
+	Keyboard();
 	bool KeyIsPressed(const unsigned char keycode);
 	bool KeyBufferIsEmpty();
 	bool CharBufferIsEmpty();

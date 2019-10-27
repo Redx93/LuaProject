@@ -4,14 +4,14 @@
 #include <string>
 #include <algorithm>
 
-#define COM_ERROR_IF_FAILED( hr, msg ) if( FAILED( hr ) ) throw COMException( hr, msg, __FILE__, __FUNCTION__, __LINE__ )
+#define COM_ERROR( hr, msg ) if( FAILED( hr ) ) throw Exception( hr, msg, __FILE__, __FUNCTION__, __LINE__ )
  std::wstring StringToWide(std::string str);
  std::string GetFileExtension(const std::string& filename);
 
-class COMException
+class Exception
 {
 public:
-	COMException(HRESULT hr, const std::string& msg, const std::string& file, const std::string& function, int line)
+	Exception(HRESULT hr, const std::string& msg, const std::string& file, const std::string& function, int line)
 	{
 		_com_error error(hr);
 		whatmsg = L"Msg: " + StringToWide(std::string(msg)) + L"\n";
@@ -35,5 +35,5 @@ public:
 	static void Log(std::string message);
 	static void Log(HRESULT hr, std::string message);
 	static void Log(HRESULT hr, std::wstring message);
-	static void Log(COMException& exception);
+	static void Log(Exception& exception);
 };
