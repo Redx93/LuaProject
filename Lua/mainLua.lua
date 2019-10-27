@@ -84,9 +84,9 @@ end
 function gamePhase() 
 	--draw
 	for i=1, numberOfSprite do
-		--if SpriteMetaTable[i]:GetType()~="Waypoint" then
+		if SpriteMetaTable[i]:GetType()~="Waypoint" then
 			SpriteMetaTable[i]:Draw()
-		--end	
+		end	
 
 		if SpriteMetaTable[i]:GetType() == "Enemy" then
 			local enemyInGoal = SpriteMetaTable[i]:updateEnemy()
@@ -102,39 +102,11 @@ function gamePhase()
 					end
 				end
 			end
-
 		end
-
-
-
-
 	end
-
-
-	--physics
-	--for i=1, numberOfSprite do
-		--if SpriteMetaTable[i]:GetType() == "Enemy" then
-		--	local enemyInGoal = SpriteMetaTable[i]:updateEnemy()
-		--	if enemyInGoal == true then
-				--SpriteMetaTable[i]:SetPosition(0,0)
-				--destroyEnemy(SpriteMetaTable[i])
-		--	end
-		--end
-
-		--fix
-		--if SpriteMetaTable[i]:GetType() == "Tower" then
-			--local newSpriteTable = {} 
-			--newSpriteTable = SpriteMetaTable
-			--newSpriteTable:InRangeTower()
-			--towerAttack(SpriteMetaTable[i], SpriteMetaTable)
-		--end 
-	--end
-
-
-
 end
 
-function towerAttack(tower, table )
+function towerAttack(tower, table ) --not used
 
 	for j=1, numberOfSprite do
 		local enemytype = table[j]

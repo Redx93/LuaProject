@@ -19,6 +19,8 @@ public:
 	//returns lua state object
 	lua_State* L();
 	void CallGlobalVariable(const char* globalvar);
+
+	void CallGlobalVariable(int value, const char* globalvar);
 	//Execute Lua File
 	void ExecuteFile(const char* file);
 	std::string GetString(const char* p);

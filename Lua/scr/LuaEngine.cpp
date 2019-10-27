@@ -65,6 +65,16 @@ void LuaEngine::CallGlobalVariable(const char* globalvar)
 		lua_pcall(m_L, 0, 0, 0);
 	}
 }
+void LuaEngine::CallGlobalVariable(int value, const char* globalvar)
+{
+	lua_getglobal(m_L, globalvar);
+	
+	if (lua_isfunction(m_L, -1))
+	{
+		lua_pushnumber(m_L, value);
+		lua_pcall(m_L, 1, 0, 0);
+	}
+}
 //helper function to report errors in evaluated lua scripts
 void LuaEngine::report_errors(int& state)
 {

@@ -225,7 +225,7 @@ bool MeshOb::Update(float dt)
 		//sqrtf(x*x+y*y+z*z);
 		float length = SimpleMath::Vector3::Distance(enemyPos, currentTargetWP);
 
-		if (length <= 0.04)
+		if (length <= 0.06)
 			CalcNewWP();
 
 		SimpleMath::Vector3 move = enemy->moveVec * enemy->speed * dt;

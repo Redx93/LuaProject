@@ -80,9 +80,9 @@ void ProjectileManager::update(float deltaTime)
 					enemies[j]->RemoveHP(5);
 					projectiles[i]->SetAlive(false);
 
-					int rSpeed = rand() % 9 + 1;
+					int rSpeed = rand() % 6 + 3;
 					int unitHealth = 25;
-					if (rSpeed < 3)
+					if (rSpeed < 5)
 						unitHealth = 50;
 					if (fmodf(enemies[j]->GetHealth(), unitHealth) <= 3) //restart
 					{

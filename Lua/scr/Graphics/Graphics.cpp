@@ -136,7 +136,10 @@ void Graphics::RenderFrame()
 		ImGui::SetWindowFontScale(1.5);
 		ImGui::SliderInt("Menu State", &current, 1, 2);
 		if (projectileManager->EndGame() == true)
+		{
 			current = 1;
+			
+		}
 		if (current==1)
 		{
 			ImGui::Text("Edit Phase");

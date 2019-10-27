@@ -17,6 +17,48 @@ function CreateMeshFile(x,y,type)
 
 end
 
+function HighScoreTop10(newScore)
+	local file =io.open("highscore.txt","r+")
+	local scoreArr ={}
+	local index =-1
+	--local entry = false
+	for i=1,10 do  --Top 10 score list
+		scoreArr[i]=0
+	end
+
+	for line in file:lines() do
+		scoreArr[#scoreArr+1] = line
+	end
+
+	for i=1,10 do  --Top 10 score list
+		if newScore>scoreArr[i] then
+			--entry=true
+			index=i
+		else 
+			break
+		end
+	end
+
+	if index~=-1 then
+		for i=index+1,10 do
+			if i+1<11 then
+				scoreArr[i+1]=scoreArr[i]
+			end
+		end
+		scoreArr[index]=newScore
+	end
+	
+
+	--getScore
+	for i=1,10 do
+		local score =scoreArr[i]
+		file:write(score .. "\n")
+	end
+
+
+	file:close()
+end
+
 function WritetoFile()
 --[[ That mode string: `r´ for reading, a `w´ for writing (which also erases any previous content of the file),
 	or an `a´ for appending,`b´ to open binary files.]]--
