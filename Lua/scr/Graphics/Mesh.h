@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MESHOB_H
+#define MESHOB_H
 #include "Vertex.h"
 #include "VertexBuffer.h"
 #include "ConstantBuffer.h"
@@ -6,34 +7,17 @@
 #include <vector>
 using namespace DirectX;
 
-enum MeshType
-{
-	Environment,
-	Enemy,
-	Player,
-	Teleport
-};
-class RenderbleGameObject : public GameObject
+class MeshOb : public GameObject
 {
 public:
-	/*Mesh(MeshType type = MeshType::Environment):type(type) { }
-	Mesh(const Mesh& other);
-	Mesh& operator=(const Mesh other)*/
-	RenderbleGameObject();
-	 ~RenderbleGameObject();
+	MeshOb();
+	 ~MeshOb();
 	bool Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext,
-		Color color = Colours::White);
+		Color color = Colours::Red);
 	void Draw();
 	void SetColor(Color color);
-	void SetColor(MeshType type);
-	void SetType(MeshType type);
-	Color GetColor();
-	MeshType GetMeshType(const unsigned char keycode);
-	MeshType GetMeshType(std::string keycode);
-	std::string GetMeshType(MeshType type);
-	MeshType GetType() { return this->type; }
-
-
+	void SetType(std::string type);
+	std::string GetType();
 	XMMATRIX worldMatrix = XMMatrixIdentity();
 	std::vector<Vertex> vertices;
 	VertexBuffer<Vertex> vertexBuffer;
@@ -41,11 +25,13 @@ public:
 private:
 	void UpdateMatrix();
 
-	MeshType type;
+	std::string type;
 	Color color;
-	ID3D11Device * device = nullptr;
-	ID3D11DeviceContext * deviceContext = nullptr;
-
+	/* constant buffers*/
 	ConstantBuffer<CB_PS_Color> cb_vs_Color;
-	//IndexBuffer indexBuffer;
+	ConstantBuffer<CB_VS_vertexshader> cb_vs_vertexshader;
+
+	ID3D11Device* device = nullptr;
+	ID3D11DeviceContext* deviceContext = nullptr;
 };
+#endif // !

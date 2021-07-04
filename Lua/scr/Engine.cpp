@@ -24,17 +24,17 @@ void Engine::Update()
 	float dt = timer.GetMilisecondsElapsed();
 	timer.Restart();
 
-	while (!mouse.EventBufferIsEmpty())
-	{
-		MouseEvent me = mouse.ReadEvent();
-		if (mouse.IsRightDown())
-		{
-			if (me.GetType() == MouseEvent::EventType::RAW_MOVE)
-			{
-				this->gfx.camera.AdjustRotation((float)me.GetPosY() * 0.01f, (float)me.GetPosX() * 0.01f, 0);
-			}
-		}
-	}
+	//while (!mouse.EventBufferIsEmpty())
+	//{
+	//	MouseEvent me = mouse.ReadEvent();
+	//	if (mouse.IsRightDown())
+	//	{
+	//		if (me.GetType() == MouseEvent::EventType::RAW_MOVE)
+	//		{
+	//			this->gfx.camera.AdjustRotation((float)me.GetPosY() * 0.01f, (float)me.GetPosX() * 0.01f, 0);
+	//		}
+	//	}
+	//}
 
 	//this->gfx.model.AdjustRotation(0.0f, 0.001f*dt, 0.0f);
 

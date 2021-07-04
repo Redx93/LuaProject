@@ -1,3 +1,5 @@
+#ifndef D3DBASE_H
+#define D3DBASE_H
 
 #include <SpriteBatch.h>
 #include <SpriteFont.h>
@@ -9,8 +11,8 @@
 #include "..//Mouse/MouseClass.h"
 #include "..//Mouse/MouseEvent.h"
 #include "..//Keyboard/KeyboardClass.h"
-#include "../..//Loader.h"
-class D3DBase : public Loader
+
+class D3DBase
 {
 protected:
 	D3DBase(){}
@@ -19,24 +21,14 @@ protected:
 	bool InitializeDirectX(HWND hwnd);
 	bool InitializeShaders();
 	void SetupShader(Shader shader, D3D11_PRIMITIVE_TOPOLOGY );
-	void UpdateConstantBuffer(RenderbleGameObject *m);
+	void UpdateConstantBuffer();
 
 	bool KeyBoardIsPressed(unsigned char& keycode);
-
-
-	MeshType GetMeshType(const unsigned char keycode);
-	MeshType GetMeshType(std::string keycode);
-	std::string GetMeshType(MeshType type);
-
 	bool mouseEvent(MouseEvent::EventType type);
+
 	MouseClass* mouse = nullptr;
 	KeyboardClass *keyboard = nullptr;
-	RenderbleGameObject* CurrentModels = nullptr;
-	Microsoft::WRL::ComPtr<ID3D11Device> device;
-	Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext;
-	Microsoft::WRL::ComPtr<IDXGISwapChain> swapchain;
-	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView;
-
+	MeshOb* CurrentModels = nullptr;
 
 	Shader ColorShader;
 	Shader DefaultShader;
@@ -44,26 +36,23 @@ protected:
 	ConstantBuffer<CB_VS_vertexshader> cb_vs_vertexshader;
 	ConstantBuffer<CB_PS_pixelshader> cb_ps_pixelshader;
 
-
+	Microsoft::WRL::ComPtr<ID3D11Device> device;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext;
+	Microsoft::WRL::ComPtr<IDXGISwapChain> swapchain;
+	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> renderTargetView;
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> depthStencilView;
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> depthStencilBuffer;
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> depthStencilState;
-
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerState;
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState> rasterizerState_CullFront;
-
 	Microsoft::WRL::ComPtr<ID3D11BlendState> blendState;
-
 	std::unique_ptr<DirectX::SpriteBatch> spriteBatch;
 	std::unique_ptr<DirectX::SpriteFont> spriteFont;
-
-
 public:
 	Camera camera;
 	int windowWidth = 0;
 	int windowHeight = 0;
 	Timer fpsTimer;
-	bool AddedModel = false;
 	InputHandler* inputHandler;
 };
-
+#endif // !D3DBASE_H

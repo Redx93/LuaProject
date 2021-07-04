@@ -22,22 +22,21 @@ void Loader::Initialize(Microsoft::WRL::ComPtr<ID3D11Device> device, Microsoft::
 	this->deviceContext = deviceContext;
 }
 
-void Loader::SaveLevel(std::vector<RenderbleGameObject*> meshes)
+void Loader::SaveLevel(std::vector<MeshOb*> meshes)
 {
 	std::ofstream file;
 	std::string temp;
 	file.open("Level.txt");
 	for (int i = 0; i < meshes.size(); i++)
 	{
-		RenderbleGameObject* mesh = meshes[i];
-		temp = mesh->GetMeshType(mesh->GetType());
+		MeshOb* mesh = meshes[i];
 		file << temp << " " << GetFloat3AsString(mesh->GetPositionFloat3());
 	}
 	file.close();
 	
 }
 
-void Loader::LoadMap(std::vector<RenderbleGameObject*>&meshes)
+void Loader::LoadMap(std::vector<MeshOb*>&meshes)
 {
 
 	for (int i = 0; i < meshes.size(); i++)
@@ -47,7 +46,7 @@ void Loader::LoadMap(std::vector<RenderbleGameObject*>&meshes)
 	meshes.clear();
 
 	std::ifstream file;
-	MeshType meshType;
+	
 	XMFLOAT3 position;
 	//std::string strtype, x, y, z;
 	file.open("Level.txt");
@@ -60,12 +59,9 @@ void Loader::LoadMap(std::vector<RenderbleGameObject*>&meshes)
 			if (strtype != "")
 			{
 				position = XMFLOAT3(std::atof(x.c_str()), std::atof(y.c_str()), std::atof(z.c_str()));
-				RenderbleGameObject* mesh = new RenderbleGameObject();
+				MeshOb* mesh = new MeshOb();
 				mesh->Initialize(device.Get(), deviceContext.Get());
-				meshType = mesh->GetMeshType(strtype);
-				mesh->SetType(meshType);
-
-				mesh->SetColor(meshType);
+				mesh->SetType("lol");
 				mesh->SetPosition(position);
 				meshes.push_back(mesh);
 			}

@@ -6,18 +6,15 @@
 #include <iostream>
 using namespace std;
 
-RenderbleGameObject::RenderbleGameObject()
+MeshOb::MeshOb()
 {
 	device = nullptr;
 	deviceContext = nullptr;
 }
 
-RenderbleGameObject::~RenderbleGameObject()
-{	
+MeshOb::~MeshOb()	{	}
 
-}
-
-bool RenderbleGameObject::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, 
+bool MeshOb::Initialize(ID3D11Device * device, ID3D11DeviceContext * deviceContext, 
 	Color color)
 {
 	this->device = device;
@@ -109,6 +106,7 @@ bool RenderbleGameObject::Initialize(ID3D11Device * device, ID3D11DeviceContext 
 		this->color = color;
 		this->cb_vs_Color.data.color = color;
 		this->cb_vs_Color.ApplyChanges();
+		cb_vs_vertexshader.Initialize(device, deviceContext);
 	}
 	catch (COMException & exception)
 	{
@@ -124,131 +122,56 @@ bool RenderbleGameObject::Initialize(ID3D11Device * device, ID3D11DeviceContext 
 }
 
 
-void RenderbleGameObject::Draw()
+void MeshOb::Draw()
 {	
 	//Update Color
 	this->deviceContext->PSSetConstantBuffers(0, 1, this->cb_vs_Color.GetAddressOf());
+	
+	cb_vs_vertexshader.data.mat = XMMatrixTranspose(worldMatrix);
+	cb_vs_vertexshader.ApplyChanges();
+	this->deviceContext->VSSetConstantBuffers(1, 1, this->cb_vs_vertexshader.GetAddressOf());
 
 	UINT offset = 0;
 	this->deviceContext->IASetVertexBuffers(0, 1, this->vertexBuffer.GetAddressOf(), this->vertexBuffer.Stride(), &offset);
 	this->deviceContext->Draw(36, 0);
 }
 
-void RenderbleGameObject::SetColor(Color color)
+void MeshOb::SetColor(Color color)
 {
 	cb_vs_Color.data.color = color;
 	this->cb_vs_Color.ApplyChanges();
 }
 
-void RenderbleGameObject::SetColor(MeshType type)
-{
-	switch (type)
-	{
-	case MeshType::Environment :
-		this->SetColor(Colours::White);
-		color = Colours::White;
-		break;
-	case MeshType::Enemy:
-		this->SetColor(Colours::Red);
-		color = Colours::Red;
-		break;
-	case MeshType::Player :
-		this->SetColor(Colours::Blue);
-		color = Colours::Blue;
-		break;
-	case MeshType::Teleport :
-		this->SetColor(Colours::Green);
-		color = Colours::Green;
-		break;
 
-	default:
-		this->SetColor(Colours::White);
-		color = Colours::White;
-		break;
+void MeshOb::SetType(std::string type)
+{
+	if (type == "Environment" || type == "1")
+	{
+		SetColor(Colours::White);
+		this->type = "Environment";
+	}
+	else if (type == "Enemy" || type == "2")
+	{
+		SetColor(Colours::Red);
+		this->type = "Enemy";
+	}
+	else if (type == "Player" || type == "3")
+	{
+		SetColor(Colours::Blue);
+		this->type = "Player";
+	}
+	else if (type == "Teleport" || type == "4")
+	{
+		SetColor(Colours::Grey);
+		this->type = "Teleport";
 	}
 }
 
-void RenderbleGameObject::SetType(MeshType type)
+std::string MeshOb::GetType()
 {
-	this->type = type;
+	return this->type;
 }
-
-Color RenderbleGameObject::GetColor()
-{
-	return color;
-}
-
-MeshType RenderbleGameObject::GetMeshType(const unsigned char keycode)
-{
-	MeshType type;
-	switch (keycode)
-	{
-	case '1':
-		type = MeshType::Environment;
-		break;
-	case '2':
-		type = MeshType::Enemy;
-		break;
-	case '3':
-		type = MeshType::Player;
-		break;
-	case '4':
-		type = MeshType::Teleport;
-		break;
-
-	default:
-		type = MeshType::Environment;
-		break;
-	}
-	return type;
-}
-
-MeshType RenderbleGameObject::GetMeshType(std::string keycode)
-{
-	MeshType type = MeshType::Environment;
-	if (keycode == "Environment")
-	{
-		type = MeshType::Environment;
-	}
-	else if (keycode == "Enemy")
-	{
-		type = MeshType::Enemy;
-	}
-	else if (keycode == "Player")
-	{
-		type = MeshType::Player;
-	}
-	else if (keycode == "Teleport")
-	{
-		type = MeshType::Teleport;
-	}
-	return type;
-}
-
-std::string RenderbleGameObject::GetMeshType(MeshType type)
-{
-	std::string mesh = "Environment";
-	if (type == MeshType::Environment)
-	{
-		mesh = "Environment";
-	}
-	else if (type == MeshType::Enemy)
-	{
-		mesh = "Enemy";
-	}
-	else if (type == MeshType::Player)
-	{
-		mesh = "Player";
-	}
-	else if (type == MeshType::Teleport)
-	{
-		mesh = "Teleport";
-	}
-	return mesh;
-}
-
-
-void RenderbleGameObject::UpdateMatrix()
+void MeshOb::UpdateMatrix()
 {
 	this->worldMatrix = XMMatrixRotationRollPitchYaw(this->rot.x, this->rot.y, this->rot.z)
 		* XMMatrixTranslation(this->pos.x, this->pos.y, this->pos.z)

@@ -35,17 +35,22 @@
     <None Include="x64\Debug\Lua.tlog\link.write.1.tlog" />
     <None Include="x64\Debug\Lua.tlog\Lua.lastbuildstate" />
     <None Include="Luafiles\Text.lua" />
+    <None Include="Luafiles\test.lua" />
+    <None Include="scr\test.lua" />
+    <None Include="lua53.dll" />
+    <None Include="LibLua.lua" />
+    <None Include="mainLua.lua" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Level.txt" />
     <Text Include="x64\Debug\Lua.Build.CppClean.log" />
     <Text Include="x64\Debug\Lua.log" />
     <Text Include="x64\Debug\Lua.vcxproj.FileListAbsolute.txt" />
+    <Text Include="Luafiles\test2.txt" />
+    <Text Include="scr\test2.txt" />
+    <Text Include="test2.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Loader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="scr\Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -115,11 +120,23 @@
     <ClCompile Include="scr\Mouse\MouseEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="scr\LuaEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scr\InputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scr\Graphics\MeshManger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scr\Graphics\Meshes\Enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Loader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="scr\WindowContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -270,6 +287,21 @@
     <ClInclude Include="scr\Mouse\MouseClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="scr\Graphics\MeshManger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scr\LuaEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scr\InputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scr\Graphics\Meshes\Enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="PS_Color.hlsl" />
@@ -316,5 +348,8 @@
     <Object Include="x64\Debug\Shaders.obj" />
     <Object Include="x64\Debug\Source.obj" />
     <Object Include="x64\Debug\Timer.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="liblua53.a" />
   </ItemGroup>
 </Project>

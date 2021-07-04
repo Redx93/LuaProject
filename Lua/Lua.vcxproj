@@ -20,11 +20,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
+    <None Include="LibLua.lua" />
+    <None Include="lua53.dll" />
+    <None Include="Luafiles\test.lua" />
     <None Include="Luafiles\Text.lua" />
     <None Include="packages.config" />
     <None Include="scr\Data\Fonts\comic_sans_ms_16.spritefont" />
     <None Include="scr\imgui.ini" />
     <None Include="scr\Includes\SimpleMath.inl" />
+    <None Include="scr\test.lua" />
+    <None Include="mainLua.lua" />
     <None Include="x64\Debug\Lua.tlog\CL.command.1.tlog" />
     <None Include="x64\Debug\Lua.tlog\CL.read.1.tlog" />
     <None Include="x64\Debug\Lua.tlog\CL.write.1.tlog" />
@@ -40,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Level.txt" />
+    <Text Include="Luafiles\test2.txt" />
+    <Text Include="scr\test2.txt" />
+    <Text Include="test2.txt" />
     <Text Include="x64\Debug\Lua.Build.CppClean.log" />
     <Text Include="x64\Debug\Lua.log" />
     <Text Include="x64\Debug\Lua.vcxproj.FileListAbsolute.txt" />
@@ -59,10 +67,14 @@
     <ClCompile Include="scr\Graphics\ImGui\imgui_impl_win32.cpp" />
     <ClCompile Include="scr\Graphics\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="scr\Graphics\Mesh.cpp" />
+    <ClCompile Include="scr\Graphics\Meshes\Enemy.cpp" />
+    <ClCompile Include="scr\Graphics\MeshManger.cpp" />
     <ClCompile Include="scr\Graphics\Shaders.cpp" />
     <ClCompile Include="scr\InputHandler.cpp" />
+    <ClCompile Include="scr\InputManager.cpp" />
     <ClCompile Include="scr\Keyboard\KeyboardClass.cpp" />
     <ClCompile Include="scr\Keyboard\KeyboardEvent.cpp" />
+    <ClCompile Include="scr\LuaEngine.cpp" />
     <ClCompile Include="scr\Mouse\MouseClass.cpp" />
     <ClCompile Include="scr\Mouse\MouseEvent.cpp" />
     <ClCompile Include="scr\RenderWindow.cpp" />
@@ -90,6 +102,8 @@
     <ClInclude Include="scr\Graphics\ImGui\imstb_truetype.h" />
     <ClInclude Include="scr\Graphics\IndexBuffer.h" />
     <ClInclude Include="scr\Graphics\Mesh.h" />
+    <ClInclude Include="scr\Graphics\Meshes\Enemy.h" />
+    <ClInclude Include="scr\Graphics\MeshManger.h" />
     <ClInclude Include="scr\Graphics\Shaders.h" />
     <ClInclude Include="scr\Graphics\Vertex.h" />
     <ClInclude Include="scr\Graphics\VertexBuffer.h" />
@@ -114,8 +128,10 @@
     <ClInclude Include="scr\Includes\WICTextureLoader.h" />
     <ClInclude Include="scr\Includes\XboxDDSTextureLoader.h" />
     <ClInclude Include="scr\InputHandler.h" />
+    <ClInclude Include="scr\InputManager.h" />
     <ClInclude Include="scr\Keyboard\KeyboardClass.h" />
     <ClInclude Include="scr\Keyboard\KeyboardEvent.h" />
+    <ClInclude Include="scr\LuaEngine.h" />
     <ClInclude Include="scr\Mouse\MouseClass.h" />
     <ClInclude Include="scr\Mouse\MouseEvent.h" />
     <ClInclude Include="scr\RenderWindow.h" />
@@ -180,6 +196,9 @@
     <Object Include="x64\Debug\Timer.obj" />
     <Object Include="x64\Debug\WindowContainer.obj" />
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="liblua53.a" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{371D800F-1679-45F8-B29D-0C7A5C652EA1}</ProjectGuid>
@@ -231,7 +250,11 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir)Lua\Lua53\include;$(IncludePath)</IncludePath>
+    <ReferencePath>$(SolutionDir)Lua\Lua53;$(ReferencePath)</ReferencePath>
+    <LibraryPath>$(SolutionDir)Lua\Lua53;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -250,6 +273,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Lua\Lua53\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -1,13 +1,44 @@
 #include "InputHandler.h"
 
-InputHandler::InputHandler(Camera* camera, int width, int height)
+InputHandler::InputHandler()
+{
+	//this->camera = camera;
+	//this->mouse = mouse;
+	//this->keyboard = keyboard;
+	//this->width = width;
+	//this->height = height;
+}
+
+InputHandler::~InputHandler()
+{
+	//delete mouse;
+	//delete keyboard;
+}
+
+unsigned char InputHandler::GetKeyCode()const 
+{
+	return this->keyboard->ReadChar();
+}
+
+EventLua& InputHandler::GetEvent()
+{
+	return this->luaEvent;
+}
+
+void InputHandler::setValues(MouseClass* mouse, KeyboardClass* keyboard)
+{
+	this->keyboard = keyboard;
+	this->mouse = mouse;
+}
+
+void InputHandler::SetCamera(Camera* camera,int width,int height)
 {
 	this->camera = camera;
 	this->width = width;
 	this->height = height;
 }
 
-bool InputHandler::Picking(Ray &ray, RenderbleGameObject* m)
+bool InputHandler::Picking(Ray &ray, MeshOb* m)
 {
 	int distanse = RayTriangle(ray.Origin, ray.Dir, m);
 	if (distanse > 0)
@@ -17,7 +48,7 @@ bool InputHandler::Picking(Ray &ray, RenderbleGameObject* m)
 	return false;
 }
 
-float InputHandler::RayTriangle(XMVECTOR &Origin, XMVECTOR& Dir, RenderbleGameObject* m)
+float InputHandler::RayTriangle(XMVECTOR &Origin, XMVECTOR& Dir, MeshOb* m)
 {
 	//pick vertices
 	auto vertices = m->vertices;
@@ -88,6 +119,22 @@ float InputHandler::RayTriangle(XMVECTOR &Origin, XMVECTOR& Dir, RenderbleGameOb
 	return -1;
 }
 
+bool InputHandler::PointInAABB(const XMFLOAT3& point, const XMFLOAT3& mesh)
+{
+	/*construct the aabb*/
+	XMFLOAT3 max = XMFLOAT3(mesh.x + 1, mesh.y + 1, mesh.z + 1);
+	XMFLOAT3 min = XMFLOAT3(mesh.x - 1, mesh.y - 1, mesh.z - 1);
+	bool inside = false;
+	/*check if its inside*/
+	if (point.x > min.x && point.x < max.x &&
+		point.y > min.y && point.y < max.y &&
+		point.z > min.z && point.z < max.z)
+	{
+		inside = true;
+	}
+	return inside;
+}
+
 bool InputHandler::PointInTriangle(XMVECTOR& v0, XMVECTOR& v1, XMVECTOR& v2, XMVECTOR& point)
 {
 	bool InsideOfTriangle = false;
@@ -115,7 +162,7 @@ bool InputHandler::PointInTriangle(XMVECTOR& v0, XMVECTOR& v1, XMVECTOR& v2, XMV
 	return InsideOfTriangle;
 }
 
-bool InputHandler::PointInPlane(Ray& ray, RenderbleGameObject* m)
+bool InputHandler::PointInPlane(Ray& ray, MeshOb* m)
 {
 	XMVECTOR Origin = ray.Origin;
 	XMVECTOR Dir = ray.Dir;
@@ -164,8 +211,10 @@ bool InputHandler::PointInPlane(Ray& ray, RenderbleGameObject* m)
 	return false;
 }
 
-Ray InputHandler::GetRay(const int& x, const int& y)
+void InputHandler::GetRay(const int& x, const int& y)
 {
+	/* check if x and y is the same as last time we checked */
+
 	XMFLOAT4X4 P;
 	XMStoreFloat4x4(&P, camera->GetProjectionMatrix());
 
@@ -196,11 +245,70 @@ Ray InputHandler::GetRay(const int& x, const int& y)
 	XMVECTOR Dir = XMVector3TransformNormal(pickRayInViewSpaceDir, pickRayToWorldSpaceMatrix);
 	Dir = XMVector3Normalize(Dir);
 
-	return Ray(Origin,Dir);
-
+	ray = Ray(Origin,Dir);
 }
 
-void InputHandler::FollowMouse(Ray& ray,RenderbleGameObject* m)
+void InputHandler::FollowMouse(MeshOb* m)
 {
+	GetRay(this->mouse->GetPosX(),this->mouse->GetPosY());
 	PointInPlane(ray, m);
+}
+
+bool InputHandler::CollideWith(MeshOb* m)
+{
+	GetRay(this->mouse->GetPosX(), this->mouse->GetPosY());
+	return Picking(ray, m);
+}
+
+XMFLOAT2 InputHandler::GetMousePos()
+{
+	XMFLOAT2 Postion(0,0);
+	/* Get ray */
+	GetRay(this->mouse->GetPosX(), this->mouse->GetPosY());
+	/* Check collison*/
+
+	XMVECTOR Origin = ray.Origin;
+	XMVECTOR Dir = ray.Dir;
+
+	XMVECTOR v0 = XMVectorSet(0, 0, 0, 0);
+	XMVECTOR Normal = XMVectorSet(0, 0, 1, 0);
+	//Get plane equation ("Ax + By + Cz + D = 0") Variables
+	float PlaneA = XMVectorGetX(Normal);
+	float PlaneB = XMVectorGetY(Normal);
+	float PlaneC = XMVectorGetZ(Normal);
+	//D = (-n.x * p.x) - (n.y * p.y) - (n.z * p.z)
+	float PlaneD = (-PlaneA * XMVectorGetX(v0) - PlaneB * XMVectorGetY(v0) - PlaneC * XMVectorGetZ(v0));
+
+	//Now we find where (on the ray) the ray intersects with the triangles plane
+		//Ax + By + Cz + D
+		//float ep1 = (orgin * normal)
+	float ep1 = (XMVectorGetX(Origin) * PlaneA) + (XMVectorGetY(Origin) * PlaneB) + (XMVectorGetZ(Origin) * PlaneC);
+	//float ep2 = (orgin * normal)
+	float ep2 = (XMVectorGetX(Dir) * PlaneA) + (XMVectorGetY(Dir) * PlaneB) + (XMVectorGetZ(Dir) * PlaneC);
+
+	float t = 0.f;
+	//Make sure there are no divide-by-zeros
+	if (ep2 != 0.0f)
+		//t = -(orgin*n) + d/(dir*n)
+		t = -(ep1 + PlaneD) / (ep2);
+
+	//Make sure you don't pick objects behind the camera
+	if (t > 0.0f)
+	{
+		float half = 0.5;
+		//Get the point on the plane
+		float	PointX = XMVectorGetX(Origin) + XMVectorGetX(Dir) * t;
+		float	PointY = XMVectorGetY(Origin) + XMVectorGetY(Dir) * t;
+		//floor to one digit then + 0.5 
+		PointX = floor(PointX) + half;
+		PointY = floor(PointY) + half;
+		float	PointZ = XMVectorGetZ(Origin) + XMVectorGetZ(Dir) * t;
+		// point = orgin + Dir * t;
+		// w = 0 because its a point and not a vector
+		XMVECTOR pointInPlane = XMVectorSet(PointX, PointY, PointZ, 0.0f);
+		XMFLOAT3 newPostion;
+		XMStoreFloat3(&newPostion, pointInPlane);
+		Postion = XMFLOAT2(newPostion.x, newPostion.y);
+	}
+	return Postion;
 }
